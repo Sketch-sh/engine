@@ -1,10 +1,9 @@
 {
-  "name": "reason-web-toplevel",
+  "name": "reason-online-rtop",
   "version": "0.0.1",
   "dependencies": {
     "@esy-ocaml/esy-installer": "^0.0.0",
-    "@opam/reason": "3.2.0",
-    "@opam/rtop": "3.2.0",
+    "@esy-ocaml/reason": "^3.2.0",
     "@opam/js_of_ocaml": "*",
     "@opam/js_of_ocaml-ppx": "*",
     "@opam/js_of_ocaml-toplevel": "*",
@@ -27,5 +26,8 @@
     "@esy-ocaml/merlin": "3.0.5000",
     "@opam/jbuilder": "1.0+beta20",
     "ocaml": "~4.6.0"
+  },
+  "scripts": {
+    "clean": "esy jbuilder clean && rm output/reason.js"
   }
 }
