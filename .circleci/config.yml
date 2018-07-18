@@ -16,11 +16,17 @@ jobs:
             npm config set prefix $NPM_CONFIG_PREFIX
 
       - restore_cache:
-          key: npm-global-{{ checksum ".circleci/config.yml" }}
+          key: 
+            - npm-global-{{ checksum ".circleci/config.yml" }}
+            - mpm-global-
       - restore_cache:
-          key: esy-cache-key-{{ checksum "package.json" }}-{{ checksum "esyi.lock.json" }}
+          key: 
+            - esy-cache-key-{{ checksum "package.json" }}-{{ checksum "esyi.lock.json" }}
+            - esy-cache-key-
       - restore_cache:
-          key: esy-postbuild-cache-key-{{ checksum "package.json" }}-{{ checksum "esyi.lock.json" }}
+          key: 
+            - esy-postbuild-cache-key-{{ checksum "package.json" }}-{{ checksum "esyi.lock.json" }}
+            - esy-postbuild-cache-key
 
       - run:
           name: "Install esy"
