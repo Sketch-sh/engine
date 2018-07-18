@@ -5,8 +5,6 @@ jobs:
       # specify the version you desire here
       - image: node:10
 
-    working_directory: ~/repo
-    
     environment:
       - NPM_CONFIG_PREFIX: "~/.npm-global"
 
