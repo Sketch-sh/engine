@@ -1,7 +1,4 @@
 (* evaluator.ml *)
-(* open Migrate_parsetree
-open Ast_404
-module To_current = Convert(OCaml_404)(OCaml_current) *)
 
 let () =
 begin

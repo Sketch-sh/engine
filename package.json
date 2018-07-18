@@ -1,0 +1,27 @@
+{
+  "name": "reason-web-toplevel",
+  "version": "0.0.1",
+  "dependencies": {
+    "@esy-ocaml/esy-installer": "^0.0.0",
+    "@esy-ocaml/reason": "^3.0.0",
+    "@esy-ocaml/rtop": "^3.0.0",
+    "@opam/js_of_ocaml": "*"
+  },
+  "esy": {
+    "build": [
+      ["jbuilder", "build", "evaluator.bs.js"]
+    ],
+    "install": [
+      "esy-installer"
+    ],
+    "buildsInSource": "_build"
+  },
+  "peerDependencies": {
+    "ocaml": "~4.6.0"
+  },
+  "devDependencies": {
+    "@esy-ocaml/merlin": "3.0.5000",
+    "@opam/dune": "*",
+    "ocaml": "~4.6.0"
+  }
+}
