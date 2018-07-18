@@ -1,18 +1,18 @@
-common_cache_key: &common_cache_key
-  key: dependency-cache-{{ checksum "../ocaml-version" }}-{{ checksum ".circleci/config.yml" }}-{{ checksum "reason.opam" }}-{{ checksum "rebuild.opam" }}-{{ checksum "rtop.opam" }}
+dependency_cache_key: &dependency_cache_key
+  key: dependency-cache-{{ checksum "package.json" }}-{{ checksum "esyi.lock.json" }}
 
 esy_cache_key: &esy_cache_key
-  key: esy-cache-{{ checksum "esy.json" }}-{{ checksum "esy.lock" }}-{{ checksum ".circleci/config.yml" }}
+  key: esy_cache_key-{{ checksum "package.json" }}-{{ checksum "esyi.lock.json" }}
 
 esy_post_build_cache_key: &esy_post_build_cache_key
-  key: esy-post-build-cache-{{ checksum "esy.json" }}-{{ checksum "esy.lock" }}-{{ checksum ".circleci/config.yml" }}
+  key: esy-post-build-cache-{{ checksum "package.json" }}-{{ checksum "esyi.lock.json" }}
 
 version: 2
 jobs:
   esy_build:
     docker:
       # specify the version you desire here
-      - image: ocaml/opam:debian-9_ocaml-4.06.0
+      - image: node:10
 
     working_directory: ~/repo
     
@@ -21,35 +21,46 @@ jobs:
 
     steps:
       - run:
-          name: "Install npm"
+          name: "Setup npm"
           command: |
-            curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-            sudo apt-get install -y nodejs
             mkdir -p ~/.npm-global
             npm config set prefix $NPM_CONFIG_PREFIX
+
+      - restore_cache:
+        <<: *common_cache_key
+      - restore_cache:
+        <<: *esy_cache_key
+      - restore_cache:
+        <<: *esy_post_build_cache_key
+
       - run:
           name: "Install esy"
           command: npm install -g esy@preview
 
-      - checkout
+      - save_cache:
+          <<: *dependency_cache_key
+          paths:
+            - ~/.npm-global
 
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
+      - checkout
 
       - run:
           name: 'esy install'
           command: ~/.npm-global/bin/esy install
 
       - save_cache:
+          <<: *esy_cache_key
           paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}-{{ checksum "esyi.lock.json" }}
+            - ~/.esy
 
       - run:
           name: 'esy build'
           command: ~/.npm-global/bin/esy build
+
+      - save_cache:
+          <<: *esy_post_build_cache_key
+          paths:
+            - ~/.esy
 
       - run: "node test.js"
 
