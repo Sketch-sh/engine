@@ -14,7 +14,7 @@ jobs:
           command: |
             mkdir -p ~/.npm-global
             npm config set prefix $NPM_CONFIG_PREFIX
-
+      - run: "ls"
       - restore_cache:
           keys: 
             - npm-global-{{ checksum ".circleci/config.yml" }}
