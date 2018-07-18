@@ -1,5 +1,3 @@
-(* evaluator.ml *)
-
 let () =
 begin
   JsooTop.initialize ();

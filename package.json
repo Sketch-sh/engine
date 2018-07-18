@@ -3,18 +3,17 @@
   "version": "0.0.1",
   "dependencies": {
     "@esy-ocaml/esy-installer": "^0.0.0",
-    "@esy-ocaml/reason": "^3.0.0",
-    "@esy-ocaml/rtop": "^3.0.0",
+    "@opam/reason": "3.2.0",
+    "@opam/rtop": "3.2.0",
     "@opam/js_of_ocaml": "*",
     "@opam/js_of_ocaml-ppx": "*",
     "@opam/js_of_ocaml-toplevel": "*",
-    "@opam/js_of_ocaml-compiler": "*",
-    "@opam/lwt": "3.3.0"
+    "@opam/js_of_ocaml-compiler": "*"
   },
   "esy": {
     "build": [
-      ["jbuilder", "build", "evaluator.bc.js"],
-      ["cp", "_build/default/evaluator.bc.js", "output/reason.js"]
+      ["jbuilder", "build", "evaluator.js"],
+      ["cp", "_build/default/evaluator.js", "output/reason.js"]
     ],
     "install": [
       "esy-installer"
