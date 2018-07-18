@@ -1,12 +1,3 @@
-dependency_cache_key: &dependency_cache_key
-  key: dependency-cache-{{ checksum "package.json" }}-{{ checksum "esyi.lock.json" }}
-
-esy_cache_key: &esy_cache_key
-  key: esy_cache_key-{{ checksum "package.json" }}-{{ checksum "esyi.lock.json" }}
-
-esy_post_build_cache_key: &esy_post_build_cache_key
-  key: esy-post-build-cache-{{ checksum "package.json" }}-{{ checksum "esyi.lock.json" }}
-
 version: 2
 jobs:
   esy_build:
@@ -27,18 +18,18 @@ jobs:
             npm config set prefix $NPM_CONFIG_PREFIX
 
       - restore_cache:
-        <<: *dependency_cache_key
+          key: npm-global-{{ checksum ".circleci/config.yml" }}
       - restore_cache:
-        <<: *esy_cache_key
+          key: esy-cache-key-{{ checksum "package.json" }}-{{ checksum "esyi.lock.json" }}
       - restore_cache:
-        <<: *esy_post_build_cache_key
+          key: esy-postbuild-cache-key-{{ checksum "package.json" }}-{{ checksum "esyi.lock.json" }}
 
       - run:
           name: "Install esy"
           command: npm install -g esy@preview
 
       - save_cache:
-          <<: *dependency_cache_key
+          key: npm-global-{{ checksum ".circleci/config.yml" }}
           paths:
             - ~/.npm-global
 
@@ -49,7 +40,7 @@ jobs:
           command: ~/.npm-global/bin/esy install
 
       - save_cache:
-          <<: *esy_cache_key
+          key: esy-cache-key-{{ checksum "package.json" }}-{{ checksum "esyi.lock.json" }}
           paths:
             - ~/.esy
 
@@ -58,7 +49,7 @@ jobs:
           command: ~/.npm-global/bin/esy build
 
       - save_cache:
-          <<: *esy_post_build_cache_key
+          key: esy-postbuild-cache-key-{{ checksum "package.json" }}-{{ checksum "esyi.lock.json" }}
           paths:
             - ~/.esy
 
