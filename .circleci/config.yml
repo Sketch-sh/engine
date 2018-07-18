@@ -1,0 +1,52 @@
+version: 2
+jobs:
+  esy_build:
+    docker:
+      # specify the version you desire here
+      - image: ocaml/opam:debian-9_ocaml-4.06.0
+
+    working_directory: ~/repo
+    
+    environment:
+      - NPM_CONFIG_PREFIX: "~/.npm-global"
+
+    steps:
+      - run:
+          name: "Install npm"
+          command: |
+            curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+            sudo apt-get install -y nodejs
+            mkdir -p ~/.npm-global
+            npm config set prefix $NPM_CONFIG_PREFIX
+      - run:
+          name: "Install esy"
+          command: npm install -g esy@preview
+
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+
+      - run:
+          name: 'esy install'
+          command: ~/.npm-global/bin/esy install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}-{{ checksum "esyi.lock.json" }}
+
+      - run:
+          name: 'esy build'
+          command: ~/.npm-global/bin/esy build
+
+      - store_artifacts:
+          path: ./_build/default/evaluator.js
+      
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - esy_build
