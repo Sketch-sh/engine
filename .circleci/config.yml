@@ -27,7 +27,7 @@ jobs:
             npm config set prefix $NPM_CONFIG_PREFIX
 
       - restore_cache:
-        <<: *common_cache_key
+        <<: *dependency_cache_key
       - restore_cache:
         <<: *esy_cache_key
       - restore_cache:
