@@ -1,0 +1,6 @@
+(executable
+  ((name evaluator)
+   (flags (:standard -w A-4-39-40-41-42-44-45 -warn-error A-26-32-58-60 -safe-string -short-paths -strict-sequence -bin-annot -absname -g))
+   (js_of_ocaml ((flags (:standard --toplevel --linkall +weak.js +toplevel.js +dynlink.js))))
+   (preprocess (pps (js_of_ocaml-ppx)))
+   (libraries (js_of_ocaml js_of_ocaml-compiler js_of_ocaml-toplevel reason rtop compiler-libs))))
