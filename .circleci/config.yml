@@ -33,14 +33,14 @@ jobs:
           name: 'esy install'
           command: ~/.npm-global/bin/esy install
 
+      - run:
+          name: 'esy build'
+          command: ~/.npm-global/bin/esy build
+
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}-{{ checksum "esyi.lock.json" }}
-
-      - run:
-          name: 'esy build'
-          command: ~/.npm-global/bin/esy build
 
       - run: "node test.js"
 
