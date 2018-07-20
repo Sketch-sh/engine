@@ -76,5 +76,5 @@ let () = begin
       val reset = setup
       val reasonSyntax = reasonSyntax
       val mlSyntax = mlSyntax
-    end)
+    end);
 end

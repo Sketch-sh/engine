@@ -2,7 +2,7 @@ const {evaluator: e} = require("./_build/default/evaluator.js");
 const assertLib = require("assert");
 
 const assert = (a, b) => {
-  assertLib(e.execute(a).trim() === b.trim());  
+  assertLib(e.execute(a).evaluate.trim() === b.trim());  
 }
 
 assert(`let a = 1 + 2;`, `let a: int = 3;`);
