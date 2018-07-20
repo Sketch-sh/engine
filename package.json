@@ -4,6 +4,7 @@
   "dependencies": {
     "@esy-ocaml/esy-installer": "^0.0.0",
     "@esy-ocaml/reason": "^3.2.0",
+    "refmterr": "link:../BetterErrors",
     "@opam/js_of_ocaml": "*",
     "@opam/js_of_ocaml-ppx": "*",
     "@opam/js_of_ocaml-toplevel": "*",
@@ -11,8 +12,8 @@
   },
   "esy": {
     "build": [
-      ["jbuilder", "build", "evaluator.js"],
-      ["cp", "_build/default/evaluator.js", "output/reason.js"]
+      ["refmterr", "jbuilder", "build", "evaluator.js"],
+      ["cp", "_build/default/evaluator.js", "../output/reason.js"]
     ],
     "install": [
       "esy-installer"
@@ -23,10 +24,11 @@
     "ocaml": "~4.6.0"
   },
   "devDependencies": {
-    "@esy-ocaml/merlin": "3.0.5000",
-    "@opam/jbuilder": "1.0+beta20",
+    "@esy-ocaml/merlin": "3.0.5005",
+    "@opam/dune": "*",
     "ocaml": "~4.6.0"
   },
+  
   "scripts": {
     "clean": "esy jbuilder clean && rm output/reason.js"
   }
