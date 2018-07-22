@@ -8,7 +8,7 @@ let parse = (content, error) => {
     ~error,
   );
 
-  let originalRevLines = Refmterr.Helpers.splitOnChar('\n', content) |> List.rev;
+  let originalRevLines = Refmterr.Helpers.splitOnChar('\n', error) |> List.rev;
   
   let html = RtopReporter.prettyPrintParsedResult(~originalRevLines, ~refmttypePath=None, parseResult)
   |> List.rev
