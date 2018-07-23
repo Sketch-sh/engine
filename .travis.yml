@@ -1,0 +1,15 @@
+language: node_js
+
+cache:
+  directories:
+    - node_modules
+    - $HOME/.esy
+node_js:
+  - 10
+os:
+  - linux
+install:
+  - npm install --global esy@preview
+  - esy install
+script:
+  - make all
