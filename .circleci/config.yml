@@ -36,7 +36,7 @@ jobs:
 
       - run:
           name: 'make all'
-          command: make all
+          command: export PATH="$PATH:$NPM_CONFIG_PREFIX/bin" && make all
 
       - save_cache:
           paths:
