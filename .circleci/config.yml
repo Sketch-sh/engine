@@ -7,21 +7,23 @@ jobs:
 
     working_directory: ~/repo
     
-    environment:
-      - NPM_CONFIG_PREFIX: "~/.npm-global"
+    # environment:
+    #   - NPM_CONFIG_PREFIX: "~/.npm-global"
 
     steps:
-      - run:
-          name: "Install npm"
-          command: |
-            mkdir -p $NPM_CONFIG_PREFIX
-            npm config set prefix $NPM_CONFIG_PREFIX
-            export PATH=$(npm --global bin):$PATH
+      # - run:
+      #     name: "Install npm"
+      #     command: |
+      #       mkdir -p $NPM_CONFIG_PREFIX
+      #       npm config set prefix $NPM_CONFIG_PREFIX
+      #       export PATH=$(npm --global bin):$PATH
             
       - run:
           name: "Install esy"
           command: npm install -g esy@preview
+      
       - run: rm -rf ~/repo/*
+
       - checkout
 
       # - restore_cache:
