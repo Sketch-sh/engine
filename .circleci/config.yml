@@ -25,7 +25,7 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}-{{ checksum "esy.lock.ci" }}-{{ checksum ".circleci/config.yml" }}
+          - v1-dependencies-{{ checksum "package.json" }}-{{ checksum "esy.lock.json" }}-{{ checksum ".circleci/config.yml" }}
           - v1-dependencies-
 
       - run:
@@ -39,7 +39,7 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}-{{ checksum "esy.lock.ci" }}-{{ checksum ".circleci/config.yml" }}
+          key: v1-dependencies-{{ checksum "package.json" }}-{{ checksum "esy.lock.json" }}-{{ checksum ".circleci/config.yml" }}
 
       - store_artifacts:
           path: ./_build/default/evaluator.js
