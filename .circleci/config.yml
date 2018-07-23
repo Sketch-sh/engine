@@ -11,16 +11,15 @@ jobs:
       - NPM_CONFIG_PREFIX: "~/.npm-global"
 
     steps:
-      - run:
-          name: "Install npm"
-          command: |
-            mkdir -p $NPM_CONFIG_PREFIX
-            npm config set prefix $NPM_CONFIG_PREFIX
+      # - run:
+      #     name: "Install npm"
+      #     command: |
+      #       mkdir -p $NPM_CONFIG_PREFIX
+      #       npm config set prefix $NPM_CONFIG_PREFIX
       - run:
           name: "Install esy"
           command: npm install -g esy@preview
-      - run: ls ~/repo
-      - run: rm -rf ~/repo/*
+      
       - checkout
 
       - restore_cache:
@@ -30,7 +29,7 @@ jobs:
 
       - run:
           name: 'esy install'
-          command: ~/.npm-global/bin/esy install
+          command: esy install
 
       - run:
           name: 'make all'
@@ -41,8 +40,8 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}-{{ checksum "esy.lock.json" }}-{{ checksum ".circleci/config.yml" }}
 
-      - store_artifacts:
-          path: ./_build/default/evaluator.js
+      # - store_artifacts:
+      #     path: ./_build/default/evaluator.js
       
 workflows:
   version: 2
