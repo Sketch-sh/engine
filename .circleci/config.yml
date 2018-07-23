@@ -18,7 +18,7 @@ jobs:
             sudo apt-get install -y nodejs
             mkdir -p $NPM_CONFIG_PREFIX
             npm config set prefix $NPM_CONFIG_PREFIX
-            export PATH="$PATH:$NPM_CONFIG_PREFIX/bin"
+            export PATH="$PATH:~/.npm-global/bin"
       - run:
           name: "Install esy"
           command: npm install -g esy@preview
@@ -36,7 +36,7 @@ jobs:
 
       - run:
           name: 'make all'
-          command: export PATH="$PATH:$NPM_CONFIG_PREFIX/bin" && make all
+          command: PATH="$PATH:~/.npm-global/bin" make all
 
       - save_cache:
           paths:
