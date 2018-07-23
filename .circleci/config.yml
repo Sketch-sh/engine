@@ -16,8 +16,9 @@ jobs:
           command: |
             curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
             sudo apt-get install -y nodejs
-            mkdir -p ~/.npm-global
+            mkdir -p $NPM_CONFIG_PREFIX
             npm config set prefix $NPM_CONFIG_PREFIX
+            export PATH="$PATH:$NPM_CONFIG_PREFIX/bin"
       - run:
           name: "Install esy"
           command: npm install -g esy@preview
