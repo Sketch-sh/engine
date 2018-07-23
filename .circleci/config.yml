@@ -22,10 +22,10 @@ jobs:
       
       - checkout
 
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}-{{ checksum "esy.lock.json" }}-{{ checksum ".circleci/config.yml" }}
-          - v1-dependencies-
+      # - restore_cache:
+      #     keys:
+      #     - v1-dependencies-{{ checksum "package.json" }}-{{ checksum "esy.lock.json" }}-{{ checksum ".circleci/config.yml" }}
+      #     - v1-dependencies-
 
       - run:
           name: 'esy install'
