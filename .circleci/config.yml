@@ -5,7 +5,7 @@ jobs:
       # specify the version you desire here
       - image: ocaml/opam:debian-9_ocaml-4.06.0
 
-    # working_directory: ~/repo
+    working_directory: ~/repo
     
     environment:
       - NPM_CONFIG_PREFIX: "~/.npm-global"
@@ -22,7 +22,7 @@ jobs:
       - run:
           name: "Install esy"
           command: npm install -g esy@preview
-
+      - run: rm -rf repo/*
       - checkout
 
       - restore_cache:
