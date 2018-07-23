@@ -22,7 +22,7 @@ jobs:
       - run:
           name: "Install esy"
           command: npm install -g esy@preview
-      - run: ls repo
+      - run: ls ~/repo
       - run: rm -rf ~/repo/*
       - checkout
 
