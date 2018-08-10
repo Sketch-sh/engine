@@ -2,7 +2,7 @@
   ((name evaluator)
    (js_of_ocaml ((flags (:standard --toplevel --linkall +toplevel.js +dynlink.js))))
    (preprocess (pps (js_of_ocaml-ppx)))
-   (libraries (js_of_ocaml js_of_ocaml-compiler js_of_ocaml-toplevel reason refmterr.lib compiler-libs))))
+   (libraries (js_of_ocaml js_of_ocaml-compiler js_of_ocaml-toplevel reason compiler-libs))))
 
 (rule ((targets (evaluator.js))
        (action (run js_of_ocaml --toplevel --linkall --no-runtime
