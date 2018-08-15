@@ -2,7 +2,7 @@ evaluator:
 	$(MAKE) -C evaluator build
 
 copy-evaluator: 
-	cp ./evaluator/_build/default/evaluator.js ../rtop_ui/public/reason.js
+	cp ./evaluator/_build/default/evaluator.js ../rtop_ui/client/public/reason.js
 
 berror:
 	$(MAKE) -C berror build
