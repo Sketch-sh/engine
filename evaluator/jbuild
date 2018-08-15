@@ -1,7 +1,7 @@
 (executable
   ((name evaluator)
    (js_of_ocaml ((flags (:standard --toplevel --linkall +toplevel.js +dynlink.js))))
-   (preprocess (pps (js_of_ocaml-ppx)))
+   (preprocess (pps (js_of_ocaml-ppx ppx_deriving.std)))
    (libraries (js_of_ocaml js_of_ocaml-compiler js_of_ocaml-toplevel reason compiler-libs))))
 
 (rule ((targets (evaluator.js))

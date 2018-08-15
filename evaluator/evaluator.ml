@@ -1,5 +1,6 @@
 module ToploopBackup = struct
   let parse_toplevel_phrase = !Toploop.parse_toplevel_phrase
+  let parse_use_file = !Toploop.parse_use_file
   let print_out_value = !Toploop.print_out_value
   let print_out_type = !Toploop.print_out_type
   let print_out_class_type = !Toploop.print_out_class_type
@@ -12,6 +13,7 @@ end
 
 let mlSyntax () = begin 
   Toploop.parse_toplevel_phrase := ToploopBackup.parse_toplevel_phrase;
+  Toploop.parse_use_file := ToploopBackup.parse_use_file;
   Toploop.print_out_value := ToploopBackup.print_out_value;
   Toploop.print_out_type := ToploopBackup.print_out_type;
   Toploop.print_out_class_type := ToploopBackup.print_out_class_type;
@@ -28,6 +30,9 @@ let reasonSyntax () = begin
   Toploop.parse_toplevel_phrase := Reason_util.correctly_catch_parse_errors
         (fun x -> Reason_toolchain.To_current.copy_toplevel_phrase
             (Reason_toolchain.RE.toplevel_phrase x));
+  Toploop.parse_use_file := Reason_util.correctly_catch_parse_errors
+    (fun x -> List.map Reason_toolchain.To_current.copy_toplevel_phrase
+        (Reason_toolchain.RE.use_file x));
   Toploop.print_out_value :=
     wrap copy_out_value Reason_oprint.print_out_value;
   Toploop.print_out_type :=
@@ -47,24 +52,15 @@ let reasonSyntax () = begin
 end
 
 let setup () = JsooTop.initialize ()
-  
+
 let execute code =
-  let code = Js.to_string code in
-  let evaluate_buffer = Buffer.create 100 in
-  let stderr_buffer = Buffer.create 100 in
-  let stdout_buffer = Buffer.create 100 in
+  code 
+  |> Js.to_string
+  |> Execute.eval 
+  |> List.map Execute.js_of_execResult 
+  |> Array.of_list 
+  |> Js.array
 
-  Sys_js.set_channel_flusher stderr (Buffer.add_string stderr_buffer);
-  Sys_js.set_channel_flusher stdout (Buffer.add_string stdout_buffer);
-
-  let formatter = Format.formatter_of_buffer evaluate_buffer in
-  JsooTop.execute true formatter code;
-  
-  object%js
-    val evaluate = Js.string (Buffer.contents evaluate_buffer)
-    val stderr = Js.string (Buffer.contents stderr_buffer)
-    val stdout = Js.string (Buffer.contents stdout_buffer)
-  end
 
 let () = begin
   setup ();

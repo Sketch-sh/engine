@@ -8,7 +8,8 @@
     "@opam/js_of_ocaml": "*",
     "@opam/js_of_ocaml-ppx": "*",
     "@opam/js_of_ocaml-toplevel": "*",
-    "@opam/js_of_ocaml-compiler": "*"
+    "@opam/js_of_ocaml-compiler": "*",
+    "@opam/ppx_deriving": "*"
   },
   "esy": {
     "install": [
