@@ -111,6 +111,7 @@ let stdout_buffer = Buffer.create(100);
 let stderr_buffer = Buffer.create(100);
 
 let formatter = Format.formatter_of_buffer(buffer);
+Format.pp_set_margin(formatter, 80);
 
 Sys_js.set_channel_flusher(stdout, Buffer.add_string(stdout_buffer));
 Sys_js.set_channel_flusher(stderr, Buffer.add_string(stderr_buffer));
@@ -172,8 +173,7 @@ let eval = code => {
               |> List.map(structure_item => structure_item.Parsetree.pstr_loc)
               |> List.hd,
             )
-          | Ptop_dir(name, _argument) =>
-            None;
+          | Ptop_dir(name, _argument) => None
           };
 
         Buffer.clear(buffer);
