@@ -1,5 +1,5 @@
 {
-  "hash": "6711538d05cc5690185ee1335fc9fa94",
+  "hash": "48ae80dc515c06d6b611989fe410a9c5",
   "root": "reason-online-rtop@path:.",
   "node": {
     "refmterr@github:esy-ocaml/BetterErrors#86eda2fbad7a51848f2dfaa0023acfd1beb047db": {
@@ -13,8 +13,8 @@
         "opam": null
       },
       "dependencies": [
-        "@esy-ocaml/reason@3.3.3", "@opam/jbuilder@opam:transition",
-        "@opam/re@opam:1.8.0"
+        "@esy-ocaml/reason@github:facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae",
+        "@opam/jbuilder@opam:transition", "@opam/re@opam:1.8.0"
       ]
     },
     "reason-online-rtop@path:.": {
@@ -27,8 +27,8 @@
       },
       "dependencies": [
         "@esy-ocaml/esy-installer@0.0.0", "@esy-ocaml/merlin@3.0.5005",
-        "@esy-ocaml/reason@3.3.3", "@opam/dune@opam:1.1.1",
-        "@opam/js_of_ocaml@opam:3.2.0",
+        "@esy-ocaml/reason@github:facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae",
+        "@opam/dune@opam:1.1.1", "@opam/js_of_ocaml@opam:3.2.0",
         "@opam/js_of_ocaml-compiler@opam:3.2.1",
         "@opam/js_of_ocaml-ppx@opam:3.2.0",
         "@opam/js_of_ocaml-toplevel@opam:3.2.0",
@@ -46,6 +46,29 @@
         "opam": null
       },
       "dependencies": []
+    },
+    "@opam/zed@opam:1.6": {
+      "record": {
+        "name": "@opam/zed",
+        "version": "opam:1.6",
+        "source": [
+          "archive:https://opam.ocaml.org/archives/zed.1.6+opam.tar.gz#md5:626adf7f380b1ee865850104123de8eb",
+          "archive:https://github.com/diml/zed/releases/download/1.6/zed-1.6.tbz#md5:f75c3094af1a22f9801d5ca5eb2d40e0"
+        ],
+        "files": [],
+        "opam": {
+          "name": "zed",
+          "version": "1.6",
+          "opam":
+            "opam-version: \"1.2\"\nmaintainer: \"opam-devel@lists.ocaml.org\"\nauthors: \"Jérémie Dimino\"\nlicense: \"BSD3\"\nhomepage: \"https://github.com/diml/zed\"\nbug-reports: \"https://github.com/diml/zed/issues\"\ndepends: [\n  \"jbuilder\" {build & >= \"1.0+beta9\"}\n  \"base-bytes\"\n  \"camomile\" {>= \"0.8\"}\n  \"react\"\n]\navailable: ocaml-version >= \"4.02.3\"\nbuild: [\n  [\"jbuilder\" \"subst\" \"-p\" name] {pinned}\n  [\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]\n]\nrun-test: [\"jbuilder\" \"runtest\" \"-p\" name \"-j\" jobs]\ndev-repo: \"git://github.com/diml/zed.git\"",
+          "override": null
+        }
+      },
+      "dependencies": [
+        "@esy-ocaml/substs@0.0.1", "@opam/base-bytes@opam:base",
+        "@opam/camomile@opam:1.0.1", "@opam/jbuilder@opam:transition",
+        "@opam/react@opam:1.2.1"
+      ]
     },
     "@opam/yojson@opam:1.4.1": {
       "record": {
@@ -68,6 +91,32 @@
         "@esy-ocaml/substs@0.0.1", "@opam/biniou@opam:1.2.0",
         "@opam/cppo@opam:1.6.4", "@opam/easy-format@opam:1.3.1",
         "@opam/jbuilder@opam:transition"
+      ]
+    },
+    "@opam/utop@opam:2.2.0": {
+      "record": {
+        "name": "@opam/utop",
+        "version": "opam:2.2.0",
+        "source": [
+          "archive:https://opam.ocaml.org/archives/utop.2.2.0+opam.tar.gz#md5:0f638cca878347aaae983d79104c34d1",
+          "archive:https://github.com/diml/utop/releases/download/2.2.0/utop-2.2.0.tbz#md5:c8e4805883ce27a2ef27b0e4322d6f04"
+        ],
+        "files": [],
+        "opam": {
+          "name": "utop",
+          "version": "2.2.0",
+          "opam":
+            "opam-version: \"1.2\"\nmaintainer: \"jeremie@dimino.org\"\nauthors: \"Jérémie Dimino\"\nlicense: \"BSD3\"\nhomepage: \"https://github.com/diml/utop\"\nbug-reports: \"https://github.com/diml/utop/issues\"\ndepends: [\n  \"base-unix\"\n  \"base-threads\"\n  \"ocamlfind\" {>= \"1.7.2\"}\n  \"lambda-term\" {>= \"1.2\"}\n  \"lwt\"\n  \"lwt_react\"\n  \"camomile\"\n  \"react\" {>= \"1.0.0\"}\n  \"cppo\" {build & >= \"1.1.2\"}\n  \"jbuilder\" {build & >= \"1.0+beta9\"}\n]\navailable: ocaml-version >= \"4.02.3\"\nbuild: [\n  [\"jbuilder\" \"subst\" \"-p\" name] {pinned}\n  [\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]\n]\nrun-test: [\"jbuilder\" \"runtest\" \"-p\" name \"-j\" jobs]\ndev-repo: \"git+https://github.com/diml/utop.git\"",
+          "override": null
+        }
+      },
+      "dependencies": [
+        "@esy-ocaml/substs@0.0.1", "@opam/base-threads@opam:base",
+        "@opam/base-unix@opam:base", "@opam/camomile@opam:1.0.1",
+        "@opam/cppo@opam:1.6.4", "@opam/jbuilder@opam:transition",
+        "@opam/lambda-term@opam:1.13", "@opam/lwt@opam:4.1.0",
+        "@opam/lwt_react@opam:1.1.1", "@opam/ocamlfind@opam:1.8.0",
+        "@opam/react@opam:1.2.1"
       ]
     },
     "@opam/uchar@opam:0.0.2": {
@@ -154,6 +203,28 @@
       },
       "dependencies": [
         "@esy-ocaml/substs@0.0.1", "@opam/jbuilder@opam:transition"
+      ]
+    },
+    "@opam/react@opam:1.2.1": {
+      "record": {
+        "name": "@opam/react",
+        "version": "opam:1.2.1",
+        "source": [
+          "archive:https://opam.ocaml.org/archives/react.1.2.1+opam.tar.gz#md5:ca71a5239ce33d429f73e675480e2a88",
+          "archive:http://erratique.ch/software/react/releases/react-1.2.1.tbz#md5:ce1454438ce4e9d2931248d3abba1fcc"
+        ],
+        "files": [],
+        "opam": {
+          "name": "react",
+          "version": "1.2.1",
+          "opam":
+            "opam-version: \"1.2\"\nmaintainer: \"Daniel Bünzli <daniel.buenzl i@erratique.ch>\"\nauthors: \"Daniel Bünzli <daniel.buenzl i@erratique.ch>\"\nlicense: \"ISC\"\ntags: [\"reactive\" \"declarative\" \"signal\" \"event\" \"frp\" \"org:erratique\"]\nhomepage: \"http://erratique.ch/software/react\"\ndoc: \"http://erratique.ch/software/react/doc/React\"\nbug-reports: \"https://github.com/dbuenzli/react/issues\"\ndepends: [\n  \"ocamlfind\" {build}\n  \"ocamlbuild\" {build}\n  \"topkg\" {build & >= \"0.9.0\"}\n]\navailable: ocaml-version >= \"4.01.0\"\nbuild: [\"ocaml\" \"pkg/pkg.ml\" \"build\" \"--dev-pkg\" \"%{pinned}%\"]\ndev-repo: \"git+http://erratique.ch/repos/react.git\"",
+          "override": null
+        }
+      },
+      "dependencies": [
+        "@esy-ocaml/substs@0.0.1", "@opam/ocamlbuild@opam:0.12.0",
+        "@opam/ocamlfind@opam:1.8.0", "@opam/topkg@opam:0.9.1"
       ]
     },
     "@opam/re@opam:1.8.0": {
@@ -404,6 +475,97 @@
       "dependencies": [
         "@esy-ocaml/substs@0.0.1", "@opam/ocamlbuild@opam:0.12.0",
         "@opam/ocamlfind@opam:1.8.0"
+      ]
+    },
+    "@opam/lwt_react@opam:1.1.1": {
+      "record": {
+        "name": "@opam/lwt_react",
+        "version": "opam:1.1.1",
+        "source": [
+          "archive:https://opam.ocaml.org/archives/lwt_react.1.1.1+opam.tar.gz#md5:212efee48f058c45e32b4a391ea31fb9",
+          "archive:https://github.com/ocsigen/lwt/archive/4.0.0.tar.gz#md5:3bbde866884e32cc7a9d9cbd1e52bde3"
+        ],
+        "files": [],
+        "opam": {
+          "name": "lwt_react",
+          "version": "1.1.1",
+          "opam":
+            "opam-version: \"1.2\"\nversion: \"1.1.1\"\nmaintainer: [\n  \"Anton Bachin <antonbachin@yahoo.com>\"\n  \"Mauricio Fernandez <mfp@acm.org>\"\n  \"Simon Cruanes <simon.cruanes.2007@m4x.org>\"\n]\nauthors: \"Jérémie Dimino\"\nlicense: \"LGPL with OpenSSL linking exception\"\nhomepage: \"https://github.com/ocsigen/lwt\"\ndoc: \"https://ocsigen.org/lwt/api/Lwt_react\"\nbug-reports: \"https://github.com/ocsigen/lwt/issues\"\ndepends: [\n  \"jbuilder\" {build & >= \"1.0+beta14\"}\n  \"lwt\" {>= \"3.0.0\"}\n  \"react\" {>= \"1.0.0\"}\n]\nbuild: [\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]\nrun-test: [\"jbuilder\" \"runtest\" \"-p\" name]\ndev-repo: \"git+https://github.com/ocsigen/lwt.git\"",
+          "override": null
+        }
+      },
+      "dependencies": [
+        "@esy-ocaml/substs@0.0.1", "@opam/jbuilder@opam:transition",
+        "@opam/lwt@opam:4.1.0", "@opam/react@opam:1.2.1"
+      ]
+    },
+    "@opam/lwt_log@opam:1.1.0": {
+      "record": {
+        "name": "@opam/lwt_log",
+        "version": "opam:1.1.0",
+        "source": [
+          "archive:https://opam.ocaml.org/archives/lwt_log.1.1.0+opam.tar.gz#md5:b41828633ddea2e0d68a649c3def1ece",
+          "archive:https://github.com/aantron/lwt_log/archive/1.1.0.tar.gz#md5:92142135d01a4d7e805990cc98653d55"
+        ],
+        "files": [],
+        "opam": {
+          "name": "lwt_log",
+          "version": "1.1.0",
+          "opam":
+            "opam-version: \"1.2\"\nversion: \"1.1.0\"\nmaintainer: \"Anton Bachin <antonbachin@yahoo.com>\"\nauthors: [\"Shawn Wagner\" \"Jérémie Dimino\"]\nlicense: \"LGPL\"\nhomepage: \"https://github.com/aantron/lwt_log\"\ndoc:\n  \"https://github.com/aantron/lwt_log/blob/master/src/core/lwt_log_core.mli\"\nbug-reports: \"https://github.com/aantron/lwt_log/issues\"\ndepends: [\n  \"jbuilder\" {build & >= \"1.0+beta10\"}\n  \"lwt\" {>= \"4.0.0\"}\n]\nbuild: [\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]\ndev-repo: \"git+https://github.com/aantron/lwt_log.git\"",
+          "override": null
+        }
+      },
+      "dependencies": [
+        "@esy-ocaml/substs@0.0.1", "@opam/jbuilder@opam:transition",
+        "@opam/lwt@opam:4.1.0"
+      ]
+    },
+    "@opam/lwt@opam:4.1.0": {
+      "record": {
+        "name": "@opam/lwt",
+        "version": "opam:4.1.0",
+        "source": [
+          "archive:https://opam.ocaml.org/archives/lwt.4.1.0+opam.tar.gz#md5:5c73061ac341ca56c2f1bd62728a0ad9",
+          "archive:https://github.com/ocsigen/lwt/archive/4.1.0.tar.gz#md5:e919bee206f18b3d49250ecf9584fde7"
+        ],
+        "files": [],
+        "opam": {
+          "name": "lwt",
+          "version": "4.1.0",
+          "opam":
+            "opam-version: \"1.2\"\nversion: \"4.1.0\"\nmaintainer: [\n  \"Anton Bachin <antonbachin@yahoo.com>\"\n  \"Mauricio Fernandez <mfp@acm.org>\"\n  \"Simon Cruanes <simon.cruanes.2007@m4x.org>\"\n]\nauthors: [\"Jérôme Vouillon\" \"Jérémie Dimino\"]\nlicense: \"LGPL with OpenSSL linking exception\"\nhomepage: \"https://github.com/ocsigen/lwt\"\ndoc: \"https://ocsigen.org/lwt/manual/\"\nbug-reports: \"https://github.com/ocsigen/lwt/issues\"\ndepends: [\n  \"cppo\" {build & >= \"1.1.0\"}\n  \"jbuilder\" {build & >= \"1.0+beta14\"}\n  \"ocamlfind\" {build & >= \"1.7.3-1\"}\n  \"result\"\n]\ndepopts: [\"base-threads\" \"base-unix\" \"conf-libev\"]\navailable: ocaml-version >= \"4.02.0\" & compiler != \"4.02.1+BER\"\nbuild: [\n  [\"ocaml\" \"src/util/configure.ml\" \"-use-libev\" \"%{conf-libev:installed}%\"]\n  [\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]\n]\nmessages: [\n  \"For the PPX, please install package lwt_ppx\" {!lwt_ppx:installed}\n  \"For the Camlp4 syntax, please install package lwt_camlp4\"\n    {camlp4:installed & !lwt_camlp4:installed}\n  \"For Lwt_log and Lwt_daemon, please install package lwt_log\"\n    {!lwt_log:installed}\n]\ndev-repo: \"git+https://github.com/ocsigen/lwt.git\"",
+          "override": null
+        }
+      },
+      "dependencies": [
+        "@esy-ocaml/substs@0.0.1", "@opam/cppo@opam:1.6.4",
+        "@opam/jbuilder@opam:transition", "@opam/ocamlfind@opam:1.8.0",
+        "@opam/result@opam:1.3"
+      ]
+    },
+    "@opam/lambda-term@opam:1.13": {
+      "record": {
+        "name": "@opam/lambda-term",
+        "version": "opam:1.13",
+        "source": [
+          "archive:https://opam.ocaml.org/archives/lambda-term.1.13+opam.tar.gz#md5:4d012fe08f3698ac3113909ba7269812",
+          "archive:https://github.com/diml/lambda-term/releases/download/1.13/lambda-term-1.13.tbz#md5:c13826a97014d4d573b927b623c7e043"
+        ],
+        "files": [],
+        "opam": {
+          "name": "lambda-term",
+          "version": "1.13",
+          "opam":
+            "opam-version: \"1.2\"\nmaintainer: \"jeremie@dimino.org\"\nauthors: \"Jérémie Dimino\"\nlicense: \"BSD3\"\nhomepage: \"https://github.com/diml/lambda-term\"\nbug-reports: \"https://github.com/diml/lambda-term/issues\"\ndepends: [\n  \"lwt\" {>= \"2.7.0\"}\n  \"lwt_log\"\n  \"react\"\n  \"zed\" {>= \"1.2\"}\n  \"camomile\" {>= \"0.8.6\"}\n  \"lwt_react\"\n  \"jbuilder\" {build & >= \"1.0+beta9\"}\n]\navailable: ocaml-version >= \"4.02.3\"\nbuild: [\n  [\"jbuilder\" \"subst\" \"-p\" name] {pinned}\n  [\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]\n]\nrun-test: [\"jbuilder\" \"runtest\" \"-p\" name \"-j\" jobs]\ndev-repo: \"git://github.com/diml/lambda-term.git\"",
+          "override": null
+        }
+      },
+      "dependencies": [
+        "@esy-ocaml/substs@0.0.1", "@opam/camomile@opam:1.0.1",
+        "@opam/jbuilder@opam:transition", "@opam/lwt@opam:4.1.0",
+        "@opam/lwt_log@opam:1.1.0", "@opam/lwt_react@opam:1.1.1",
+        "@opam/react@opam:1.2.1", "@opam/zed@opam:1.6"
       ]
     },
     "@opam/js_of_ocaml-toplevel@opam:3.2.0": {
@@ -664,6 +826,27 @@
         "@opam/topkg@opam:0.9.1"
       ]
     },
+    "@opam/camomile@opam:1.0.1": {
+      "record": {
+        "name": "@opam/camomile",
+        "version": "opam:1.0.1",
+        "source": [
+          "archive:https://opam.ocaml.org/archives/camomile.1.0.1+opam.tar.gz#md5:1e1465d42ef0e422a165b19b22b2964b",
+          "archive:https://github.com/yoriyuki/Camomile/releases/download/1.0.1/camomile-1.0.1.tbz#md5:82e016653431353a07f22c259adc6e05"
+        ],
+        "files": [],
+        "opam": {
+          "name": "camomile",
+          "version": "1.0.1",
+          "opam":
+            "opam-version: \"1.2\"\nmaintainer: \"yoriyuki.y@gmail.com\"\nauthors: \"Yoriyuki Yamagata\"\nlicense: \"LGPL-2+ with OCaml linking exception\"\nhomepage: \"https://github.com/yoriyuki/Camomile/wiki\"\nbug-reports: \"https://github.com/yoriyuki/Camomile/issues\"\ndepends: [\n  \"jbuilder\" {build & >= \"1.0+beta17\"}\n]\navailable: ocaml-version >= \"4.02.3\"\nbuild: [\n  [\"ocaml\" \"configure.ml\" \"--share\" \"%{share}%/camomile\"]\n  [\"jbuilder\" \"subst\" \"-p\" name] {pinned}\n  [\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]\n]\ndev-repo: \"git+https://github.com/yoriyuki/Camomile.git\"",
+          "override": null
+        }
+      },
+      "dependencies": [
+        "@esy-ocaml/substs@0.0.1", "@opam/jbuilder@opam:transition"
+      ]
+    },
     "@opam/biniou@opam:1.2.0": {
       "record": {
         "name": "@opam/biniou",
@@ -702,6 +885,22 @@
       },
       "dependencies": [ "@esy-ocaml/substs@0.0.1" ]
     },
+    "@opam/base-threads@opam:base": {
+      "record": {
+        "name": "@opam/base-threads",
+        "version": "opam:base",
+        "source": "no-source:",
+        "files": [],
+        "opam": {
+          "name": "base-threads",
+          "version": "base",
+          "opam":
+            "opam-version: \"1\"\nmaintainer: \"https://github.com/ocaml/opam-repository/issues\"",
+          "override": null
+        }
+      },
+      "dependencies": [ "@esy-ocaml/substs@0.0.1" ]
+    },
     "@opam/base-bytes@opam:base": {
       "record": {
         "name": "@opam/base-bytes",
@@ -731,12 +930,13 @@
       },
       "dependencies": []
     },
-    "@esy-ocaml/reason@3.3.3": {
+    "@esy-ocaml/reason@github:facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae": {
       "record": {
         "name": "@esy-ocaml/reason",
-        "version": "3.3.3",
+        "version":
+          "github:facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae",
         "source":
-          "archive:https://registry.npmjs.org/@esy-ocaml/reason/-/reason-3.3.3.tgz#sha1:cd4c673504f7217a11a77089b021b5ba9ed1f744",
+          "github:facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae",
         "files": [],
         "opam": null
       },
@@ -745,7 +945,8 @@
         "@opam/jbuilder@opam:transition", "@opam/menhir@opam:20171013",
         "@opam/merlin-extend@opam:0.3",
         "@opam/ocaml-migrate-parsetree@opam:1.0.11",
-        "@opam/ocamlfind@opam:1.8.0", "@opam/result@opam:1.3"
+        "@opam/ocamlbuild@opam:0.12.0", "@opam/ocamlfind@opam:1.8.0",
+        "@opam/result@opam:1.3", "@opam/utop@opam:2.2.0"
       ]
     },
     "@esy-ocaml/merlin@3.0.5005": {

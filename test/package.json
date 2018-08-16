@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "jest": "^23.5.0",
+    "object-path": "^0.11.4",
+    "prettier": "^1.14.2"
+  }
+}

@@ -1,0 +1,47 @@
+defaults: &defaults
+  working_directory: ~/evaluator
+  docker:
+    - image: circleci/node:10
+
+version: 2
+jobs:
+  build:
+    <<: *defaults
+    environment:
+      TERM: xterm
+      NPM_CONFIG_PREFIX: "~/.npm-global"
+
+    steps:
+      - checkout
+      - restore_cache:
+          key: v1-deps-{{ .Branch }}-{{ checksum "esy.lock" }}-{{ checksum "esy.lock.json" }}-{{ checksum "package.json" }}
+          key: v1-deps-{{ .Branch }}
+          key: v1-deps
+      - run:
+          name: Install esy
+          command: |
+            mkdir -p $NPM_CONFIG_PREFIX
+            npm config set prefix $NPM_CONFIG_PREFIX
+            eval "echo 'export PATH=$(npm -g bin):$PATH'" >> $BASH_ENV 
+            npm install -g esy
+
+      - run:
+          name: Install Dependencies
+          command: |
+            echo $PATH
+            esy install
+            cd test && npm install
+      - run:
+          name: Build and test
+          command: |
+            make all
+
+      - save_cache:
+          key: v1-deps-{{ .Branch }}-{{ checksum "esy.lock" }}-{{ checksum "esy.lock.json" }}-{{ checksum "package.json" }}
+          paths:
+            - ~/.esy
+            - node_modules
+            - test/node_modules
+      - store_artifacts:
+          path: evaluator/_build/default/evaluator.js
+          destination: evaluator

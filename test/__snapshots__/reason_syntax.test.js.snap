@@ -1,0 +1,279 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`0 snapshot 1`] = `
+Array [
+  Object {
+    "kind": "Ok",
+    "value": Object {
+      "loc": Array [
+        Object {
+          "col": 0,
+          "line": 1,
+        },
+        Object {
+          "col": 24,
+          "line": 1,
+        },
+      ],
+      "stderr": "",
+      "stdout": "awesome
+",
+      "value": "- : unit = ()
+",
+    },
+  },
+  Object {
+    "kind": "Ok",
+    "value": Object {
+      "loc": Array [
+        Object {
+          "col": 2,
+          "line": 3,
+        },
+        Object {
+          "col": 28,
+          "line": 3,
+        },
+      ],
+      "stderr": "",
+      "stdout": "",
+      "value": "type say = Hello | Goodbye;
+",
+    },
+  },
+  Object {
+    "kind": "Ok",
+    "value": Object {
+      "loc": Array [
+        Object {
+          "col": 2,
+          "line": 5,
+        },
+        Object {
+          "col": 11,
+          "line": 8,
+        },
+      ],
+      "stderr": "File \\"\\", line 8, characters 2-5:
+Warning 11: this match case is unused.
+",
+      "stdout": "",
+      "value": "- : say => unit = <fun>
+",
+    },
+  },
+  Object {
+    "kind": "Ok",
+    "value": Object {
+      "loc": Array [
+        Object {
+          "col": 2,
+          "line": 10,
+        },
+        Object {
+          "col": 11,
+          "line": 10,
+        },
+      ],
+      "stderr": "",
+      "stdout": "",
+      "value": "let a: int = 1;
+",
+    },
+  },
+]
+`;
+
+exports[`1 snapshot 1`] = `
+Array [
+  Object {
+    "kind": "Ok",
+    "value": Object {
+      "loc": Array [
+        Object {
+          "col": 0,
+          "line": 1,
+        },
+        Object {
+          "col": 31,
+          "line": 1,
+        },
+      ],
+      "stderr": "",
+      "stdout": "Another stdout
+",
+      "value": "- : unit = ()
+",
+    },
+  },
+]
+`;
+
+exports[`2 snapshot 1`] = `
+Array [
+  Object {
+    "kind": "Ok",
+    "value": Object {
+      "loc": Array [
+        Object {
+          "col": 0,
+          "line": 1,
+        },
+        Object {
+          "col": 14,
+          "line": 1,
+        },
+      ],
+      "stderr": "",
+      "stdout": "",
+      "value": "let a: ref(int) = {contents: 1};
+",
+    },
+  },
+  Object {
+    "kind": "Ok",
+    "value": Object {
+      "loc": Array [
+        Object {
+          "col": 16,
+          "line": 1,
+        },
+        Object {
+          "col": 29,
+          "line": 1,
+        },
+      ],
+      "stderr": "",
+      "stdout": "1",
+      "value": "- : unit = ()
+",
+    },
+  },
+]
+`;
+
+exports[`3 snapshot 1`] = `
+Array [
+  Object {
+    "kind": "Ok",
+    "value": Object {
+      "loc": Array [
+        Object {
+          "col": 0,
+          "line": 1,
+        },
+        Object {
+          "col": 60,
+          "line": 1,
+        },
+      ],
+      "stderr": "",
+      "stdout": "",
+      "value": "let factorial: int => int = <fun>;
+",
+    },
+  },
+  Object {
+    "kind": "Ok",
+    "value": Object {
+      "loc": Array [
+        Object {
+          "col": 62,
+          "line": 1,
+        },
+        Object {
+          "col": 74,
+          "line": 1,
+        },
+      ],
+      "stderr": "",
+      "stdout": "",
+      "value": "- : int = 720
+",
+    },
+  },
+]
+`;
+
+exports[`4 snapshot 1`] = `
+Array [
+  Object {
+    "kind": "Ok",
+    "value": Object {
+      "loc": Array [
+        Object {
+          "col": 0,
+          "line": 1,
+        },
+        Object {
+          "col": 25,
+          "line": 3,
+        },
+      ],
+      "stderr": "",
+      "stdout": "",
+      "value": "type tree = Leaf | Node(int, tree, tree);
+",
+    },
+  },
+  Object {
+    "kind": "Ok",
+    "value": Object {
+      "loc": Array [
+        Object {
+          "col": 2,
+          "line": 5,
+        },
+        Object {
+          "col": 62,
+          "line": 8,
+        },
+      ],
+      "stderr": "",
+      "stdout": "",
+      "value": "let sum: tree => int = <fun>;
+",
+    },
+  },
+  Object {
+    "kind": "Ok",
+    "value": Object {
+      "loc": Array [
+        Object {
+          "col": 2,
+          "line": 10,
+        },
+        Object {
+          "col": 3,
+          "line": 15,
+        },
+      ],
+      "stderr": "",
+      "stdout": "",
+      "value": "let myTree: tree =
+  Node(1, Node(2, Node(4, Leaf, Leaf), Node(6, Leaf, Leaf)),
+   Node(3, Node(5, Leaf, Leaf), Node(7, Leaf, Leaf)));
+",
+    },
+  },
+  Object {
+    "kind": "Ok",
+    "value": Object {
+      "loc": Array [
+        Object {
+          "col": 2,
+          "line": 17,
+        },
+        Object {
+          "col": 13,
+          "line": 17,
+        },
+      ],
+      "stderr": "",
+      "stdout": "",
+      "value": "- : int = 28
+",
+    },
+  },
+]
+`;

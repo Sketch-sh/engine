@@ -1,6 +1,7 @@
 evaluator:
 	$(MAKE) -C evaluator build
 
+
 copy-evaluator: 
 	cp ./evaluator/_build/default/evaluator.js ../rtop_ui/client/public/reason.js
 
@@ -15,12 +16,17 @@ clean:
 	$(MAKE) -C berror clean
 
 test: 
-	$(MAKE) -C evaluator test
+	cd test && npm test
 
 copy: copy-berror copy-evaluator
 
 build: evaluator berror
 
-all: clean evaluator berror test
+all: clean evaluator test
 
-.PHONY: evaluator copy-evaluator berror copy-berror clean build all
+ci-evaluator:
+	$(MAKE) -C evaluator ci-build
+
+ci: ci-evaluator test
+
+.PHONY: evaluator copy-evaluator berror copy-berror clean build all test ci-evaluator ci

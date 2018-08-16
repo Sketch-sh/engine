@@ -1,11 +1,11 @@
 build:
 	esy refmterr jbuilder build evaluator.js
 
+ci-build:
+	esy jbuilder build evaluator.js
+
 clean:
 	esy jbuilder clean
-
-test:
-	node test.js
 
 all: clean build
 
