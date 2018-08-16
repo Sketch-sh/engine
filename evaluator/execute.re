@@ -1,90 +1,5 @@
-type position =
-  Lexing.position = {
-    pos_fname: string,
-    pos_lnum: int,
-    pos_bol: int,
-    pos_cnum: int,
-  };
+open Sketch__Types;
 
-let js_of_position = pos => [%js
-  {val line = pos.pos_lnum; val col = pos.pos_cnum - pos.pos_bol}
-];
-let show_position = pos =>
-  Printf.sprintf("(%i, %i)", pos.pos_lnum, pos.pos_cnum - pos.pos_bol);
-
-type location =
-  Location.t = {
-    loc_start: position,
-    loc_end: position,
-    loc_ghost: bool,
-  };
-
-let js_of_location = ({loc_start, loc_end}) =>
-  Js.array([|js_of_position(loc_start), js_of_position(loc_end)|]);
-
-let show_location = location =>
-  Printf.sprintf(
-    "%s - %s",
-    location.loc_start |> show_position,
-    location.loc_end |> show_position,
-  );
-
-type execContent = {
-  loc: option(Location.t),
-  value: string,
-  stderr: string,
-  stdout: string,
-};
-
-let js_of_execContent = ({loc, value, stderr, stdout}) => [%js
-  {
-    val loc = loc |> Utils.Option.map(js_of_location) |> Js.Opt.option;
-    val value = Js.string(value);
-    val stderr = Js.string(stderr);
-    val stdout = Js.string(stdout)
-  }
-];
-
-let show_execContent = ({loc, value, stderr, stdout}) =>
-  Printf.sprintf(
-    "{
-  loc: %s,
-  value: %s,
-  stderr: %s,
-  stdout: %s,
-}",
-    switch (loc) {
-    | None => "None"
-    | Some(loc) => "Some(" ++ show_location(loc) ++ ")"
-    },
-    value,
-    stderr,
-    stdout,
-  );
-
-type execResult = result(execContent, execContent);
-
-let show_execResult =
-  fun
-  | Ok(execContent) =>
-    Printf.sprintf("Ok: %s", show_execContent(execContent))
-  | Error(execContent) =>
-    Printf.sprintf("Error: %s", show_execContent(execContent));
-
-let js_of_execResult =
-  fun
-  | Ok(execContent) => [%js
-      {
-        val kind = Js.string("Ok");
-        val value = js_of_execContent(execContent)
-      }
-    ]
-  | Error(execContent) => [%js
-      {
-        val kind = Js.string("Error");
-        val value = js_of_execContent(execContent)
-      }
-    ];
 let get_error_loc =
   fun
   | Syntaxerr.Error(x) => Some(Syntaxerr.location_of_error(x))
@@ -106,17 +21,23 @@ let drainBuffer = bf => {
   content;
 };
 
+let rec last = (head, tail) =>
+  switch (tail) {
+  | [] => head
+  | [head, ...tail] => last(head, tail)
+  };
+
 let buffer = Buffer.create(100);
 let stdout_buffer = Buffer.create(100);
 let stderr_buffer = Buffer.create(100);
 
 let formatter = Format.formatter_of_buffer(buffer);
-/* The generic rule is that it is better to always update max_indent 
+/* The generic rule is that it is better to always update max_indent
  * after increasing the margin
  * default value for max_indent is margin - 10
  */
 Format.pp_set_margin(formatter, 80);
-Format.pp_set_max_indent(formatter,70)
+Format.pp_set_max_indent(formatter, 70);
 
 Sys_js.set_channel_flusher(stdout, Buffer.add_string(stdout_buffer));
 Sys_js.set_channel_flusher(stderr, Buffer.add_string(stderr_buffer));
@@ -140,6 +61,11 @@ let report = (~loc: option(Location.t)=?, ~value=?, ~stdout=?, ~stderr=?, ()) =>
     },
 };
 
+let parse_use_file = lexbuf =>
+  try (Ok(Toploop.parse_use_file^(lexbuf))) {
+  | exn => Error(exn)
+  };
+
 let eval = code => {
   /* Clean up all buffers before executing new block */
   Buffer.clear(buffer);
@@ -150,11 +76,7 @@ let eval = code => {
   /* Init location reporting */
   Location.input_lexbuf := Some(lexbuf);
 
-  switch (
-    try (Ok(Toploop.parse_use_file^(lexbuf))) {
-    | x => Error(x)
-    }
-  ) {
+  switch (parse_use_file(lexbuf)) {
   | Error(exn) => [
       {
         Errors.report_error(Format.err_formatter, exn);
@@ -172,13 +94,15 @@ let eval = code => {
       | [phrase, ...phrases] =>
         let loc =
           switch (phrase) {
-          | Parsetree.Ptop_def(structure) =>
-            Some(
-              structure
-              |> List.map(structure_item => structure_item.Parsetree.pstr_loc)
-              |> List.hd,
-            )
-          | Ptop_dir(name, _argument) => None
+          | Parsetree.Ptop_def([]) => None
+          | Parsetree.Ptop_def([item, ...items]) =>
+            let loc = {
+              Location.loc_start: item.pstr_loc.Location.loc_start,
+              Location.loc_end: last(item, items).pstr_loc.Location.loc_end,
+              Location.loc_ghost: false,
+            };
+            Some(loc);
+          | Ptop_dir(_name, _argument) => None
           };
 
         Buffer.clear(buffer);
@@ -191,7 +115,15 @@ let eval = code => {
           }
         ) {
         | Ok(true) =>
-          let outMessages = [Ok(report(~loc?, ())), ...out_messages];
+          let value = drainBuffer(buffer);
+
+          let outMessages =
+            if (value == "") {
+              out_messages;
+            } else {
+              [Ok(report(~loc?, ~value, ())), ...out_messages];
+            };
+
           run(outMessages, phrases);
         | Ok(false) => [Error(report(~loc?, ())), ...out_messages]
         | Error(Sys.Break) => [

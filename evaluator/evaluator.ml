@@ -57,7 +57,7 @@ let execute code =
   code 
   |> Js.to_string
   |> Execute.eval 
-  |> List.map Execute.js_of_execResult 
+  |> List.map Sketch__Types.js_of_execResult 
   |> Array.of_list 
   |> Js.array
 
