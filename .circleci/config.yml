@@ -34,7 +34,7 @@ jobs:
       - run:
           name: Build and test
           command: |
-            make ci
+            make all
 
       - save_cache:
           key: v1-deps-{{ .Branch }}-{{ checksum "esy.lock" }}-{{ checksum "esy.lock.json" }}-{{ checksum "package.json" }}
