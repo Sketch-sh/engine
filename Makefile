@@ -3,7 +3,7 @@ evaluator:
 
 
 copy-evaluator: 
-	cp ./evaluator/_build/default/evaluator.js ../rtop_ui/client/public/reason.js
+	cp ./evaluator/_build/default/evaluator.js ../rtop_ui/client/public/reason_v2.js
 
 berror:
 	$(MAKE) -C berror build
