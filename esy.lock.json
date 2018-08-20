@@ -1,5 +1,5 @@
 {
-  "hash": "48ae80dc515c06d6b611989fe410a9c5",
+  "hash": "280209bde0da6952b6944a6ca72a4365",
   "root": "reason-online-rtop@path:.",
   "node": {
     "refmterr@github:esy-ocaml/BetterErrors#86eda2fbad7a51848f2dfaa0023acfd1beb047db": {
@@ -32,16 +32,16 @@
         "@opam/js_of_ocaml-compiler@opam:3.2.1",
         "@opam/js_of_ocaml-ppx@opam:3.2.0",
         "@opam/js_of_ocaml-toplevel@opam:3.2.0",
-        "@opam/ppx_deriving@opam:4.2.1", "ocaml@4.6.4",
+        "@opam/ppx_deriving@opam:4.2.1", "ocaml@4.6.1",
         "refmterr@github:esy-ocaml/BetterErrors#86eda2fbad7a51848f2dfaa0023acfd1beb047db"
       ]
     },
-    "ocaml@4.6.4": {
+    "ocaml@4.6.1": {
       "record": {
         "name": "ocaml",
-        "version": "4.6.4",
+        "version": "4.6.1",
         "source":
-          "archive:https://registry.npmjs.org/ocaml/-/ocaml-4.6.4.tgz#sha1:315bc4f8231b605674306715ce362dfaf42fee2c",
+          "archive:https://registry.npmjs.org/ocaml/-/ocaml-4.6.1.tgz#sha1:8babea2c41a9f734313b4fc1841ec0963c9d7a07",
         "files": [],
         "opam": null
       },

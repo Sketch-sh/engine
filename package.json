@@ -21,11 +21,11 @@
     "buildsInSource": "_build"
   },
   "peerDependencies": {
-    "ocaml": "~4.6.0"
+    "ocaml": "~4.6.1"
   },
   "devDependencies": {
     "@esy-ocaml/merlin": "3.0.5005",
     "@opam/dune": "*",
-    "ocaml": "~4.6.0"
+    "ocaml": "4.6.1"
   }
 }

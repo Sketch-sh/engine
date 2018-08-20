@@ -62,7 +62,7 @@ let report = (~loc: option(Location.t)=?, ~value=?, ~stdout=?, ~stderr=?, ()) =>
 };
 
 let parse_use_file = lexbuf =>
-  try (Ok(Toploop.parse_use_file^(lexbuf))) {
+  try (Ok(Sketch__Toploop.parse_use_file^(lexbuf))) {
   | exn => Error(exn)
   };
 
@@ -110,7 +110,7 @@ let eval = code => {
         Buffer.clear(stdout_buffer);
 
         switch (
-          try (Ok(Toploop.execute_phrase(true, formatter, phrase))) {
+          try (Ok(Sketch__Toploop.execute_phrase(true, formatter, phrase))) {
           | exn => Error(exn)
           }
         ) {
