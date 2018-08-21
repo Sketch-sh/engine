@@ -13,7 +13,8 @@
     "@opam/utop": "*"
   },
   "resolutions": {
-    "**/@esy-ocaml/reason": "github:facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae"
+    "**/@esy-ocaml/reason": "github:facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae",
+    "**/@opam/utop": "link:../utop"
   },
   "esy": {
     "install": [

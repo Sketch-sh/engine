@@ -66,6 +66,8 @@ let parse_use_file = lexbuf =>
   | exn => Error(exn)
   };
 
+module Complete = UTop_complete;
+
 let eval = code => {
   /* Clean up all buffers before executing new block */
   Buffer.clear(buffer);
