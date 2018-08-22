@@ -17,7 +17,7 @@
   },
   "esy": {
     "install": [
-      "esy-installer"
+      "esy-installer" 
     ],
     "buildsInSource": "_build"
   },

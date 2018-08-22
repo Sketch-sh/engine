@@ -8,7 +8,7 @@ toplevel: clear all
 	esy b jbuilder exec -- make -C build
 
 test: 
-	cd test && jest
+	cd test && npm test
 
 ci: toplevel test
 
