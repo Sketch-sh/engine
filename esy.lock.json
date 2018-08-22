@@ -1,5 +1,5 @@
 {
-  "hash": "48ae80dc515c06d6b611989fe410a9c5",
+  "hash": "364b0c66d2887412e2c735f41aa8cac9",
   "root": "reason-online-rtop@path:.",
   "node": {
     "refmterr@github:esy-ocaml/BetterErrors#86eda2fbad7a51848f2dfaa0023acfd1beb047db": {
@@ -32,7 +32,8 @@
         "@opam/js_of_ocaml-compiler@opam:3.2.1",
         "@opam/js_of_ocaml-ppx@opam:3.2.0",
         "@opam/js_of_ocaml-toplevel@opam:3.2.0",
-        "@opam/ppx_deriving@opam:4.2.1", "ocaml@4.6.4",
+        "@opam/ppx_deriving@opam:4.2.1", "@opam/re@opam:1.8.0",
+        "ocaml@4.6.4",
         "refmterr@github:esy-ocaml/BetterErrors#86eda2fbad7a51848f2dfaa0023acfd1beb047db"
       ]
     },

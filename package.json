@@ -9,7 +9,8 @@
     "@opam/js_of_ocaml-ppx": "*",
     "@opam/js_of_ocaml-toplevel": "*",
     "@opam/js_of_ocaml-compiler": "*",
-    "@opam/ppx_deriving": "*"
+    "@opam/ppx_deriving": "*",
+    "@opam/re": "*"
   },
   "resolutions": {
     "**/@esy-ocaml/reason": "github:facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae"
