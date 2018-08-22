@@ -1,4 +1,9 @@
-_build
+**/_build
 .merlin
 node_modules
 output/reason.js
+
+build/*.js
+build/*.byte
+*.install
+packages

@@ -1,4 +1,4 @@
-open Sketch__Types;
+open Types;
 
 let get_error_loc =
   fun
@@ -164,3 +164,5 @@ let eval = code => {
     List.rev(run([], phrases));
   };
 };
+
+let toString = js_of_execResult;

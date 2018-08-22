@@ -43,5 +43,5 @@ jobs:
             - node_modules
             - test/node_modules
       - store_artifacts:
-          path: evaluator/_build/default/evaluator.js
-          destination: evaluator
+          path: build
+          destination: build

@@ -1,31 +1,30 @@
 {
-  "name": "reason-online-rtop",
+  "name": "sketch",
   "version": "0.0.1",
   "dependencies": {
     "@esy-ocaml/esy-installer": "^0.0.0",
-    "@esy-ocaml/reason": "facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae",
-    "refmterr": "esy-ocaml/BetterErrors.git",
-    "@opam/js_of_ocaml": "*",
-    "@opam/js_of_ocaml-ppx": "*",
-    "@opam/js_of_ocaml-toplevel": "*",
-    "@opam/js_of_ocaml-compiler": "*",
-    "@opam/ppx_deriving": "*"
+    "@esy-ocaml/reason":
+      "github:facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae",
+    "@opam/js_of_ocaml": "^3.2.0",
+    "@opam/js_of_ocaml-compiler": "^3.2.1",
+    "@opam/js_of_ocaml-ppx": "^3.2.0",
+    "@opam/js_of_ocaml-toplevel": "^3.2.0",
+    "@opam/owl-base": "0.4.0",
+    "refmterr": "esy-ocaml/BetterErrors.git"
   },
   "resolutions": {
-    "**/@esy-ocaml/reason": "github:facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae"
+    "**/@esy-ocaml/reason":
+      "github:facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae"
   },
   "esy": {
-    "install": [
-      "esy-installer"
-    ],
+    "build": [ "make all" ],
+    "install": [ "esy-installer" ],
     "buildsInSource": "_build"
   },
-  "peerDependencies": {
-    "ocaml": "~4.6.0"
-  },
+  "peerDependencies": { "ocaml": "~4.6.5" },
   "devDependencies": {
     "@esy-ocaml/merlin": "3.0.5005",
     "@opam/dune": "*",
-    "ocaml": "~4.6.0"
+    "ocaml": "~4.6.5"
   }
 }

@@ -1,0 +1,8 @@
+(library
+ (name Sketch)
+ (public_name sketch.evaluator)
+ (libraries js_of_ocaml js_of_ocaml-compiler js_of_ocaml-toplevel reason compiler-libs)
+ (library_flags -linkall)
+ (preprocess (pps js_of_ocaml-ppx))
+ (flags :standard -rectypes)
+)

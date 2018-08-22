@@ -1,29 +1,22 @@
-evaluator:
-	esy b $(MAKE) -C evaluator build
+all:
+	refmterr dune build @install -j 8
 
+clear:
+	rm -rf packages/*
+	$(MAKE) -C build clear
 
-copy-evaluator: 
-	cp ./evaluator/_build/default/evaluator.js ../rtop_ui/client/public/reason_v2.js
-
-berror:
-	$(MAKE) -C berror build
-
-copy-berror: 
-	cp ./berror/_build/default/berror.js ../rtop_ui/public/berror.js
-
-clean:
-	esy b $(MAKE) -C evaluator clean
-	esy b $(MAKE) -C berror clean
+toplevel: clear all
+	dune exec -- make -C build
 
 test: 
 	cd test && npm test
 
-copy: copy-berror copy-evaluator
+ci: toplevel test
 
-build: evaluator berror
+plugin: 
+	$(MAKE) -C generate re unix owl	
 
-all: clean evaluator test
+package: all
+	dune exec -- sketch re owl-base
 
-ci: evaluator test
-
-.PHONY: evaluator copy-evaluator berror copy-berror clean build all test ci-evaluator ci
+.PHONY: all toplevel test ci package

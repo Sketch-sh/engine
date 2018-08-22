@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <script>
+      function e(code) {
+        evaluator
+          .execute(code)
+          .forEach(({kind, value}) => console.log({kind, value}))
+      }
+      function load_script(url){
+        var fileref=document.createElement('script');
+        fileref.setAttribute("type","text/javascript");
+        fileref.setAttribute("src", "./" + url);
+        document.getElementsByTagName("head")[0].appendChild(fileref);
+      }
+      load_script("exported-unit.cmis.js");
+      load_script("stdlib.cmis.js");
+      load_script("toplevel.js");
+      load_script("re.cmis.js");
+      load_script("re.cma.js");
+    </script>
+  </head>
+</html>
