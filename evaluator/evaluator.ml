@@ -53,6 +53,12 @@ end
 
 let setup () = JsooTop.initialize ()
 
+let insertModule name content = 
+  let name = Js.to_string name in
+  let content = Js.to_string content in
+  let _ = File__System.createOrUpdateFile name content in
+  Execute.mod_use_file ("/static" ^ name)
+
 let execute code =
   code 
   |> Js.to_string
@@ -60,7 +66,6 @@ let execute code =
   |> List.map Sketch__Types.js_of_execResult 
   |> Array.of_list 
   |> Js.array
-
 
 let () = begin
   setup ();
@@ -72,5 +77,6 @@ let () = begin
       val reset = setup
       val reasonSyntax = reasonSyntax
       val mlSyntax = mlSyntax
+      val insertModule = insertModule
     end);
 end

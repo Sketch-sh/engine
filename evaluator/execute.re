@@ -66,6 +66,11 @@ let parse_use_file = lexbuf =>
   | exn => Error(exn)
   };
 
+let mod_use_file = name =>
+  try (Ok(Toploop.mod_use_file(formatter, name))) {
+  | exn => Error(exn)
+  };
+
 let eval = code => {
   /* Clean up all buffers before executing new block */
   Buffer.clear(buffer);
