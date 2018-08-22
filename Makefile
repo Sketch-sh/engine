@@ -10,4 +10,6 @@ toplevel: clear all
 test: 
 	cd test && jest
 
-.PHONY: all toplevel test
+ci: toplevel test
+
+.PHONY: all toplevel test ci
