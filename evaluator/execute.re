@@ -81,7 +81,7 @@ let eval = code => {
       {
         Errors.report_error(Format.err_formatter, exn);
         switch (get_error_loc(exn)) {
-        | None => Error(report(~stderr="Unknown error", ()))
+        | None => Error(report(~stderr=Printexc.to_string(exn), ()))
         | Some(loc) => Error(report(~loc, ()))
         };
       },
@@ -134,7 +134,8 @@ let eval = code => {
           Errors.report_error(Format.err_formatter, exn);
           let newMessage =
             switch (get_error_loc(exn)) {
-            | None => Error(report(~loc?, ~stderr="Unknown error", ()))
+            | None =>
+              Error(report(~loc?, ~stderr=Printexc.to_string(exn), ()))
             | Some(parsedLoc) => Error(report(~loc=parsedLoc, ()))
             };
           [newMessage, ...out_messages];
