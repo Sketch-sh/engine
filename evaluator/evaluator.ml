@@ -61,6 +61,19 @@ let execute code =
   |> Array.of_list 
   |> Js.array
 
+let load_cmis () =
+  let env = !Toploop.toplevel_env in
+  let cmis = Array.to_list (Sys.readdir "/static/cmis/") in
+  List.iter (fun cmi -> (
+    let cmi_name = String.capitalize_ascii (Filename.chop_suffix cmi ".cmi") in
+    try
+      let _ = Env.lookup_module ~load:true (Lident cmi_name) env in
+      Firebug.console##log (Js.string ("Loading: " ^ cmi_name)) ;
+      
+    with
+    | exn -> 
+    Firebug.console##log_2 (Js.string "Exn: ") (Js.string (Printexc.to_string exn));
+  )) cmis
 
 let () = begin
   setup ();
@@ -72,5 +85,6 @@ let () = begin
       val reset = setup
       val reasonSyntax = reasonSyntax
       val mlSyntax = mlSyntax
+      val load = load_cmis
     end);
 end
