@@ -81,7 +81,7 @@ let eval = code => {
       {
         Errors.report_error(Format.err_formatter, exn);
         switch (get_error_loc(exn)) {
-        | None => Error(report(~stderr=Printexc.to_string(exn), ()))
+        | None => Error(report())
         | Some(loc) => Error(report(~loc, ()))
         };
       },
@@ -135,7 +135,7 @@ let eval = code => {
           let newMessage =
             switch (get_error_loc(exn)) {
             | None =>
-              Error(report(~loc?, ~stderr=Printexc.to_string(exn), ()))
+              Error(report(~loc?, ()))
             | Some(parsedLoc) => Error(report(~loc=parsedLoc, ()))
             };
           [newMessage, ...out_messages];
