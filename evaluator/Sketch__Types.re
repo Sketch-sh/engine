@@ -19,7 +19,7 @@ type location =
     loc_ghost: bool,
   };
 
-let js_of_location = ({loc_start, loc_end}) =>
+let js_of_location = ({loc_start, loc_end, loc_ghost: _}) =>
   Js.array([|js_of_position(loc_start), js_of_position(loc_end)|]);
 
 let show_location = location =>

@@ -73,4 +73,6 @@ let () = begin
       val reasonSyntax = reasonSyntax
       val mlSyntax = mlSyntax
     end);
+
+  Js.export "refmt" RefmtJsApi.api
 end
