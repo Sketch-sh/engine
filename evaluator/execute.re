@@ -13,6 +13,7 @@ let get_error_loc =
   | Translclass.Error(loc, _)
   | Translmod.Error(loc, _) => Some(loc)
   | Reason_syntax_util.Error(loc, _) => Some(loc)
+  | Reason_lexer.Error(_err, loc) => Some(loc)
   | _ => None;
 
 let drainBuffer = bf => {
