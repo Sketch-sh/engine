@@ -12,4 +12,9 @@ test:
 
 ci: toplevel test
 
+do_it_1: clear toplevel
+	esy b jsoo_mkcmis re && mv re.cmis.js build
+do_it: do_it_1
+	$(MAKE) -C build try
+
 .PHONY: all toplevel test ci

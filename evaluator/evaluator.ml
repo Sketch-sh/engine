@@ -75,6 +75,8 @@ let load_cmis () =
     Firebug.console##log_2 (Js.string "Exn: ") (Js.string (Printexc.to_string exn));
   )) cmis
 
+let load_cmos = Load.load_cmos;;
+
 let () = begin
   setup ();
   reasonSyntax ();
@@ -85,6 +87,7 @@ let () = begin
       val reset = setup
       val reasonSyntax = reasonSyntax
       val mlSyntax = mlSyntax
-      val load = load_cmis
+      val cmis = load_cmis
+      val cmos = load_cmos
     end);
-end
+end;;

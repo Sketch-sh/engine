@@ -30,6 +30,8 @@ endif
 
 MKTOP=jsoo_mktop -verbose $(SAFESTRING) -g \
 	${addprefix -top-syntax , ${SYNTAXES}} \
+	-jsopt "--dynlink" \
+	-jsopt "--extern-fs" \
 	${addprefix -export-package , ${PACKAGES}} \
 	# -jsopt "--disable shortvar --pretty" \
 
@@ -44,3 +46,14 @@ $(TOPLEVEL_NAME).js:
 
 clear::
 	rm -f *.js *.byte
+
+CMA_PATH=$(shell esy b ocamlfind query re -a-format -predicates byte)
+CMA_FOLDER=$(shell esy b ocamlfind query re)
+
+plugin::
+	esy b js_of_ocaml --wrap-with-fun=reDynlink --pretty ${CMA_PATH} -o re.dynlink.js && \
+	mv ../re.dynlink.js .
+
+try::
+	esy b js_of_ocaml --wrap-with-fun=reDynlink --file seq.cma --file re.cma --extern-fs -I . re.cma --ofs=fs.js
+	mv ../fs.js re.dynlink.js
