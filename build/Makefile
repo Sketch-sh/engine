@@ -30,8 +30,6 @@ endif
 
 MKTOP=jsoo_mktop -verbose $(SAFESTRING) -g \
 	${addprefix -top-syntax , ${SYNTAXES}} \
-	-jsopt "--dynlink" \
-	-jsopt "--extern-fs" \
 	${addprefix -export-package , ${PACKAGES}} \
 	# -jsopt "--disable shortvar --pretty" \
 
@@ -52,4 +50,4 @@ CMA_FOLDER=$(shell ocamlfind query re)
 
 plugin:
 	js_of_ocaml --wrap-with-fun=reCma --pretty ${CMA_PATH} -o re.cma.js && \
-	jsoo_mkcmis re -o re.cmi.js
+	jsoo_mkcmis re -o re.cmis.js
