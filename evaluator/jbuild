@@ -9,7 +9,6 @@
            reason 
            compiler-libs
         ))
-   (optional)
    (library_flags (-linkall))
    (preprocess (pps (js_of_ocaml-ppx)))
    (flags (:standard -rectypes))
