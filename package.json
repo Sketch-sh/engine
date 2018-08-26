@@ -13,11 +13,15 @@
     "@opam/re": "*"
   },
   "resolutions": {
-    "**/@esy-ocaml/reason": "github:facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae"
+    "**/@esy-ocaml/reason": "github:facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae",
+    "**/@opam/js_of_ocaml": "github:ocsigen/js_of_ocaml#9858b67c044ed52de14e90af4cadfc0140cfd02d",
+    "**/@opam/js_of_ocaml-ppx": "github:ocsigen/js_of_ocaml#9858b67c044ed52de14e90af4cadfc0140cfd02d",
+    "**/@opam/js_of_ocaml-toplevel": "github:ocsigen/js_of_ocaml#9858b67c044ed52de14e90af4cadfc0140cfd02d",
+    "**/@opam/js_of_ocaml-compiler": "github:ocsigen/js_of_ocaml#9858b67c044ed52de14e90af4cadfc0140cfd02d"
   },
   "esy": {
     "install": [
-      "esy-installer" 
+      "esy-installer"
     ],
     "buildsInSource": "_build"
   },
