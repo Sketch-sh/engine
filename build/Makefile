@@ -44,16 +44,12 @@ $(TOPLEVEL_NAME).js:
 	${addprefix -jsopt , ${JSFILES}} \
 	-o $(TOPLEVEL_NAME).byte
 
-clear::
+clear:
 	rm -f *.js *.byte
 
 CMA_PATH=$(shell ocamlfind query re -a-format -predicates byte)
 CMA_FOLDER=$(shell ocamlfind query re)
 
-plugin::
-	js_of_ocaml --wrap-with-fun=reDynlink --pretty ${CMA_PATH} -o re.dynlink.js && \
-	mv ../re.dynlink.js .
-
-try::
-	js_of_ocaml --wrap-with-fun=reDynlink --file seq.cma --file re.cma --extern-fs -I . re.cma --ofs=fs.js
-	mv ../fs.js re.dynlink.js
+plugin:
+	js_of_ocaml --wrap-with-fun=reCma --pretty ${CMA_PATH} -o re.cma.js && \
+	jsoo_mkcmis re -o re.cmi.js

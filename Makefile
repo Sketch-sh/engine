@@ -12,9 +12,7 @@ test:
 
 ci: toplevel test
 
-do_it_1: clear toplevel
-	jsoo_mkcmis re && mv re.cmis.js build
-do_it: do_it_1
-	$(MAKE) -C build try
+do_it: toplevel
+	$(MAKE) -C build plugin
 
 .PHONY: all toplevel test ci
