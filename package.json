@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "dependencies": {
     "@esy-ocaml/esy-installer": "^0.0.0",
-    "@esy-ocaml/reason": "facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae",
+    "@esy-ocaml/reason": "github:facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae",
     "refmterr": "esy-ocaml/BetterErrors.git",
-    "**/@opam/js_of_ocaml": "ocsigen/js_of_ocaml#9858b67c044ed52de14e90af4cadfc0140cfd02d",
-    "**/@opam/js_of_ocaml-ppx": "ocsigen/js_of_ocaml#9858b67c044ed52de14e90af4cadfc0140cfd02d",
-    "**/@opam/js_of_ocaml-toplevel": "ocsigen/js_of_ocaml#9858b67c044ed52de14e90af4cadfc0140cfd02d",
-    "**/@opam/js_of_ocaml-compiler": "ocsigen/js_of_ocaml#9858b67c044ed52de14e90af4cadfc0140cfd02d",
+    "**/@opam/js_of_ocaml": "github:ocsigen/js_of_ocaml#9858b67c044ed52de14e90af4cadfc0140cfd02d",
+    "**/@opam/js_of_ocaml-ppx": "github:ocsigen/js_of_ocaml#9858b67c044ed52de14e90af4cadfc0140cfd02d",
+    "**/@opam/js_of_ocaml-toplevel": "github:ocsigen/js_of_ocaml#9858b67c044ed52de14e90af4cadfc0140cfd02d",
+    "**/@opam/js_of_ocaml-compiler": "github:ocsigen/js_of_ocaml#9858b67c044ed52de14e90af4cadfc0140cfd02d",
     "@opam/re": "*"
   },
   "resolutions": {

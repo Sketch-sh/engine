@@ -47,13 +47,13 @@ $(TOPLEVEL_NAME).js:
 clear::
 	rm -f *.js *.byte
 
-CMA_PATH=$(shell esy b ocamlfind query re -a-format -predicates byte)
-CMA_FOLDER=$(shell esy b ocamlfind query re)
+CMA_PATH=$(shell ocamlfind query re -a-format -predicates byte)
+CMA_FOLDER=$(shell ocamlfind query re)
 
 plugin::
-	esy b js_of_ocaml --wrap-with-fun=reDynlink --pretty ${CMA_PATH} -o re.dynlink.js && \
+	js_of_ocaml --wrap-with-fun=reDynlink --pretty ${CMA_PATH} -o re.dynlink.js && \
 	mv ../re.dynlink.js .
 
 try::
-	esy b js_of_ocaml --wrap-with-fun=reDynlink --file seq.cma --file re.cma --extern-fs -I . re.cma --ofs=fs.js
+	js_of_ocaml --wrap-with-fun=reDynlink --file seq.cma --file re.cma --extern-fs -I . re.cma --ofs=fs.js
 	mv ../fs.js re.dynlink.js
