@@ -79,4 +79,6 @@ let () = begin
       val mlSyntax = mlSyntax
       val insertModule = insertModule
     end);
+
+  Js.export "refmt" RefmtJsApi.api
 end
