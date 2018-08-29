@@ -54,10 +54,32 @@ end
 let setup () = JsooTop.initialize ()
 
 let insertModule name content = 
-  let name = Js.to_string name in
-  let content = Js.to_string content in
-  let _ = File__System.createOrUpdateFile name content in
-  Execute.mod_use_file ("/static" ^ name)
+  begin 
+    let result = try  
+      let name = Js.to_string name in
+      let content = Js.to_string content in
+      let file_name = ("/static/" ^ (String.capitalize_ascii name) ^ ".re") in 
+      let _ = File__System.createOrUpdateFile file_name content in
+      Execute.mod_use_file file_name
+    with 
+      | exn -> 
+        let buffer = Buffer.create 100 in
+        let formatter = Format.formatter_of_buffer buffer in 
+        Errors.report_error formatter exn;
+        let error_message = Buffer.contents buffer in 
+        Error(error_message) in
+    match result with 
+    | Ok(_) -> 
+      object%js 
+        val kind = Js.string "Ok"
+        val value = Js.string "unit"
+      end
+    | Error(message) -> 
+      object%js 
+        val kind = Js.string "Error"
+        val value = Js.string message
+      end
+  end
 
 let execute code =
   code 
