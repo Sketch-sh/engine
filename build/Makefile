@@ -13,6 +13,7 @@ endif
 PACKAGES= \
 	sketch_evaluator \
 	compiler-libs.common \
+	# owl-base \
 
 ifeq ($(WITH_ASYNC_JS),YES)
 PACKAGES += async_js core_kernel async_kernel base
@@ -45,9 +46,9 @@ $(TOPLEVEL_NAME).js:
 clear:
 	rm -f *.js *.byte
 
-CMA_PATH=$(shell ocamlfind query re -a-format -predicates byte)
-CMA_FOLDER=$(shell ocamlfind query re)
+CMA_PATH=$(shell ocamlfind query owl-base -a-format -predicates byte)
+CMA_FOLDER=$(shell ocamlfind query owl-base)
 
 plugin:
-	js_of_ocaml --wrap-with-fun=reCma --pretty ${CMA_PATH} -o re.cma.js && \
-	jsoo_mkcmis re -o re.cmis.js
+	js_of_ocaml --wrap-with-fun=owlBaseCma ${CMA_PATH} -o owl-base.cma.js && \
+	jsoo_mkcmis owl-base -o owl-base.cmis.js

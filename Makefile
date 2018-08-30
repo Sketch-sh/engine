@@ -12,7 +12,7 @@ test:
 
 ci: toplevel test
 
-do_it: toplevel
+plugin:
 	$(MAKE) -C build plugin
 
 .PHONY: all toplevel test ci

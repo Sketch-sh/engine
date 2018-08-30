@@ -2,9 +2,9 @@
   <head>
     <script>
       function e(code) {
-        evaluator
-          .execute(code)
-          .forEach(({kind, value}) => console.log({kind, value}))
+        console.log(evaluator
+          .execute(code))
+          // .forEach(({kind, value}) => console.log({kind, value}))
       }
       function load_script(url){
         var fileref=document.createElement('script');
@@ -15,8 +15,8 @@
       load_script("exported-unit.cmis.js");
       load_script("stdlib.cmis.js");
       load_script("toplevel.js");
-      load_script("re.cmis.js");
-      load_script("re.cma.js");
+      load_script("owl-base.cmis.js");
+      load_script("owl-base.cma.js");
     </script>
   </head>
 </html>
