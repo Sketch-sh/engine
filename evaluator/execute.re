@@ -131,6 +131,11 @@ let eval = code => {
             ...out_messages,
           ]
         | Error(exn) =>
+            switch (exn) {
+            | Js.Error(content) => 
+              let content = content;
+              Firebug.console##log_2 (Js.string "\tFAILURE: ") (Js.error s)
+            };
           Errors.report_error(Format.err_formatter, exn);
           let newMessage =
             switch (get_error_loc(exn)) {
