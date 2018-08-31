@@ -128,25 +128,13 @@ let eval = code => {
                 ...out_messages,
               ];
             };
-
           run(outMessages, phrases);
-        | Ok(false) =>
-          Firebug.console##log_2(
-            Js.string("Log: "),
-            Js.string("OK false toploop"),
-          );
-          [Error(report(~loc?, ())), ...out_messages];
-        | Error(Sys.Break) =>
-          Firebug.console##log_2(
-            Js.string("Log: "),
-            Js.string("error sys.break"),
-          );
-          [Error(report(~loc?, ~stderr="Interupted", ())), ...out_messages];
+        | Ok(false) => [Error(report(~loc?, ())), ...out_messages]
+        | Error(Sys.Break) => [
+            Error(report(~loc?, ~stderr="Interupted", ())),
+            ...out_messages,
+          ]
         | Error(exn) =>
-          Firebug.console##log_2(
-            Js.string("Log: "),
-            Js.string("error exn"),
-          );
           Errors.report_error(Format.err_formatter, exn);
           let newMessage =
             switch (get_error_loc(exn)) {
