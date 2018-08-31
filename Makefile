@@ -24,9 +24,6 @@ build: evaluator berror
 
 all: clean evaluator test
 
-ci-evaluator:
-	$(MAKE) -C evaluator ci-build
-
-ci: ci-evaluator test
+ci: evaluator test
 
 .PHONY: evaluator copy-evaluator berror copy-berror clean build all test ci-evaluator ci
