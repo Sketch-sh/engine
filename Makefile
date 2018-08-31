@@ -1,5 +1,5 @@
 evaluator:
-	$(MAKE) -C evaluator build
+	esy b $(MAKE) -C evaluator build
 
 
 copy-evaluator: 
@@ -12,8 +12,8 @@ copy-berror:
 	cp ./berror/_build/default/berror.js ../rtop_ui/public/berror.js
 
 clean:
-	$(MAKE) -C evaluator clean
-	$(MAKE) -C berror clean
+	esy b $(MAKE) -C evaluator clean
+	esy b $(MAKE) -C berror clean
 
 test: 
 	cd test && npm test

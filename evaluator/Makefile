@@ -1,8 +1,8 @@
 build:
-	esy b refmterr jbuilder build evaluator.js
+	refmterr jbuilder build evaluator.js
 
 clean:
-	esy b jbuilder clean
+	jbuilder clean
 
 all: clean build
 
