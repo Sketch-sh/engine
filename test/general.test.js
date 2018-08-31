@@ -13,3 +13,15 @@ test("correct values order when having multiple expressions on the same line", (
     "let z: int = 3;",
   ]);
 });
+
+test("directives", () => {
+  let result = e.execute(`let a = 1; #show a;`);
+  expect(result.length).toBe(2);
+  expect(result[1].value.stdout.trim()).toMatchInlineSnapshot(`"let a: int;"`);
+});
+
+test("directives: #help", () => {
+  let result = e.execute(`#help;`);
+  expect(result.length).toBe(1);
+  expect(result[0].value.stdout.trim()).toMatchSnapshot();
+});

@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`directives: #help 1`] = `
+"General
+#help
+  Prints a list of all available directives, with corresponding argument type
+  if appropriate.
+#quit
+  Exit the toplevel.
+
+                              Loading code
+#cd <str>
+  Change the current working directory.
+#directory <str>
+  Add the given directory to search path for source and compiled files.
+#load <str>
+  Load in memory a bytecode object, produced by ocamlc.
+#load_rec <str>
+  As #load, but loads dependencies recursively.
+#mod_use <str>
+  Usage is identical to #use but #mod_use wraps the contents in a module.
+#remove_directory <str>
+  Remove the given directory from the search path.
+#use <str>
+  Read, compile and execute source phrases from the given file.
+
+                              Environment queries
+#show <ident>
+  Print the signatures of components from any of the categories below.
+#show_class <ident>
+  Print the signature of the corresponding class.
+#show_class_type <ident>
+  Print the signature of the corresponding class type.
+#show_exception <ident>
+  Print the signature of the corresponding exception.
+#show_module <ident>
+  Print the signature of the corresponding module.
+#show_module_type <ident>
+  Print the signature of the corresponding module type.
+#show_type <ident>
+  Print the signature of the corresponding type constructor.
+#show_val <ident>
+  Print the signature of the corresponding value.
+
+                              Pretty-printing
+#install_printer <ident>
+  Registers a printer for values of a certain type.
+#print_depth <int>
+  Limit the printing of values to a maximal depth of n.
+#print_length <int>
+  Limit the number of value nodes printed to at most n.
+#remove_printer <ident>
+  Remove the named function from the table of toplevel printers.
+
+                              Tracing
+#trace <ident>
+  All calls to the function named function-name will be traced.
+#untrace <ident>
+  Stop tracing the given function.
+#untrace_all
+  Stop tracing all functions traced so far.
+
+                              Compiler options
+#labels <bool>
+  Choose whether to ignore labels in function types.
+#ppx <str>
+  After parsing, pipe the abstract syntax tree through the preprocessor
+  command.
+#principal <bool>
+  Make sure that all types are derived in a principal way.
+#rectypes
+  Allow arbitrary recursive types during type-checking.
+#warn_error <str>
+  Treat as errors the warnings enabled by the argument.
+#warnings <str>
+  Enable or disable warnings according to the argument.
+
+                              Undocumented
+#debug_off <str>
+#debug_on <str>
+#disable <str>
+#enable <str>
+#tailcall <str>"
+`;
