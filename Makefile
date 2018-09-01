@@ -1,5 +1,5 @@
 all:
-	refmterr dune build @install -j 8
+	dune build @install -j 8
 
 clear:
 	rm -rf packages/*
