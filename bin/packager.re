@@ -1,5 +1,6 @@
 open Utils;
 let verbose = ref(false);
+let urlPrefix = ref("https://libraries.sketch.sh");
 
 let execute = cmd => {
   let s = String.concat(" ", cmd);
@@ -70,7 +71,8 @@ let build = mainPackageName => {
            let fileName = safePackageName ++ ".lib.sketch.js";
            [
              Printf.sprintf(
-               {|importScripts("%s"); %s(self);|},
+               {|importScripts("%s/%s"); %s(self);|},
+               urlPrefix^,
                fileName,
                functionName,
              ),

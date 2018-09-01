@@ -19,8 +19,10 @@ plugin:
 package: all
 	dune exec -- sketch re owl-base
 	
-packages: 
+packages: all
 	cp ./_build/default/bin/packager.exe ./sandbox/packager.exe
 	$(MAKE) -C sandbox all
+upload:
+	surge sandbox/packages
 
-.PHONY: all toplevel test ci package copy
+.PHONY: all toplevel test ci package copy upload
