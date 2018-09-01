@@ -51,17 +51,41 @@ let reasonSyntax () = begin
     wrap copy_out_phrase Reason_oprint.print_out_phrase;
 end
 
+type lang = RE | ML
+
+let stringToLang = 
+  function
+  | "ml" | "ocaml" -> ML
+  | "re" | "reason"
+  | _ -> RE
+
+let langToExtension = 
+  function 
+  | RE -> "re"
+  | ML -> "ml"
+
+let moduleToFileName moduleName lang =
+  "/static/" ^ (String.capitalize_ascii moduleName) ^ "." ^ (langToExtension lang)
+
 let setup () = JsooTop.initialize ()
 
-let insertModule name content = 
+let insertModule moduleName content lang = 
   begin 
     let result = try  
-      let name = Js.to_string name in
+      let moduleName = Js.to_string moduleName in
       let content = Js.to_string content in
-      let file_name = ("/static/" ^ (String.capitalize_ascii name) ^ ".re") in 
-      let _ = File__System.createOrUpdateFile file_name content in
-      Execute.mod_use_file file_name
-    with 
+      let lang = Js.to_string lang in
+      let lang = stringToLang lang in 
+      begin 
+        match lang with 
+        | ML -> mlSyntax()
+        | RE -> reasonSyntax()
+      end;
+
+      let fileName = moduleToFileName moduleName lang in
+      let _ = File__System.createOrUpdateFile fileName content in
+      Execute.mod_use_file fileName
+    with
       | exn -> 
         let buffer = Buffer.create 100 in
         let formatter = Format.formatter_of_buffer buffer in 
