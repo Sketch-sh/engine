@@ -18,5 +18,9 @@ plugin:
 
 package: all
 	dune exec -- sketch re owl-base
+	
+packages: 
+	cp ./_build/default/bin/packager.exe ./sandbox/packager.exe
+	$(MAKE) -C sandbox all
 
-.PHONY: all toplevel test ci package
+.PHONY: all toplevel test ci package copy

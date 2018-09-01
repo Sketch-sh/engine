@@ -6,5 +6,7 @@ output/reason.js
 build/*.js
 build/*.byte
 *.install
-packages
+
+sandbox/packages
 sandbox/node_modules
+sandbox/packager.exe
