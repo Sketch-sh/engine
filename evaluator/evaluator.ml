@@ -51,7 +51,59 @@ let reasonSyntax () = begin
     wrap copy_out_phrase Reason_oprint.print_out_phrase;
 end
 
+type lang = RE | ML
+
+let stringToLang = 
+  function
+  | "ml" | "ocaml" -> ML
+  | "re" | "reason"
+  | _ -> RE
+
+let langToExtension = 
+  function 
+  | RE -> "re"
+  | ML -> "ml"
+
+let moduleToFileName moduleName lang =
+  "/static/" ^ (String.capitalize_ascii moduleName) ^ "." ^ (langToExtension lang)
+
 let setup () = JsooTop.initialize ()
+
+let insertModule moduleName content lang = 
+  begin 
+    let result = try  
+      let moduleName = Js.to_string moduleName in
+      let content = Js.to_string content in
+      let lang = Js.to_string lang in
+      let lang = stringToLang lang in 
+      begin 
+        match lang with 
+        | ML -> mlSyntax()
+        | RE -> reasonSyntax()
+      end;
+
+      let fileName = moduleToFileName moduleName lang in
+      let _ = File__System.createOrUpdateFile fileName content in
+      Execute.mod_use_file fileName
+    with
+      | exn -> 
+        let buffer = Buffer.create 100 in
+        let formatter = Format.formatter_of_buffer buffer in 
+        Errors.report_error formatter exn;
+        let error_message = Buffer.contents buffer in 
+        Error(error_message) in
+    match result with 
+    | Ok(_) -> 
+      object%js 
+        val kind = Js.string "Ok"
+        val value = Js.string "unit"
+      end
+    | Error(message) -> 
+      object%js 
+        val kind = Js.string "Error"
+        val value = Js.string message
+      end
+  end
 
 let execute code =
   code 
@@ -60,7 +112,6 @@ let execute code =
   |> List.map Sketch__Types.js_of_execResult 
   |> Array.of_list 
   |> Js.array
-
 
 let () = begin
   setup ();
@@ -72,6 +123,7 @@ let () = begin
       val reset = setup
       val reasonSyntax = reasonSyntax
       val mlSyntax = mlSyntax
+      val insertModule = insertModule
     end);
 
   Js.export "refmt" RefmtJsApi.api
