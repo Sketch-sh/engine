@@ -7,3 +7,4 @@ build/*.js
 build/*.byte
 *.install
 packages
+sandbox/node_modules

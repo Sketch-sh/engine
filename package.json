@@ -9,7 +9,6 @@
     "@opam/js_of_ocaml-compiler": "^3.2.1",
     "@opam/js_of_ocaml-ppx": "^3.2.0",
     "@opam/js_of_ocaml-toplevel": "^3.2.0",
-    "@opam/owl-base": "0.4.0",
     "refmterr": "esy-ocaml/BetterErrors.git"
   },
   "resolutions": {
