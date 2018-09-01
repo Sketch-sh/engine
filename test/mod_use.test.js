@@ -69,28 +69,3 @@ Error: This expression has type int but an expression was expected of type
          string"
 `);
 });
-
-test("persist after a reset", () => {
-  e.reset();
-  let insertModule = e.insertModule(
-    "awesome",
-    `let x = 1; let y = 2; let z = 3;`,
-    "re"
-  );
-
-  expect(objPath.get(insertModule, "kind")).toBe("Ok");
-  e.reset();
-  let result = e.execute(
-    "let x = Awesome.x; let y = Awesome.y; let z = Awesome.z;"
-  );
-  console.log(result);
-  result = result
-    .map(phr => objPath.get(phr, "value.value"))
-    .map(str => str.trim());
-
-  expect(result).toEqual([
-    "let x: int = 1;",
-    "let y: int = 2;",
-    "let z: int = 3;",
-  ]);
-});
