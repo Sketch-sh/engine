@@ -30,6 +30,7 @@ jobs:
           command: |
             echo $PATH
             esy install
+            cd sandbox && esy install
             cd test && npm install
       - run:
           name: Build and test
