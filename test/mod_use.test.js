@@ -1,4 +1,6 @@
-const { evaluator: e } = require("../evaluator/_build/default/evaluator.js");
+require("../build/exported-unit.cmis");
+require("../build/stdlib.cmis");
+const { evaluator: e } = require("../build/toplevel.js");
 const objPath = require("object-path");
 
 test("mod_use valid file", () => {
@@ -19,7 +21,7 @@ test("mod_use valid file", () => {
   expect(result).toEqual([
     "let x: int = 1;",
     "let y: int = 2;",
-    "let z: int = 3;",
+    "let z: int = 3;"
   ]);
 });
 
@@ -43,7 +45,7 @@ test("mod_use valid file ml syntax", () => {
   expect(result).toEqual([
     "let x: int = 1;",
     "let y: int = 2;",
-    "let z: int = 3;",
+    "let z: int = 3;"
   ]);
 });
 
@@ -54,7 +56,7 @@ test("mod_use with syntax error", () => {
   expect(objPath.get(insertModule, "kind")).toBe("Error");
   expect(objPath.get(insertModule, "value").trim()).toMatchInlineSnapshot(`
 "File \\"/static/Syntax_error.re\\", line 1, characters 13-14:
-Error: 1160: <syntax error>"
+Error: Syntax error"
 `);
 });
 

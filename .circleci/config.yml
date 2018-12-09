@@ -34,7 +34,7 @@ jobs:
       - run:
           name: Build and test
           command: |
-            make ci
+            esy make all test
 
       - save_cache:
           key: v1-deps-{{ .Branch }}-{{ checksum "esy.lock" }}-{{ checksum "esy.lock.json" }}-{{ checksum "package.json" }}
@@ -43,5 +43,5 @@ jobs:
             - node_modules
             - test/node_modules
       - store_artifacts:
-          path: evaluator/_build/default/evaluator.js
-          destination: evaluator
+          path: build
+          destination: build

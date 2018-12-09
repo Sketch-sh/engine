@@ -1,4 +1,14 @@
-_build
+**/_build
 .merlin
 node_modules
 output/reason.js
+
+build/*.js
+build/*.byte
+*.install
+
+sandbox/packages
+sandbox/node_modules
+sandbox/packager.exe
+
+_esy

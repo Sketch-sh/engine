@@ -1,0 +1,6 @@
+(executable
+  (name packager)
+  (public_name sketch)
+  (package sketch)
+  (libraries unix str)
+)

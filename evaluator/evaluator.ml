@@ -1,3 +1,5 @@
+open Js_of_ocaml;;
+
 module ToploopBackup = struct
   let parse_toplevel_phrase = !Toploop.parse_toplevel_phrase
   let parse_use_file = !Toploop.parse_use_file
@@ -109,7 +111,7 @@ let execute code =
   code 
   |> Js.to_string
   |> Execute.eval 
-  |> List.map Sketch__Types.js_of_execResult 
+  |> List.map Execute.toString
   |> Array.of_list 
   |> Js.array
 
