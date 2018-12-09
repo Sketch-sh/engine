@@ -1,4 +1,4 @@
-const { refmt } = require("../evaluator/_build/default/evaluator.js");
+const { refmt } = require("../build/toplevel.js");
 
 test("api shape", () => {
   expect(Object.keys(refmt)).toMatchInlineSnapshot(`
@@ -77,16 +77,17 @@ Object {
     Array [
       0,
       Object {
-        "col": 6,
+        "col": 9,
         "line": 0,
       },
       Object {
-        "col": 7,
+        "col": 9,
         "line": 0,
       },
     ],
   ],
-  "message": "1694: <syntax error>",
+  "message": "File \\"\\", line 1, characters 9-10:
+Error: Syntax error",
 }
 `);
     }
