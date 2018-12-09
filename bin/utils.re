@@ -8,4 +8,6 @@ let writeFileSync = (~path, content) => {
 };
 
 let toSafePackageName = packageName =>
-  packageName |> replace(~find="-", ~replaceWith="_");
+  packageName
+  |> replace(~find="-", ~replaceWith="_")
+  |> replace(~find=".", ~replaceWith="_");
