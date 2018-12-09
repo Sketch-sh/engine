@@ -1,16 +1,16 @@
 evaluator:
-	# Building the evaluator and packager
-	dune build @install -j 8
+	dune build @evaluator/all
 
-js_compile: clear all
+js_compile:
 	# Compiling evaluator to JS
-	dune exec -- make -C build
+	dune build evaluator/toplevel.byte --verbose
+	cp _build/default/evaluator/*.js ./build
 
 clear:
 	rm -rf sandbox/packages/*
 	$(MAKE) -C build clear
 
-test: 
+test:
 	cd test && npm test
 
 build_packager:
