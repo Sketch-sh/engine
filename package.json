@@ -3,24 +3,25 @@
   "version": "0.0.1",
   "dependencies": {
     "@esy-ocaml/esy-installer": "^0.0.0",
-    "@esy-ocaml/reason":
-      "github:facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae",
-    "@opam/js_of_ocaml": "^3.2.0",
-    "@opam/js_of_ocaml-compiler": "^3.2.1",
-    "@opam/js_of_ocaml-ppx": "^3.2.0",
-    "@opam/js_of_ocaml-toplevel": "^3.2.0",
-    "refmterr": "esy-ocaml/BetterErrors.git"
-  },
-  "resolutions": {
-    "**/@esy-ocaml/reason":
-      "github:facebook/reason#35fbcad13aa8642dfd95ebff97aee429f1257cae"
+    "@esy-ocaml/reason": "^3.3.7",
+    "@opam/js_of_ocaml": "^3.3.0",
+    "@opam/js_of_ocaml-compiler": "^3.3.0",
+    "@opam/js_of_ocaml-ppx": "^3.3.0",
+    "@opam/js_of_ocaml-toplevel": "^3.3.0",
+    "refmterr": "^3.1.10"
   },
   "esy": {
-    "build": [ "make all" ],
-    "install": [ "esy-installer" ],
+    "build": [
+      "make all"
+    ],
+    "install": [
+      "esy-installer"
+    ],
     "buildsInSource": "_build"
   },
-  "peerDependencies": { "ocaml": "~4.6.5" },
+  "peerDependencies": {
+    "ocaml": "~4.6.5"
+  },
   "devDependencies": {
     "@esy-ocaml/merlin": "3.0.5005",
     "@opam/dune": "*",
