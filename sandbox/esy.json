@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "dependencies": {
     "@opam/base": "v0.11.1",
+    "@opam/containers": "2.4",
     "@opam/owl-base": "0.4.0",
     "@opam/re": "1.8.0"
   },
-  "esy": { "install": [ "esy-installer" ], "buildsInSource": "_build" },
+  "esy": { "install": ["esy-installer"], "buildsInSource": "_build" },
   "peerDependencies": { "ocaml": "~4.6.5" },
   "devDependencies": { "ocaml": "~4.6.5" }
 }

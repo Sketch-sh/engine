@@ -1,28 +1,26 @@
-all:
+evaluator:
+	# Building the evaluator and packager
 	dune build @install -j 8
+
+js_compile: clear all
+	# Compiling evaluator to JS
+	dune exec -- make -C build
 
 clear:
 	rm -rf packages/*
 	$(MAKE) -C build clear
 
-toplevel: clear all
-	dune exec -- make -C build
-
 test: 
 	cd test && npm test
 
-ci: toplevel test
-
-plugin: 
-	$(MAKE) -C generate re unix owl	
-
-package: all
-	dune exec -- sketch re owl-base
-	
-packages: all
+build_packager:
+	# Build external dependencies with packager
 	cp ./_build/default/bin/packager.exe ./sandbox/packager.exe
 	$(MAKE) -C sandbox all
+
+all: evaluator js_compile build_packager
+
 upload:
 	surge sandbox/packages
 
-.PHONY: all toplevel test ci package copy upload
+.PHONY: evaluator js_compile build_packager all test clear
