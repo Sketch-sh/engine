@@ -1,5 +1,5 @@
 {
-  "hash": "3997d5a1bd5989ce204d24171a2bb7b9",
+  "hash": "2bee87a2460852cd1d7d4e871839bdf1",
   "root": "root@path:./esy.json",
   "node": {
     "root@path:./esy.json": {
@@ -12,7 +12,9 @@
       },
       "dependencies": [
         "@opam/base@opam:v0.11.1", "@opam/containers@opam:2.4",
-        "@opam/owl-base@opam:0.4.0", "@opam/re@opam:1.8.0", "ocaml@4.6.9"
+        "@opam/js_of_ocaml@opam:3.3.0",
+        "@opam/js_of_ocaml-compiler@opam:3.3.0", "@opam/owl-base@opam:0.4.0",
+        "@opam/re@opam:1.8.0", "ocaml@4.6.9"
       ]
     },
     "ocaml@4.6.9": {
@@ -25,6 +27,27 @@
         "opam": null
       },
       "dependencies": []
+    },
+    "@opam/yojson@opam:1.4.1": {
+      "record": {
+        "name": "@opam/yojson",
+        "version": "opam:1.4.1",
+        "source":
+          "archive:https://github.com/mjambon/yojson/archive/v1.4.1.tar.gz#md5:3ea6e36422dd670e8ab880710d5f7398",
+        "files": [],
+        "opam": {
+          "name": "yojson",
+          "version": "1.4.1",
+          "opam":
+            "opam-version: \"2.0\"\nname: \"yojson\"\nversion: \"1.4.1\"\nsynopsis:\n  \"Yojson is an optimized parsing and printing library for the JSON format\"\ndescription: \"\"\"\nIt addresses a few shortcomings of json-wheel including 2x speedup,\npolymorphic variants and optional syntax for tuples and variants.\n\nydump is a pretty-printing command-line program provided with the\nyojson package.\n\nThe program atdgen can be used to derive OCaml-JSON serializers and\ndeserializers from type definitions.\"\"\"\nmaintainer: \"martin@mjambon.com\"\nauthors: \"Martin Jambon\"\nhomepage: \"http://mjambon.com/yojson.html\"\nbug-reports: \"https://github.com/mjambon/yojson/issues\"\ndepends: [\n  \"ocaml\" {>= \"4.02.3\"}\n  \"jbuilder\" {build}\n  \"cppo\" {build}\n  \"easy-format\"\n  \"biniou\" {>= \"1.2.0\"}\n]\nbuild: [\n  [\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]\n  [\"jbuilder\" \"runtest\" \"-p\" name] {with-test}\n]\ndev-repo: \"git+https://github.com/mjambon/yojson.git\"\nurl {\n  src: \"https://github.com/mjambon/yojson/archive/v1.4.1.tar.gz\"\n  checksum: \"md5=3ea6e36422dd670e8ab880710d5f7398\"\n}",
+          "override": null
+        }
+      },
+      "dependencies": [
+        "@esy-ocaml/substs@0.0.1", "@opam/biniou@opam:1.2.0",
+        "@opam/cppo@opam:1.6.5", "@opam/easy-format@opam:1.3.1",
+        "@opam/jbuilder@opam:transition", "ocaml@4.6.9"
+      ]
     },
     "@opam/uchar@opam:0.0.2": {
       "record": {
@@ -124,6 +147,26 @@
       "dependencies": [
         "@esy-ocaml/substs@0.0.1", "@opam/jbuilder@opam:transition",
         "@opam/seq@opam:0.1", "ocaml@4.6.9"
+      ]
+    },
+    "@opam/ppx_tools_versioned@opam:5.2.1": {
+      "record": {
+        "name": "@opam/ppx_tools_versioned",
+        "version": "opam:5.2.1",
+        "source":
+          "archive:https://github.com/ocaml-ppx/ppx_tools_versioned/archive/5.2.1.tar.gz#md5:1ae6ae43ec161fbbf12c2b4d3a7e26f5",
+        "files": [],
+        "opam": {
+          "name": "ppx_tools_versioned",
+          "version": "5.2.1",
+          "opam":
+            "opam-version: \"2.0\"\nname: \"ppx_tools_versioned\"\nversion: \"5.2.1\"\nsynopsis: \"A variant of ppx_tools based on ocaml-migrate-parsetree\"\nmaintainer: \"frederic.bour@lakaban.net\"\nauthors: [\n  \"Frédéric Bour <frederic.bour@lakaban.net>\"\n  \"Alain Frisch <alain.frisch@lexifi.com>\"\n]\nlicense: \"MIT\"\ntags: \"syntax\"\nhomepage: \"https://github.com/let-def/ppx_tools_versioned\"\nbug-reports: \"https://github.com/let-def/ppx_tools_versioned/issues\"\ndepends: [\n  \"ocaml\" {>= \"4.02.0\"}\n  \"jbuilder\" {build & >= \"1.0+beta17\"}\n  \"ocaml-migrate-parsetree\" {>= \"1.0.10\"}\n]\nbuild: [\n  [\"jbuilder\" \"subst\" \"-p\" name] {pinned}\n  [\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]\n  [\"jbuilder\" \"runtest\" \"-p\" name \"-j\" jobs] {with-test}\n]\ndev-repo: \"git://github.com/let-def/ppx_tools_versioned.git\"\nurl {\n  src:\n    \"https://github.com/ocaml-ppx/ppx_tools_versioned/archive/5.2.1.tar.gz\"\n  checksum: \"md5=1ae6ae43ec161fbbf12c2b4d3a7e26f5\"\n}",
+          "override": null
+        }
+      },
+      "dependencies": [
+        "@esy-ocaml/substs@0.0.1", "@opam/jbuilder@opam:transition",
+        "@opam/ocaml-migrate-parsetree@opam:1.1.0", "ocaml@4.6.9"
       ]
     },
     "@opam/owl-base@opam:0.4.0": {
@@ -255,6 +298,71 @@
       },
       "dependencies": [ "@esy-ocaml/substs@0.0.1", "ocaml@4.6.9" ]
     },
+    "@opam/ocaml-migrate-parsetree@opam:1.1.0": {
+      "record": {
+        "name": "@opam/ocaml-migrate-parsetree",
+        "version": "opam:1.1.0",
+        "source":
+          "archive:https://github.com/ocaml-ppx/ocaml-migrate-parsetree/releases/download/v1.1.0/ocaml-migrate-parsetree-1.1.0.tbz#md5:7dd4808e27af98065f63604c9658d311",
+        "files": [],
+        "opam": {
+          "name": "ocaml-migrate-parsetree",
+          "version": "1.1.0",
+          "opam":
+            "opam-version: \"2.0\"\nname: \"ocaml-migrate-parsetree\"\nversion: \"1.1.0\"\nsynopsis: \"\"\ndescription: \"\"\"\nConvert OCaml parsetrees between different versions \n\nThis library converts parsetrees, outcometree and ast mappers between different OCaml versions.\nHigh-level functions help making PPX rewriters independent of a compiler version.\"\"\"\nmaintainer: \"frederic.bour@lakaban.net\"\nauthors: [\n  \"Frédéric Bour <frederic.bour@lakaban.net>\"\n  \"Jérémie Dimino <jeremie@dimino.org>\"\n]\nlicense: \"LGPL-2.1\"\ntags: [\"syntax\" \"org:ocamllabs\"]\nhomepage: \"https://github.com/ocaml-ppx/ocaml-migrate-parsetree\"\ndoc: \"https://ocaml-ppx.github.io/ocaml-migrate-parsetree/\"\nbug-reports: \"https://github.com/ocaml-ppx/ocaml-migrate-parsetree/issues\"\ndepends: [\n  \"result\"\n  \"dune\" {build}\n  \"ocaml\" {>= \"4.02.0\"}\n]\nbuild: [\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]\ndev-repo: \"git+https://github.com/ocaml-ppx/ocaml-migrate-parsetree.git\"\nurl {\n  src:\n    \"https://github.com/ocaml-ppx/ocaml-migrate-parsetree/releases/download/v1.1.0/ocaml-migrate-parsetree-1.1.0.tbz\"\n  checksum: \"md5=7dd4808e27af98065f63604c9658d311\"\n}",
+          "override": null
+        }
+      },
+      "dependencies": [
+        "@esy-ocaml/substs@0.0.1", "@opam/dune@opam:1.6.2",
+        "@opam/result@opam:1.3", "ocaml@4.6.9"
+      ]
+    },
+    "@opam/js_of_ocaml-compiler@opam:3.3.0": {
+      "record": {
+        "name": "@opam/js_of_ocaml-compiler",
+        "version": "opam:3.3.0",
+        "source":
+          "archive:https://github.com/ocsigen/js_of_ocaml/archive/3.3.0.tar.gz#md5:438051f64e307edbda42f250a3d9cef1",
+        "files": [],
+        "opam": {
+          "name": "js_of_ocaml-compiler",
+          "version": "3.3.0",
+          "opam":
+            "opam-version: \"2.0\"\nname: \"js_of_ocaml-compiler\"\nversion: \"3.3.0\"\nsynopsis: \"Compiler from OCaml bytecode to Javascript\"\nmaintainer: \"dev@ocsigen.org\"\nauthors: \"Ocsigen team\"\nhomepage: \"http://ocsigen.org/js_of_ocaml\"\nbug-reports: \"https://github.com/ocsigen/js_of_ocaml/issues\"\ndepends: [\n  \"ocaml\" {>= \"4.02.0\"}\n  \"dune\" {build & >= \"1.2\"}\n  \"cmdliner\"\n  \"cppo\" {>= \"1.1.0\"}\n  \"ocamlfind\"\n  \"yojson\"\n]\nconflicts: [\n  \"ocamlfind\" {< \"1.5.1\"}\n  \"js_of_ocaml\" {< \"3.0\"}\n]\nbuild: [\"dune\" \"build\" \"-p\" name \"-j\" jobs]\ndev-repo: \"git+https://github.com/ocsigen/js_of_ocaml.git\"\nurl {\n  src: \"https://github.com/ocsigen/js_of_ocaml/archive/3.3.0.tar.gz\"\n  checksum: \"md5=438051f64e307edbda42f250a3d9cef1\"\n}",
+          "override": null
+        }
+      },
+      "dependencies": [
+        "@esy-ocaml/substs@0.0.1", "@opam/cmdliner@opam:1.0.3",
+        "@opam/cppo@opam:1.6.5", "@opam/dune@opam:1.6.2",
+        "@opam/ocamlfind@opam:1.8.0", "@opam/yojson@opam:1.4.1",
+        "ocaml@4.6.9"
+      ]
+    },
+    "@opam/js_of_ocaml@opam:3.3.0": {
+      "record": {
+        "name": "@opam/js_of_ocaml",
+        "version": "opam:3.3.0",
+        "source":
+          "archive:https://github.com/ocsigen/js_of_ocaml/archive/3.3.0.tar.gz#md5:438051f64e307edbda42f250a3d9cef1",
+        "files": [],
+        "opam": {
+          "name": "js_of_ocaml",
+          "version": "3.3.0",
+          "opam":
+            "opam-version: \"2.0\"\nname: \"js_of_ocaml\"\nversion: \"3.3.0\"\nsynopsis: \"Compiler from OCaml bytecode to Javascript\"\nmaintainer: \"dev@ocsigen.org\"\nauthors: \"Ocsigen team\"\nhomepage: \"http://ocsigen.org/js_of_ocaml\"\nbug-reports: \"https://github.com/ocsigen/js_of_ocaml/issues\"\ndepends: [\n  \"ocaml\" {>= \"4.02.0\"}\n  \"dune\" {build & >= \"1.2\"}\n  \"ocaml-migrate-parsetree\"\n  \"ppx_tools_versioned\"\n  \"uchar\"\n  \"js_of_ocaml-compiler\"\n]\nconflicts: [\n  \"ppx_tools_versioned\" {<= \"5.0beta0\"}\n]\nbuild: [\"dune\" \"build\" \"-p\" name \"-j\" jobs]\ndev-repo: \"git+https://github.com/ocsigen/js_of_ocaml.git\"\nurl {\n  src: \"https://github.com/ocsigen/js_of_ocaml/archive/3.3.0.tar.gz\"\n  checksum: \"md5=438051f64e307edbda42f250a3d9cef1\"\n}",
+          "override": null
+        }
+      },
+      "dependencies": [
+        "@esy-ocaml/substs@0.0.1", "@opam/dune@opam:1.6.2",
+        "@opam/js_of_ocaml-compiler@opam:3.3.0",
+        "@opam/ocaml-migrate-parsetree@opam:1.1.0",
+        "@opam/ppx_tools_versioned@opam:5.2.1", "@opam/uchar@opam:0.0.2",
+        "ocaml@4.6.9"
+      ]
+    },
     "@opam/jbuilder@opam:transition": {
       "record": {
         "name": "@opam/jbuilder",
@@ -271,6 +379,26 @@
       },
       "dependencies": [
         "@esy-ocaml/substs@0.0.1", "@opam/dune@opam:1.6.2", "ocaml@4.6.9"
+      ]
+    },
+    "@opam/easy-format@opam:1.3.1": {
+      "record": {
+        "name": "@opam/easy-format",
+        "version": "opam:1.3.1",
+        "source":
+          "archive:https://github.com/mjambon/easy-format/archive/v1.3.1.tar.gz#md5:4e163700fb88fdcd6b8976c3a216c8ea",
+        "files": [],
+        "opam": {
+          "name": "easy-format",
+          "version": "1.3.1",
+          "opam":
+            "opam-version: \"2.0\"\nname: \"easy-format\"\nversion: \"1.3.1\"\nsynopsis:\n  \"High-level and functional interface to the Format module of the OCaml standard library\"\nmaintainer: \"martin@mjambon.com\"\nauthors: \"Martin Jambon\"\nhomepage: \"http://mjambon.com/easy-format.html\"\nbug-reports: \"https://github.com/mjambon/easy-format/issues\"\ndepends: [\n  \"ocaml\" {>= \"4.02.3\"}\n  \"jbuilder\" {build}\n]\nbuild: [\n  [\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]\n  [\"jbuilder\" \"runtest\" \"-p\" name] {with-test}\n]\ndev-repo: \"git+https://github.com/mjambon/easy-format.git\"\nurl {\n  src: \"https://github.com/mjambon/easy-format/archive/v1.3.1.tar.gz\"\n  checksum: \"md5=4e163700fb88fdcd6b8976c3a216c8ea\"\n}",
+          "override": null
+        }
+      },
+      "dependencies": [
+        "@esy-ocaml/substs@0.0.1", "@opam/jbuilder@opam:transition",
+        "ocaml@4.6.9"
       ]
     },
     "@opam/dune@opam:1.6.2": {
@@ -298,6 +426,26 @@
         "@opam/base-unix@opam:base", "ocaml@4.6.9"
       ]
     },
+    "@opam/cppo@opam:1.6.5": {
+      "record": {
+        "name": "@opam/cppo",
+        "version": "opam:1.6.5",
+        "source":
+          "archive:https://github.com/mjambon/cppo/archive/v1.6.5.tar.gz#md5:1cd25741d31417995b0973fe0b6f6c82",
+        "files": [],
+        "opam": {
+          "name": "cppo",
+          "version": "1.6.5",
+          "opam":
+            "opam-version: \"2.0\"\nname: \"cppo\"\nversion: \"1.6.5\"\nsynopsis: \"Equivalent of the C preprocessor for OCaml programs\"\nmaintainer: \"martin@mjambon.com\"\nauthors: \"Martin Jambon\"\nlicense: \"BSD-3-Clause\"\nhomepage: \"https://github.com/mjambon/cppo\"\nbug-reports: \"https://github.com/mjambon/cppo/issues\"\ndepends: [\n  \"ocaml\"\n  \"jbuilder\" {build & >= \"1.0+beta17\"}\n  \"base-unix\"\n]\nbuild: [\n  [\"jbuilder\" \"subst\" \"-p\" name] {pinned}\n  [\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]\n  [\"jbuilder\" \"runtest\" \"-p\" name] {with-test}\n]\ndev-repo: \"git+https://github.com/mjambon/cppo.git\"\nurl {\n  src: \"https://github.com/mjambon/cppo/archive/v1.6.5.tar.gz\"\n  checksum: \"md5=1cd25741d31417995b0973fe0b6f6c82\"\n}",
+          "override": null
+        }
+      },
+      "dependencies": [
+        "@esy-ocaml/substs@0.0.1", "@opam/base-unix@opam:base",
+        "@opam/jbuilder@opam:transition", "ocaml@4.6.9"
+      ]
+    },
     "@opam/containers@opam:2.4": {
       "record": {
         "name": "@opam/containers",
@@ -318,6 +466,22 @@
         "@opam/result@opam:1.3", "@opam/uchar@opam:0.0.2", "ocaml@4.6.9"
       ]
     },
+    "@opam/conf-which@opam:1": {
+      "record": {
+        "name": "@opam/conf-which",
+        "version": "opam:1",
+        "source": "no-source:",
+        "files": [],
+        "opam": {
+          "name": "conf-which",
+          "version": "1",
+          "opam":
+            "opam-version: \"2.0\"\nname: \"conf-which\"\nversion: \"1\"\nsynopsis: \"Virtual package relying on which\"\ndescription:\n  \"This package can only install if the which program is installed on the system.\"\nmaintainer: \"unixjunkie@sdf.org\"\nauthors: \"Carlo Wood\"\nlicense: \"GPL-2+\"\nhomepage: \"http://www.gnu.org/software/which/\"\nbug-reports: \"https://github.com/ocaml/opam-repository/issues\"\nflags: conf\nbuild: [\"which\" \"which\"]\ndepexts: [\n  [\"which\"] {os-distribution = \"centos\"}\n  [\"which\"] {os-distribution = \"fedora\"}\n  [\"which\"] {os-distribution = \"opensuse\"}\n  [\"debianutils\"] {os-distribution = \"debian\"}\n  [\"debianutils\"] {os-distribution = \"ubuntu\"}\n  [\"which\"] {os-distribution = \"nixos\"}\n  [\"which\"] {os-distribution = \"archlinux\"}\n]",
+          "override": null
+        }
+      },
+      "dependencies": [ "@esy-ocaml/substs@0.0.1" ]
+    },
     "@opam/conf-m4@opam:1": {
       "record": {
         "name": "@opam/conf-m4",
@@ -333,6 +497,44 @@
         }
       },
       "dependencies": [ "@esy-ocaml/substs@0.0.1" ]
+    },
+    "@opam/cmdliner@opam:1.0.3": {
+      "record": {
+        "name": "@opam/cmdliner",
+        "version": "opam:1.0.3",
+        "source":
+          "archive:http://erratique.ch/software/cmdliner/releases/cmdliner-1.0.3.tbz#md5:3674ad01d4445424105d33818c78fba8",
+        "files": [],
+        "opam": {
+          "name": "cmdliner",
+          "version": "1.0.3",
+          "opam":
+            "opam-version: \"2.0\"\nname: \"cmdliner\"\nversion: \"1.0.3\"\nsynopsis: \"Declarative definition of command line interfaces for OCaml\"\ndescription: \"\"\"\nCmdliner allows the declarative definition of command line interfaces\nfor OCaml.\n\nIt provides a simple and compositional mechanism to convert command\nline arguments to OCaml values and pass them to your functions. The\nmodule automatically handles syntax errors, help messages and UNIX man\npage generation. It supports programs with single or multiple commands\nand respects most of the [POSIX][1] and [GNU][2] conventions.\n\nCmdliner has no dependencies and is distributed under the ISC license.\n\n[1]: http://pubs.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap12.html\n[2]: http://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html\"\"\"\nmaintainer: \"Daniel Bünzli <daniel.buenzl i@erratique.ch>\"\nauthors: \"Daniel Bünzli <daniel.buenzl i@erratique.ch>\"\nlicense: \"ISC\"\ntags: [\"cli\" \"system\" \"declarative\" \"org:erratique\"]\nhomepage: \"http://erratique.ch/software/cmdliner\"\ndoc: \"http://erratique.ch/software/cmdliner/doc/Cmdliner\"\nbug-reports: \"https://github.com/dbuenzli/cmdliner/issues\"\ndepends: [\n  \"ocaml\" {>= \"4.03.0\"}\n]\nbuild: [make \"all\" \"PREFIX=%{prefix}%\"]\ninstall: [\n  [make \"install\" \"LIBDIR=%{_:lib}%\" \"DOCDIR=%{_:doc}%\"]\n  [make \"install-doc\" \"LIBDIR=%{_:lib}%\" \"DOCDIR=%{_:doc}%\"]\n]\ndev-repo: \"git+http://erratique.ch/repos/cmdliner.git\"\nurl {\n  src: \"http://erratique.ch/software/cmdliner/releases/cmdliner-1.0.3.tbz\"\n  checksum: \"md5=3674ad01d4445424105d33818c78fba8\"\n}",
+          "override": null
+        }
+      },
+      "dependencies": [ "@esy-ocaml/substs@0.0.1", "ocaml@4.6.9" ]
+    },
+    "@opam/biniou@opam:1.2.0": {
+      "record": {
+        "name": "@opam/biniou",
+        "version": "opam:1.2.0",
+        "source":
+          "archive:https://github.com/mjambon/biniou/archive/v1.2.0.tar.gz#md5:f3e92358e832ed94eaf23ce622ccc2f9",
+        "files": [],
+        "opam": {
+          "name": "biniou",
+          "version": "1.2.0",
+          "opam":
+            "opam-version: \"2.0\"\nname: \"biniou\"\nversion: \"1.2.0\"\nsynopsis:\n  \"Binary data format designed for speed, safety, ease of use and backward compatibility as protocols evolve\"\nmaintainer: \"martin@mjambon.com\"\nauthors: \"Martin Jambon\"\nlicense: \"BSD-3-Clause\"\nhomepage: \"https://github.com/mjambon/biniou\"\nbug-reports: \"https://github.com/mjambon/biniou/issues\"\ndepends: [\n  \"ocaml\" {>= \"4.02.3\"}\n  \"conf-which\" {build}\n  \"jbuilder\" {build & >= \"1.0+beta7\"}\n  \"easy-format\"\n]\nbuild: [\n  [\"jbuilder\" \"build\" \"-p\" name \"-j\" jobs]\n  [\"jbuilder\" \"runtest\" \"-p\" name] {with-test}\n]\ndev-repo: \"git+https://github.com/mjambon/biniou.git\"\nurl {\n  src: \"https://github.com/mjambon/biniou/archive/v1.2.0.tar.gz\"\n  checksum: \"md5=f3e92358e832ed94eaf23ce622ccc2f9\"\n}",
+          "override": null
+        }
+      },
+      "dependencies": [
+        "@esy-ocaml/substs@0.0.1", "@opam/conf-which@opam:1",
+        "@opam/easy-format@opam:1.3.1", "@opam/jbuilder@opam:transition",
+        "ocaml@4.6.9"
+      ]
     },
     "@opam/base-unix@opam:base": {
       "record": {

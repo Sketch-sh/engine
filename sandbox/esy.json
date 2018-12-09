@@ -9,5 +9,9 @@
   },
   "esy": { "install": ["esy-installer"], "buildsInSource": "_build" },
   "peerDependencies": { "ocaml": "~4.6.5" },
-  "devDependencies": { "ocaml": "~4.6.5" }
+  "devDependencies": {
+    "ocaml": "~4.6.5",
+    "@opam/js_of_ocaml": "^3.3.0",
+    "@opam/js_of_ocaml-compiler": "^3.3.0"
+  }
 }

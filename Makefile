@@ -7,7 +7,7 @@ js_compile: clear all
 	dune exec -- make -C build
 
 clear:
-	rm -rf packages/*
+	rm -rf sandbox/packages/*
 	$(MAKE) -C build clear
 
 test: 
