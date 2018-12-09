@@ -1,3 +1,12 @@
+/**
+ * How this works? 
+ * 1. Build a dependencies list of the current package in the correct loading order
+ *    ocamlfind query PACKAGE_NAME -r -p-formate -predicates byte
+ * 2. With that list of all packages. We can find cmi and cma files and building them one by one 
+ *    ocamlfind query PACKAGE_NAME -i-format -predicates byte
+ *    ocamlfind query PACKAGE_NAME -a-format -predicates byte
+ * 3. There are some deduplication going on so we don't build the package twice
+ */
 open Utils;
 let verbose = ref(false);
 let urlPrefix = ref("https://libraries.sketch.sh");
