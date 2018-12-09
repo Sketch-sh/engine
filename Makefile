@@ -8,7 +8,7 @@ js_compile:
 
 clear:
 	rm -rf sandbox/packages/*
-	$(MAKE) -C build clear
+	dune clean
 
 test:
 	cd test && npm test
@@ -18,7 +18,7 @@ build_packager:
 	cp ./_build/default/bin/packager.exe ./sandbox/packager.exe
 	$(MAKE) -C sandbox all
 
-all: evaluator js_compile build_packager
+all: js_compile build_packager
 
 upload:
 	surge sandbox/packages
