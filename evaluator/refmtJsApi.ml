@@ -1,3 +1,4 @@
+open Js_of_ocaml
 (* 
   This file is taken and modified from 
   https://github.com/facebook/reason/blob/9bb16162a68486851069f295bc19d9fb81fca763/bspacks/refmtJsApi.ml

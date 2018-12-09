@@ -1,3 +1,5 @@
+open Js_of_ocaml;
+
 let js_of_position = pos => [%js
   {val line = pos.Lexing.pos_lnum; val col = pos.pos_cnum - pos.pos_bol}
 ];

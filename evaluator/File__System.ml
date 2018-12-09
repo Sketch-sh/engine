@@ -1,3 +1,4 @@
+open Js_of_ocaml
 let createOrUpdateFile name content = 
   try
     let _ = Sys_js.read_file ~name in

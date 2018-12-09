@@ -1,5 +1,5 @@
 {
-  "hash": "c6c46e769dce932651ccd206fa28634a",
+  "hash": "eef3ebd7fd58b17742f8965d5f764177",
   "root": "root@path:./package.json",
   "node": {
     "root@path:./package.json": {
@@ -11,8 +11,9 @@
         "opam": null
       },
       "dependencies": [
-        "@esy-ocaml/merlin@3.0.5005", "@esy-ocaml/reason@3.3.7",
-        "@opam/dune@opam:1.6.2", "@opam/js_of_ocaml@opam:3.3.0",
+        "@esy-ocaml/esy-installer@0.0.0", "@esy-ocaml/merlin@3.0.5005",
+        "@esy-ocaml/reason@3.3.7", "@opam/dune@opam:1.6.2",
+        "@opam/js_of_ocaml@opam:3.3.0",
         "@opam/js_of_ocaml-compiler@opam:3.3.0",
         "@opam/js_of_ocaml-ppx@opam:3.3.0",
         "@opam/js_of_ocaml-toplevel@opam:3.3.0", "ocaml@4.6.9",

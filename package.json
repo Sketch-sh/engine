@@ -2,6 +2,7 @@
   "name": "sketch",
   "version": "0.0.1",
   "dependencies": {
+    "@esy-ocaml/esy-installer": "^0.0.0",
     "@esy-ocaml/reason": "^3.3.7",
     "@opam/js_of_ocaml": "^3.3.0",
     "@opam/js_of_ocaml-compiler": "^3.3.0",
