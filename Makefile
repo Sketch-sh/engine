@@ -15,6 +15,7 @@ test:
 
 build_packager:
 	# Build external dependencies with packager
+	dune build bin/packager.exe
 	cp ./_build/default/bin/packager.exe ./sandbox/packager.exe
 	$(MAKE) -C sandbox all
 

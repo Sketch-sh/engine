@@ -1,4 +1,4 @@
-# rtop-evaluator
+# sketch-engine
 Exposes toplevel functionality for https://github.com/Sketch-sh/sketch-sh
 
 ## Installation
@@ -6,13 +6,12 @@ This project uses https://esy.sh
 
 install esy: `npm install -g esy`
 
-install dependencies: `esy install`
+install dependencies: `esy install && cd sandbox && esy install && cd ../test && npm install`
 
 ## Build:
 
-`make` 
-
-`make evaluator`
+`esy make all` 
 
 ## Test
-`cd test && npm install` (one time) at root of the project, run `make test` to test with jest
+
+`esy make test`

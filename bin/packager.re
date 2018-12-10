@@ -46,8 +46,6 @@ let rec scan_args = acc =>
   | [x, ...xs] => scan_args([x, ...acc], xs)
   | [] => List.rev(acc);
 
-module SS = Set.Make(String);
-
 let findDeps = name =>
   execute([
     "ocamlfind",
@@ -62,64 +60,75 @@ let findCmi = name =>
 let findCma = name =>
   execute(["ocamlfind", "query", name, "-a-format", "-predicates byte"]);
 
-let build = mainPackageName => {
+let buildLib = packageName => {
   if (verbose^) {
-    Printf.printf("Building dependencies for: %s\n", mainPackageName);
+    Printf.printf("Building library with jsoo: %s\n", packageName);
   };
-  let allDeps =
-    findDeps(mainPackageName)
-    |> String.split_on_char('\n')
-    |> List.filter(name => name != "");
+  let safePkgName = toSafePackageName(packageName);
+  let funcName = "sketch__private__" ++ safePkgName;
 
-  let _ =
-    allDeps
+  execute([
+    "js_of_ocaml",
+    "--wrap-with-fun=" ++ funcName,
+    "--toplevel",
+    findCmi(packageName),
+    findCma(packageName),
+    "-o",
+    "packages/" ++ safePkgName ++ ".lib.sketch.js",
+  ])
+  |> ignore;
+};
+
+module SS = Set.Make(String);
+module LibMap = Map.Make(String);
+
+module J = Json;
+
+let build = toplevelPkgs => {
+  /* if (verbose^) {
+       Printf.printf("Building dependencies for: %s\n", toplevelPkg);
+     }; */
+  let libsToBuild = ref(SS.empty);
+  let libsWithDependencies =
+    toplevelPkgs
     |> List.fold_left(
-         (acc, packageName) => {
-           let safePackageName = toSafePackageName(packageName);
-           let functionName = "sketch__private__" ++ safePackageName;
-           let fileName = safePackageName ++ ".lib.sketch.js";
-           [
-             Printf.sprintf(
-               {|importScripts("%s/%s"); %s(self);|},
-               urlPrefix^,
-               fileName,
-               functionName,
-             ),
-             ...acc,
-           ];
+         (map: LibMap.t(list(string)), pkg) => {
+           let allDeps =
+             findDeps(pkg)
+             |> String.split_on_char('\n')
+             |> List.filter(name => name != "");
+
+           let _ =
+             allDeps
+             |> List.iter(name => libsToBuild := libsToBuild^ |> SS.add(name));
+
+           map |> LibMap.add(pkg, allDeps);
          },
-         [],
-       )
-    |> List.rev
-    |> String.concat("\n")
-    |> writeFileSync(
-         ~path=
-           "packages/"
-           ++ toSafePackageName(mainPackageName)
-           ++ ".loader.sketch.js",
+         LibMap.empty,
        );
 
-  allDeps
-  |> List.iter(packageName => {
-       let safePackageName = toSafePackageName(packageName);
-       let functionName = "sketch__private__" ++ safePackageName;
-       let fileName = safePackageName ++ ".lib.sketch.js";
-       let _ =
-         execute([
-           "js_of_ocaml",
-           "--wrap-with-fun=" ++ functionName,
-           "--toplevel",
-           findCmi(packageName),
-           findCma(packageName),
-           "-o",
-           "packages/" ++ fileName,
-         ]);
-       ();
-     });
+  let _ = libsToBuild^ |> SS.iter(name => buildLib(name));
+  let _ =
+    LibMap.fold(
+      (topName, libs, acc) => {
+        let libField =
+          J.Object([
+            (topName, J.Array(libs |> List.map(name => J.String(name)))),
+          ]);
+        [libField, ...acc];
+      },
+      libsWithDependencies,
+      [],
+    )
+    |> (list => J.Array(list))
+    |> (json => J.stringify(json))
+    |> writeFileSync(~path="packages/list.json");
+  ();
 };
+
 let _ = {
   let args = List.tl(Array.to_list(Sys.argv));
   let args = scan_args([], args);
-  args |> List.iter(build);
+  build(args);
   print_endline("Done !");
 };
