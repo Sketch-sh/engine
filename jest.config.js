@@ -1,3 +1,4 @@
 module.exports = {
-  transform: {}
+  transform: {},
+  resolver: require.resolve(`jest-pnp-resolver`)
 };

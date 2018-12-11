@@ -1,5 +1,5 @@
 {
-  "hash": "f57ff200dac8a62277d9a39235b4d961",
+  "hash": "c1348b2c58981a57d0e8d1ebce7dc431",
   "root": "root@path:./package.json",
   "node": {
     "yargs-parser@9.0.2": {
@@ -1146,7 +1146,8 @@
         "opam": null
       },
       "dependencies": [
-        "jest@23.6.0", "object-path@0.11.4", "prettier@1.15.3"
+        "jest@23.6.0", "jest-pnp-resolver@1.0.2", "object-path@0.11.4",
+        "prettier@1.15.3"
       ]
     },
     "rimraf@2.6.2": {
@@ -2884,6 +2885,17 @@
         "version": "23.3.0",
         "source":
           "archive:https://registry.npmjs.org/jest-regex-util/-/jest-regex-util-23.3.0.tgz#sha1:5f86729547c2785c4002ceaa8f849fe8ca471bc5",
+        "files": [],
+        "opam": null
+      },
+      "dependencies": []
+    },
+    "jest-pnp-resolver@1.0.2": {
+      "record": {
+        "name": "jest-pnp-resolver",
+        "version": "1.0.2",
+        "source":
+          "archive:https://registry.npmjs.org/jest-pnp-resolver/-/jest-pnp-resolver-1.0.2.tgz#sha1:470384ae9ea31f72136db52618aa4010ff23b715",
         "files": [],
         "opam": null
       },
