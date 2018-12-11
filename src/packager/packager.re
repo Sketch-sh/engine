@@ -76,6 +76,14 @@ let buildLib = (~outputDir, packageName) => {
 module SS = Set.Make(String);
 module LibMap = Map.Make(String);
 
+/*
+ * These packages are for compatibility with OCaml
+ * But Sketch only supports OCaml > 4.06
+ * So this will result in not found packages
+ */
+
+let excludedPackages = SS.of_list(["uchar", "result", "bytes"]);
+
 module J = Json;
 
 let build = (~outputDir, toplevelPkgs) => {
@@ -90,7 +98,8 @@ let build = (~outputDir, toplevelPkgs) => {
            let allDeps =
              findDeps(pkg)
              |> String.split_on_char('\n')
-             |> List.filter(name => name != "");
+             |> List.filter(name => name != "")
+             |> List.filter(name => !SS.mem(name, excludedPackage));
 
            let _ =
              allDeps
