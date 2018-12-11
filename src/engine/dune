@@ -1,6 +1,6 @@
 (library
-  (name evaluator)
-  (public_name sketch.evaluator)
+  (name engine)
+  (public_name sketch.engine)
   (libraries 
     js_of_ocaml 
     js_of_ocaml-compiler 
@@ -14,8 +14,8 @@
 )
 
 (rule
-  (targets toplevel.byte)
-  (deps (package sketch))
+  (targets engine.byte)
+  (deps (package sketch.engine))
   (action
     (run
       jsoo_mktop -g -package bytes

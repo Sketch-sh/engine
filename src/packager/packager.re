@@ -9,29 +9,14 @@
  */
 open Utils;
 let verbose = ref(false);
-let urlPrefix = ref("https://libraries.sketch.sh");
+let output = ref(None);
 
-let execute = cmd => {
-  let s = String.concat(" ", cmd);
-  if (verbose^) {
-    Printf.printf("Executing: %s\n", s);
-  };
-  let ret = Unix.open_process_in(s);
-  let output = ref("");
-  try (
-    while (true) {
-      let l = input_line(ret);
-      output := output^ ++ l ++ "\n";
-    }
-  ) {
-  | End_of_file => ()
-  };
-  output^ |> String.trim;
-};
+let execute = execute(~verbose);
 
 let usage = () => {
   Format.eprintf("Usage: sketch [find packages] @.");
   Format.eprintf(" --verbose@.");
+  Format.eprintf(" --output\t\t\tBuild output directory@.");
   Format.eprintf(" --help\t\t\tDisplay usage@.");
   exit(1);
 };
@@ -43,6 +28,10 @@ let rec scan_args = acc =>
       scan_args(acc, xs);
     }
   | ["--help" | "-h", ..._] => usage()
+  | ["--output", outputDir, ...xs] => {
+      output := Some(outputDir);
+      scan_args(acc, xs);
+    }
   | [x, ...xs] => scan_args([x, ...acc], xs)
   | [] => List.rev(acc);
 
@@ -60,23 +49,28 @@ let findCmi = name =>
 let findCma = name =>
   execute(["ocamlfind", "query", name, "-a-format", "-predicates byte"]);
 
-let buildLib = packageName => {
+let buildLib = (~outputDir, packageName) => {
   if (verbose^) {
     Printf.printf("Building library with jsoo: %s\n", packageName);
   };
   let safePkgName = toSafePackageName(packageName);
   let funcName = "sketch__private__" ++ safePkgName;
 
-  execute([
-    "js_of_ocaml",
-    "--wrap-with-fun=" ++ funcName,
-    "--toplevel",
-    findCmi(packageName),
-    findCma(packageName),
-    "-o",
-    "packages/" ++ safePkgName ++ ".lib.sketch.js",
-  ])
-  |> ignore;
+  let cmaPath = findCma(packageName);
+  switch (String.trim(cmaPath)) {
+  | "" => print_endline("Can't find cma file for package " ++ packageName)
+  | _ =>
+    execute([
+      "js_of_ocaml",
+      "--wrap-with-fun=" ++ funcName,
+      "--toplevel",
+      findCmi(packageName),
+      findCma(packageName),
+      "-o",
+      Filename.concat(outputDir, safePkgName ++ ".lib.sketch.js"),
+    ])
+    |> ignore
+  };
 };
 
 module SS = Set.Make(String);
@@ -84,7 +78,7 @@ module LibMap = Map.Make(String);
 
 module J = Json;
 
-let build = toplevelPkgs => {
+let build = (~outputDir, toplevelPkgs) => {
   /* if (verbose^) {
        Printf.printf("Building dependencies for: %s\n", toplevelPkg);
      }; */
@@ -107,7 +101,7 @@ let build = toplevelPkgs => {
          LibMap.empty,
        );
 
-  let _ = libsToBuild^ |> SS.iter(name => buildLib(name));
+  let _ = libsToBuild^ |> SS.iter(name => buildLib(~outputDir, name));
   let _ =
     LibMap.fold(
       (topName, libs, acc) => {
@@ -122,13 +116,21 @@ let build = toplevelPkgs => {
     )
     |> (list => J.Array(list))
     |> (json => J.stringify(json))
-    |> writeFileSync(~path="packages/list.json");
+    |> writeFileSync(~path=Filename.concat(outputDir, "list.json"));
   ();
 };
 
 let _ = {
   let args = List.tl(Array.to_list(Sys.argv));
   let args = scan_args([], args);
-  build(args);
+
+  let outputDir =
+    switch (output^) {
+    | None => Filename.concat(Sys.getcwd(), "packages")
+    | Some(output) => output
+    };
+  mkdirp(outputDir);
+
+  build(~outputDir, args);
   print_endline("Done !");
 };

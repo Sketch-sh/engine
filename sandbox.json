@@ -1,5 +1,5 @@
 {
-  "name": "sketch-dependencies-sandbox",
+  "name": "sandbox",
   "version": "0.0.1",
   "dependencies": {
     "@opam/base": "v0.11.1",
@@ -8,9 +8,15 @@
     "@opam/owl-base": "0.4.0",
     "@opam/re": "1.8.0",
     "@opam/ocamlgraph": "1.8.8",
-    "@opam/sexplib": "v0.11.0"
+    "@opam/sexplib": "v0.11.0",
+    "sketch": "*"
   },
-  "esy": { "install": [ "esy-installer" ], "buildsInSource": "_build" },
+  "resolutions": { "sketch": "link:./sketch.json" },
+  "esy": {
+    "install": ["esy-installer"],
+    "buildsInSource": "_build",
+    "build": "sketch.packager --output build/packages base containers lwt owl-base re ocamlgraph sexplib unix"
+  },
   "peerDependencies": { "ocaml": "~4.6.5" },
   "devDependencies": {
     "ocaml": "~4.6.5",

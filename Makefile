@@ -1,5 +1,5 @@
 evaluator:
-	dune build @evaluator/all
+	esy @sketch dune build @install -j 8
 
 js_compile:
 	# Compiling evaluator to JS
@@ -22,6 +22,6 @@ build_packager:
 all: js_compile build_packager
 
 upload:
-	surge sandbox/packages
+	surge build/packages
 
 .PHONY: evaluator js_compile build_packager all test clear
