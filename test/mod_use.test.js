@@ -1,6 +1,4 @@
-require("../build/exported-unit.cmis");
-require("../build/stdlib.cmis");
-const { evaluator: e } = require("../build/toplevel.js");
+const { evaluator: e } = require("./engine.js");
 const objPath = require("object-path");
 
 test("mod_use valid file", () => {

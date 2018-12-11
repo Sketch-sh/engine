@@ -11,7 +11,7 @@ install dependencies:
 ```bash
 esy @sketch install && \
 esy @sandbox install && \
-cd test && npm install
+esy install
 ```
 
 ## Build

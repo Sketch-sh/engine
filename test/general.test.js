@@ -1,5 +1,5 @@
 
-const { evaluator: e } = require("../build/toplevel.js");
+const { evaluator: e } = require("./engine.js");
 const objPath = require("object-path");
 
 test("correct values order when having multiple expressions on the same line", () => {

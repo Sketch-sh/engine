@@ -4,7 +4,7 @@ node_modules
 output/reason.js
 
 build/packages
-build/core
+build/engine
 *.install
 
 _esy

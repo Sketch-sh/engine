@@ -18,7 +18,7 @@ packages: engine
 	esy @sandbox build
 
 test:
-	cd test && npm test
+	esy test
 
 all: js
 

@@ -1,4 +1,4 @@
-const { refmt } = require("../build/toplevel.js");
+const { refmt } = require("./engine.js");
 
 test("api shape", () => {
   expect(Object.keys(refmt)).toMatchInlineSnapshot(`

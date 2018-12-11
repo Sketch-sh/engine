@@ -1,4 +1,4 @@
-const { evaluator: e } = require("../build/toplevel.js");
+const { evaluator: e } = require("./engine.js");
 const objPath = require("object-path");
 
 let count = (result, path, value) =>

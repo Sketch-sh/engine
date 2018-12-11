@@ -1,4 +1,8 @@
 {
+  "name": "sketch-test",
+  "esy": {
+    "install": ["esy-installer"]
+  },
   "scripts": {
     "test": "jest"
   },
