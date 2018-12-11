@@ -4,10 +4,7 @@ engine:
 clean:
 	esy @sketch dune clean
 
-# I'm not sure how to tell dune keeping track of 
-# generated js files so a clean is neccessary 
-# before copying the js files out
-js: clean
+js:
 	# Compiling engine to Javascript
 	esy @sketch dune build src/engine/engine.byte
 	mkdir -p build/engine
