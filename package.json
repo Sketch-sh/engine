@@ -4,7 +4,7 @@
     "install": ["esy-installer"]
   },
   "scripts": {
-    "test": "jest"
+    "test": "./node_modules/.bin/jest"
   },
   "dependencies": {
     "jest": "^23.5.0",
