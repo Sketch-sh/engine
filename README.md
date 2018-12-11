@@ -6,12 +6,48 @@ This project uses https://esy.sh
 
 install esy: `npm install -g esy`
 
-install dependencies: `esy install && cd sandbox && esy install && cd ../test && npm install`
+install dependencies: 
 
-## Build:
+```bash
+esy @sketch install && \
+esy @sandbox install && \
+cd test && npm install
+```
 
-`esy make all` 
+## Build
+
+- For engine and packager development:
+
+```
+make engine
+```
+
+- For compiling engine to Javascript (this takes awhile):
+
+```
+make js
+````
+
+Build artifacts in `build/engine`
+
+- For compiling packages to Javscript
+
+```
+make packages
+```
+
+Build artifacts in `build/packages`
+
+## Adding new package to the sandbox
+
+```
+esy @sandbox add @opam/PACKAGE_NAME
+```
+
+Open `sandbox.json` and add the name of the package to `esy.build`
 
 ## Test
 
-`esy make test`
+```
+make test
+```

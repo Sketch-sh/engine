@@ -1,27 +1,28 @@
-evaluator:
-	esy @sketch dune build @install -j 8
+engine:
+	esy @sketch build
 
-js_compile:
-	# Compiling evaluator to JS
-	dune build evaluator/toplevel.byte --verbose
-	cp _build/default/evaluator/*.js ./build
+clean:
+	esy @sketch dune clean
 
-clear:
-	rm -rf sandbox/packages/*
-	dune clean
+# I'm not sure how to tell dune keeping track of 
+# generated js files so a clean is neccessary 
+# before copying the js files out
+js: clean
+	# Compiling engine to Javascript
+	esy @sketch dune build src/engine/engine.byte
+	mkdir -p build/engine
+	cp _build/default/src/engine/*.js ./build/engine
+
+packages: engine
+	# Compiling libraries to Javascript
+	esy @sandbox build
 
 test:
 	cd test && npm test
 
-build_packager:
-	# Build external dependencies with packager
-	dune build bin/packager.exe
-	cp ./_build/default/bin/packager.exe ./sandbox/packager.exe
-	$(MAKE) -C sandbox all
-
-all: js_compile build_packager
+all: js
 
 upload:
 	surge build/packages
 
-.PHONY: evaluator js_compile build_packager all test clear
+.PHONY: engine js all test clean packages

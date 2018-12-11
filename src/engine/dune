@@ -15,11 +15,11 @@
 
 (rule
   (targets engine.byte)
-  (deps (package sketch.engine))
+  (deps (package sketch))
   (action
     (run
       jsoo_mktop -g -package bytes
-      -export-package sketch.evaluator
+      -export-package sketch.engine
       -jsopt +toplevel.js
       -jsopt +dynlink.js
       -jsopt +nat.js
@@ -27,4 +27,3 @@
     )
   )
 )
-

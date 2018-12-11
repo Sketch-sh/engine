@@ -3,9 +3,8 @@
 node_modules
 output/reason.js
 
-build/*.js
 build/packages
-build/**.byte
+build/core
 *.install
 
 _esy
