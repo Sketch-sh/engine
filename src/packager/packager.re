@@ -99,7 +99,7 @@ let build = (~outputDir, toplevelPkgs) => {
              findDeps(pkg)
              |> String.split_on_char('\n')
              |> List.filter(name => name != "")
-             |> List.filter(name => !SS.mem(name, excludedPackage));
+             |> List.filter(name => !SS.mem(name, excludedPackages));
 
            let _ =
              allDeps
