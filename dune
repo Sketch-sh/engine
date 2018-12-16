@@ -1,1 +1,1 @@
-(ignored_subdirs (_esy))
+(dirs src)

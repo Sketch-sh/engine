@@ -12,24 +12,3 @@
   (preprocess (pps js_of_ocaml-ppx))
   (flags :standard -rectypes)
 )
-
-(rule
-  (targets 
-    engine.byte 
-    engine.js 
-    exported-unit.cmis.js 
-    sketch.engine.cmis.js 
-    stdlib.cmis.js
-  )
-  (deps (package sketch))
-  (action
-    (run
-      jsoo_mktop -g -package bytes
-      -export-package sketch.engine
-      -jsopt +toplevel.js
-      -jsopt +dynlink.js
-      -jsopt +nat.js
-      -o engine.byte
-    )
-  )
-)

@@ -11,14 +11,14 @@
     "refmterr": "^3.1.10"
   },
   "esy": {
-    "install": ["esy-installer"],
+    "install": [ "esy-installer" ],
     "buildsInSource": "_build",
     "build": "dune build @install"
   },
   "peerDependencies": { "ocaml": "~4.6.5" },
   "devDependencies": {
     "@esy-ocaml/merlin": "3.0.5005",
-    "@opam/dune": "*",
+    "@opam/dune": "^1.6.2",
     "ocaml": "~4.6.5"
   }
 }

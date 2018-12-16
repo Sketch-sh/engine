@@ -1,0 +1,7 @@
+(executable
+  (name entry)
+  (flags :standard -safe-string)
+  (js_of_ocaml (flags :standard --toplevel --linkall +toplevel.js +dynlink.js))
+  (preprocess (pps js_of_ocaml-ppx))
+  (libraries sketch.engine)
+)

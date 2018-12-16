@@ -3,12 +3,12 @@ engine:
 
 clean:
 	esy @sketch dune clean
-
+	rm -rf build
 js:
 	# Compiling engine to Javascript
-	esy @sketch dune build src/engine/engine.byte
+	esy @sketch dune build src/entry/entry.bc.js --profile release
 	mkdir -p build/engine
-	cp _build/default/src/engine/*.js ./build/engine
+	cp _build/default/src/entry/entry.bc.js ./build/engine/engine.js
 
 packages: engine
 	# Compiling libraries to Javascript
