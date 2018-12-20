@@ -1,24 +1,17 @@
 let verbose = ref(true);
+let exec = Utils.execute(~verbose);
 
 module Ocamlfind = {
-  let cmas: string => string =
-    name =>
-      Utils.execute(
-        ~verbose,
-        ["ocamlfind query", name, "-r -predicates byte -a-format"],
-      );
-  let cmis: string => string =
-    name =>
-      Utils.execute(
-        ~verbose,
-        ["ocamlfind query", name, "-r -predicates byte -i-format"],
-      );
+  let cmas = name =>
+    ["ocamlfind query", name, "-r -predicates byte -a-format"] |> exec;
+  let cmis = name =>
+    ["ocamlfind query", name, "-r -predicates byte -i-format"] |> exec;
 };
 
 module Ocamlc = {
   let archive = (aFiles, output) => {
     let cma = output ++ ".cma";
-    Utils.execute(~verbose, ["ocamlc -a", aFiles, "-o", cma]) |> ignore;
+    ["ocamlc -a", aFiles, "-o", cma] |> exec |> ignore;
     cma;
   };
 };
@@ -27,29 +20,21 @@ module Jsoo = {
   let lib = name => name ++ ".sketch.lib.js";
 
   let autoBootstrap = libName =>
-    Utils.execute(
-      ~verbose,
-      [
-        "echo \"sketch_private__" ++ libName ++ "(self);\"",
-        ">>",
-        lib(libName),
-      ],
-    )
+    ["echo \"sketch_private__" ++ libName ++ "(self);\"", ">>", lib(libName)]
+    |> exec
     |> ignore;
 
   let compile = (libName, archive, cmis) =>
-    Utils.execute(
-      ~verbose,
-      [
-        "js_of_ocaml",
-        "--wrap-with-fun=sketch_private__" ++ libName,
-        "--toplevel",
-        cmis,
-        archive,
-        "-o",
-        lib(libName),
-      ],
-    )
+    [
+      "js_of_ocaml",
+      "--wrap-with-fun=sketch_private__" ++ libName,
+      "--toplevel",
+      cmis,
+      archive,
+      "-o",
+      lib(libName),
+    ]
+    |> exec
     |> ignore;
 };
 
