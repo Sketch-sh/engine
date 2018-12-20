@@ -30,8 +30,7 @@ module Jsoo = {
     Utils.execute(
       ~verbose,
       [
-        "
-      echo \"sketch_private__" ++ libName ++ "(self);\"",
+        "echo \"sketch_private__" ++ libName ++ "(self);\"",
         ">>",
         lib(libName),
       ],
