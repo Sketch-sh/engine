@@ -13,8 +13,7 @@ let get_error_loc =
   | Translcore.Error(loc, _)
   | Translclass.Error(loc, _)
   | Translmod.Error(loc, _) => Some(loc)
-  | Reason_syntax_util.Error(loc, _) => Some(loc)
-  | Reason_lexer.Error(_err, loc) => Some(loc)
+  | Reason_errors.Reason_error(_err, loc) => Some(loc)
   | _ => None;
 
 let drainBuffer = bf => {
@@ -120,7 +119,7 @@ let eval = code => {
               Location.loc_ghost: false,
             };
             Some(loc);
-          | Ptop_dir(_name, _argument) => None
+          | Ptop_dir(_toplevel_directive) => None
           };
 
         Buffer.clear(buffer);

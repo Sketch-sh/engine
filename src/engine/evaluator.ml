@@ -1,4 +1,5 @@
-open Js_of_ocaml;;
+open Js_of_ocaml
+open Js_of_ocaml_toplevel
 
 module ToploopBackup = struct
   let parse_toplevel_phrase = !Toploop.parse_toplevel_phrase
