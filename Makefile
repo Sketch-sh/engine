@@ -18,9 +18,15 @@ clean:
 	dune clean
 	rm -rf build
 
-js:
-	# Compiling engine to Javascript
-	dune build  --profile release src/entry/entry.js
+js_dev:
+	# Compiling engine to Javascript with dev mode
+	dune build @@src/entry/dev
+	mkdir -p build/engine
+	cp _build/default/src/entry/entry_dev.js ./build/engine/engine.js
+
+js_prod:
+	# Compiling engine to Javascript with prod mode (no --pretty)
+	dune build @@src/entry/prod
 	mkdir -p build/engine
 	cp _build/default/src/entry/entry.js ./build/engine/engine.js
 

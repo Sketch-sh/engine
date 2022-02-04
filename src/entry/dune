@@ -14,7 +14,7 @@
   (run jsoo_listunits -o %{targets} stdlib)))
 
 (rule
- (targets entry.js)
+ (targets entry_dev.js)
  (action
   (run
    %{bin:js_of_ocaml}
@@ -28,6 +28,24 @@
    -o
    %{targets})))
 
+(rule
+ (targets entry.js)
+ (action
+  (run
+   %{bin:js_of_ocaml}
+   --export
+   %{dep:export.txt}
+   --toplevel
+   +toplevel.js
+   +dynlink.js
+   %{dep:entry.bc}
+   -o
+   %{targets})))
+
 (alias
- (name default)
+ (name dev)
+ (deps entry_dev.js))
+
+(alias
+ (name prod)
  (deps entry.js))
