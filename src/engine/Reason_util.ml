@@ -44,4 +44,14 @@ let maybe_skip_phrase lexbuf =
 
 
 let correctly_catch_parse_errors fn lexbuf =
-  fn lexbuf
+  let kind = if !Toploop.input_name = "//toplevel//" then `Toplevel else `Batch in
+  try
+    fn lexbuf
+  with exn when kind = `Toplevel ->
+    (* In expunged toplevel, we have a split-brain situation where toplevel
+       and m17n have different internal IDs for the "same" exceptions.
+       Fixup. *)
+    raise (match exn with
+          | Reason_errors.Reason_error (_, _) -> transmogrify_exn exn exn_Lexer_Error
+          | Syntaxerr.Error _ -> transmogrify_exn exn exn_Syntaxerr_Error
+          | _ -> exn)
