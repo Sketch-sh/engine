@@ -3,7 +3,6 @@
   "scripts": { "test": "jest" },
   "dependencies": {
     "jest": "^23.5.0",
-    "jest-pnp-resolver": "^1.0.2",
     "object-path": "^0.11.4",
     "prettier": "^1.14.2"
   }
