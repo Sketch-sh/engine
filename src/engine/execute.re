@@ -94,6 +94,12 @@ let eval = code => {
   Location.input_lexbuf := Some(lexbuf);
 
   switch (parse_use_file(lexbuf)) {
+    | Error(Reason_errors.Reason_error (err, loc)) => [
+      {
+        Reason_errors.report_error(~loc, Format.err_formatter, err );
+        Error(report(~loc, ()));
+      },
+    ]
   | Error(exn) => [
       {
         Errors.report_error(Format.err_formatter, exn);
