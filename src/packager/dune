@@ -1,6 +1,4 @@
 (executable
   (name packager)
-  (public_name sketch.packager)
-  (package sketch)
   (libraries unix str)
 )

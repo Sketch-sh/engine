@@ -77,17 +77,19 @@ Object {
     Array [
       0,
       Object {
-        "col": 9,
+        "col": 6,
         "line": 0,
       },
       Object {
-        "col": 9,
+        "col": 7,
         "line": 0,
       },
     ],
   ],
-  "message": "File \\"\\", line 1, characters 9-10:
-Error: Syntax error",
+  "message": "Line 1, characters 6-8:
+Error: syntax error, consider adding a \`;' before
+
+",
 }
 `);
     }
@@ -97,23 +99,47 @@ Error: Syntax error",
       refmt.parseMLI(`val f: `);
     } catch (error) {
       expect(error).toMatchInlineSnapshot(`
-Object {
-  "location": Array [
+Array [
+  0,
+  Array [
+    248,
+    qT {
+      "c": "Syntaxerr.Error",
+      "l": 15,
+      "t": 0,
+    },
+    31,
+  ],
+  Array [
+    5,
     Array [
       0,
-      Object {
-        "col": 7,
-        "line": 0,
-      },
-      Object {
-        "col": 7,
-        "line": 0,
-      },
+      Array [
+        0,
+        qT {
+          "c": "",
+          "l": 0,
+          "t": 0,
+        },
+        1,
+        0,
+        7,
+      ],
+      Array [
+        0,
+        qT {
+          "c": "",
+          "l": 0,
+          "t": 0,
+        },
+        1,
+        0,
+        7,
+      ],
+      0,
     ],
   ],
-  "message": "File \\"\\", line 1, characters 7-7:
-Error: Syntax error",
-}
+]
 `);
     }
   });
@@ -136,7 +162,10 @@ Object {
       },
     ],
   ],
-  "message": "a type name must start with a lower-case letter or an underscore",
+  "message": "Line 1, characters 5-6:
+Error: a type name must start with a lower-case letter or an underscore
+
+",
 }
 `);
     }

@@ -21,8 +21,13 @@ exports[`directives: #help 1`] = `
   Usage is identical to #use but #mod_use wraps the contents in a module.
 #remove_directory <str>
   Remove the given directory from the search path.
+#show_dirs
+  List directories currently in the search path.
 #use <str>
   Read, compile and execute source phrases from the given file.
+#use_output <str>
+  Execute a command and read, compile and execute source phrases from its
+  output.
 
                               Environment queries
 #show <ident>
@@ -31,6 +36,8 @@ exports[`directives: #help 1`] = `
   Print the signature of the corresponding class.
 #show_class_type <ident>
   Print the signature of the corresponding class type.
+#show_constructor <ident>
+  Print the signature of the corresponding value constructor.
 #show_exception <ident>
   Print the signature of the corresponding exception.
 #show_module <ident>

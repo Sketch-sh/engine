@@ -1,7 +1,51 @@
 (executable
-  (name entry)
-  (flags :standard -safe-string)
-  (js_of_ocaml (flags :standard --toplevel --linkall +toplevel.js +dynlink.js))
-  (preprocess (pps js_of_ocaml-ppx))
-  (libraries sketch.engine)
-)
+ (name entry)
+ (modes byte)
+ (preprocess
+  (pps js_of_ocaml-ppx))
+ (libraries engine)
+ (link_flags
+  (:standard -linkall)))
+
+(rule
+ (targets export.txt)
+ (deps entry.bc)
+ (action
+  (run jsoo_listunits -o %{targets} stdlib)))
+
+(rule
+ (targets entry_dev.js)
+ (action
+  (run
+   %{bin:js_of_ocaml}
+   --export
+   %{dep:export.txt}
+   --toplevel
+   --pretty
+   +toplevel.js
+   +dynlink.js
+   %{dep:entry.bc}
+   -o
+   %{targets})))
+
+(rule
+ (targets entry.js)
+ (action
+  (run
+   %{bin:js_of_ocaml}
+   --export
+   %{dep:export.txt}
+   --toplevel
+   +toplevel.js
+   +dynlink.js
+   %{dep:entry.bc}
+   -o
+   %{targets})))
+
+(alias
+ (name dev)
+ (deps entry_dev.js))
+
+(alias
+ (name prod)
+ (deps entry.js))

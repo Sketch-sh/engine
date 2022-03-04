@@ -56,7 +56,6 @@ let locationToJsObj (loc: Location.t) =
       |]
     )
 
-
 let parseWith f code =
   (* you can't throw an Error here. jsoo parses the string and turns it
     into something else *)
@@ -67,37 +66,14 @@ let parseWith f code =
     |> Lexing.from_string
     |> f)
   with
-  (* from ocaml and reason *)
-  | Syntaxerr.Error err ->
-    let location = Syntaxerr.location_of_error err in
+  (* from reason *)
+  | Reason_errors.Reason_error (err, location) ->
     let jsLocation = locationToJsObj location in
-    Syntaxerr.report_error Format.str_formatter err;
+    Reason_errors.report_error ~loc:location Format.str_formatter err;
     let errorString = Format.flush_str_formatter () in
     let jsError =
       Js.Unsafe.obj [|
         ("message", Js.Unsafe.inject (Js.string errorString));
-        ("location", Js.Unsafe.inject jsLocation);
-      |]
-    in
-    Js.Unsafe.fun_call throwAnything [|Js.Unsafe.inject jsError|]
-  (* from reason *)
-  | Reason_syntax_util.Error (location, Syntax_error err) ->
-    let jsLocation = locationToJsObj location in
-    let jsError =
-      Js.Unsafe.obj [|
-        ("message", Js.Unsafe.inject (Js.string err));
-        ("location", Js.Unsafe.inject jsLocation);
-      |]
-    in
-    Js.Unsafe.fun_call throwAnything [|Js.Unsafe.inject jsError|]
-  | Reason_lexer.Error (err, loc) ->
-    let reportedError =
-      Location.error_of_printer loc Reason_lexer.report_error err
-    in
-    let jsLocation = locationToJsObj reportedError.loc in
-    let jsError =
-      Js.Unsafe.obj [|
-        ("message", Js.Unsafe.inject (Js.string reportedError.msg));
         ("location", Js.Unsafe.inject jsLocation);
       |]
     in

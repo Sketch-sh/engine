@@ -1,14 +1,12 @@
 (library
   (name engine)
-  (public_name sketch.engine)
   (libraries 
     js_of_ocaml 
     js_of_ocaml-compiler 
     js_of_ocaml-toplevel 
-    reason 
+    reason
     compiler-libs
   )
-  (library_flags -linkall)
   (preprocess (pps js_of_ocaml-ppx))
   (flags :standard -rectypes)
 )

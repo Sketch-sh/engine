@@ -1,7 +1,0 @@
-{
-  "reason.diagnostics.tools": [
-    "merlin"
-  ],
-  "editor.formatOnSave": false,
-  "git.ignoreLimitWarning": true
-}

@@ -1,10 +1,11 @@
 {
   "name": "sketch-test",
-  "esy": { "install": [ "esy-installer" ] },
-  "scripts": { "test": "./node_modules/.bin/jest" },
+  "scripts": {
+    "test": "jest",
+    "test-promote": "jest --updateSnapshot"
+  },
   "dependencies": {
     "jest": "^23.5.0",
-    "jest-pnp-resolver": "^1.0.2",
     "object-path": "^0.11.4",
     "prettier": "^1.14.2"
   }

@@ -1,10 +1,7 @@
-**/_build
-.merlin
+/_build/
+/_opam/
+/.vscode/
 node_modules
-output/reason.js
 
 build/packages
 build/engine
-*.install
-
-_esy

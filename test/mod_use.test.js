@@ -65,6 +65,8 @@ test("mod_use with type error", () => {
   expect(objPath.get(insertModule, "kind")).toBe("Error");
   expect(objPath.get(insertModule, "value").trim()).toMatchInlineSnapshot(`
 "File \\"/static/Type_error.re\\", line 1, characters 16-17:
+1 | let x: string = 1
+                    ^
 Error: This expression has type int but an expression was expected of type
          string"
 `);
