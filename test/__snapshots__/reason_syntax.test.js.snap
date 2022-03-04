@@ -54,8 +54,8 @@ Array [
           "line": 8,
         },
       ],
-      "stderr": "File \\"\\", line 8, characters 2-5:
-Warning 11: this match case is unused.
+      "stderr": "Line 8, characters 2-5:
+Warning 11 [redundant-case]: this match case is unused.
 ",
       "stdout": "",
       "value": "- : say => unit = <fun>
