@@ -1,6 +1,9 @@
 {
   "name": "sketch-test",
-  "scripts": { "test": "jest" },
+  "scripts": {
+    "test": "jest",
+    "test-promote": "jest --updateSnapshot"
+  },
   "dependencies": {
     "jest": "^23.5.0",
     "object-path": "^0.11.4",
