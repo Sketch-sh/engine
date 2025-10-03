@@ -3,11 +3,11 @@
 exports[`ocaml 0 snapshot 1`] = `
 [
   {
-    "kind": "Error",
+    "kind": "Ok",
     "value": {
       "loc": [
         {
-          "col": 22,
+          "col": 0,
           "line": 1,
         },
         {
@@ -15,12 +15,72 @@ exports[`ocaml 0 snapshot 1`] = `
           "line": 1,
         },
       ],
-      "stderr": "Line 1, characters 22-31:
-Error: syntax error, consider adding a \`;' before
-
+      "stderr": "",
+      "stdout": "awesome
+",
+      "value": "- : unit = ()
+",
+    },
+  },
+  {
+    "kind": "Ok",
+    "value": {
+      "loc": [
+        {
+          "col": 2,
+          "line": 2,
+        },
+        {
+          "col": 13,
+          "line": 4,
+        },
+      ],
+      "stderr": "",
+      "stdout": "",
+      "value": "type say = Hello | Goodbye
+",
+    },
+  },
+  {
+    "kind": "Ok",
+    "value": {
+      "loc": [
+        {
+          "col": 2,
+          "line": 5,
+        },
+        {
+          "col": 60,
+          "line": 5,
+        },
+      ],
+      "stderr": "Line 5, characters 53-54:
+Warning 11 [redundant-case]: this match case is unused.
 ",
       "stdout": "",
-      "value": "",
+      "value": "
+- : say -> unit = <fun>
+",
+    },
+  },
+  {
+    "kind": "Ok",
+    "value": {
+      "loc": [
+        {
+          "col": 2,
+          "line": 6,
+        },
+        {
+          "col": 11,
+          "line": 6,
+        },
+      ],
+      "stderr": "",
+      "stdout": "",
+      "value": "
+val a : int = 1
+",
     },
   },
 ]
@@ -29,11 +89,11 @@ Error: syntax error, consider adding a \`;' before
 exports[`ocaml 1 snapshot 1`] = `
 [
   {
-    "kind": "Error",
+    "kind": "Ok",
     "value": {
       "loc": [
         {
-          "col": 14,
+          "col": 0,
           "line": 1,
         },
         {
@@ -41,13 +101,12 @@ exports[`ocaml 1 snapshot 1`] = `
           "line": 1,
         },
       ],
-      "stderr": "
-Line 1, characters 14-30:
-Error: syntax error, consider adding a \`;' before
-
+      "stderr": "",
+      "stdout": "Another stdout
 ",
-      "stdout": "",
-      "value": "",
+      "value": "
+- : unit = ()
+",
     },
   },
 ]
@@ -56,11 +115,11 @@ Error: syntax error, consider adding a \`;' before
 exports[`ocaml 2 snapshot 1`] = `
 [
   {
-    "kind": "Error",
+    "kind": "Ok",
     "value": {
       "loc": [
         {
-          "col": 12,
+          "col": 0,
           "line": 1,
         },
         {
@@ -68,13 +127,31 @@ exports[`ocaml 2 snapshot 1`] = `
           "line": 1,
         },
       ],
-      "stderr": "
-Line 1, characters 12-13:
-Error: syntax error, consider adding a \`;' before
-
-",
+      "stderr": "",
       "stdout": "",
-      "value": "",
+      "value": "
+val a : int ref = {contents = 1}
+",
+    },
+  },
+  {
+    "kind": "Ok",
+    "value": {
+      "loc": [
+        {
+          "col": 2,
+          "line": 2,
+        },
+        {
+          "col": 24,
+          "line": 2,
+        },
+      ],
+      "stderr": "",
+      "stdout": "1",
+      "value": "
+- : unit = ()
+",
     },
   },
 ]
@@ -83,25 +160,43 @@ Error: syntax error, consider adding a \`;' before
 exports[`ocaml 3 snapshot 1`] = `
 [
   {
-    "kind": "Error",
+    "kind": "Ok",
     "value": {
       "loc": [
         {
-          "col": 18,
+          "col": 0,
           "line": 1,
         },
         {
-          "col": 19,
-          "line": 1,
+          "col": 68,
+          "line": 2,
         },
       ],
-      "stderr": "
-Line 1, characters 18-19:
-Error: syntax error, consider adding a \`;' before
-
-",
+      "stderr": "",
       "stdout": "",
-      "value": "",
+      "value": "
+val factorial : int -> int = <fun>
+",
+    },
+  },
+  {
+    "kind": "Ok",
+    "value": {
+      "loc": [
+        {
+          "col": 2,
+          "line": 3,
+        },
+        {
+          "col": 21,
+          "line": 3,
+        },
+      ],
+      "stderr": "",
+      "stdout": "",
+      "value": "
+- : int = 720
+",
     },
   },
 ]
@@ -110,25 +205,85 @@ Error: syntax error, consider adding a \`;' before
 exports[`ocaml 4 snapshot 1`] = `
 [
   {
-    "kind": "Error",
+    "kind": "Ok",
     "value": {
       "loc": [
         {
-          "col": 9,
-          "line": 3,
+          "col": 0,
+          "line": 1,
         },
         {
-          "col": 11,
+          "col": 27,
           "line": 3,
         },
       ],
-      "stderr": "
-Line 3, characters 9-11:
-Error: syntax error, consider adding a \`;' before
-
-",
+      "stderr": "",
       "stdout": "",
-      "value": "",
+      "value": "
+type tree = Leaf | Node of int * tree * tree
+",
+    },
+  },
+  {
+    "kind": "Ok",
+    "value": {
+      "loc": [
+        {
+          "col": 2,
+          "line": 4,
+        },
+        {
+          "col": 66,
+          "line": 7,
+        },
+      ],
+      "stderr": "",
+      "stdout": "",
+      "value": "
+val sum : tree -> int = <fun>
+",
+    },
+  },
+  {
+    "kind": "Ok",
+    "value": {
+      "loc": [
+        {
+          "col": 2,
+          "line": 9,
+        },
+        {
+          "col": 5,
+          "line": 14,
+        },
+      ],
+      "stderr": "",
+      "stdout": "",
+      "value": "
+val myTree : tree =
+  Node (1, Node (2, Node (4, Leaf, Leaf), Node (6, Leaf, Leaf)),
+   Node (3, Node (5, Leaf, Leaf), Node (7, Leaf, Leaf)))
+",
+    },
+  },
+  {
+    "kind": "Ok",
+    "value": {
+      "loc": [
+        {
+          "col": 2,
+          "line": 15,
+        },
+        {
+          "col": 20,
+          "line": 15,
+        },
+      ],
+      "stderr": "",
+      "stdout": "",
+      "value": "
+- : int = 28
+",
     },
   },
 ]

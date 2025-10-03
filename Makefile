@@ -20,28 +20,28 @@ install: $(opam_file) ## Alias to update the opam file and install the needed de
 
 .PHONY: format
 format: ## Format the codebase with ocamlformat
-	dune build @fmt --auto-promote
+	opam exec -- dune build @fmt --auto-promote
 	
 .PHONY: build
 build: ## Build the project, including non installable libraries and executables
-	dune build @@default
+	opam exec -- dune build @@default
 
 .PHONY: clean
 clean: ## Clean the project
-	dune clean
+	opam exec -- dune clean
 	rm -rf build
 
 .PHONY: js_dev
 js_dev: ## Create engine .js artifact in dev mode
 	# Compiling engine to Javascript with dev mode
-	dune build @@src/entry/dev
+	opam exec -- dune build @@src/entry/dev
 	mkdir -p build/engine
 	cp _build/default/src/entry/entry_dev.js ./build/engine/engine.js
 
 .PHONY: js_prod
 js_prod: ## Create engine .js artifact in prod mode
 	# Compiling engine to Javascript with prod mode (no --pretty)
-	dune build @@src/entry/prod
+	opam exec -- dune build @@src/entry/prod
 	mkdir -p build/engine
 	cp _build/default/src/entry/entry.js ./build/engine/engine.js
 
@@ -59,5 +59,5 @@ test_promote: js_prod ## Run end-to-end tests and promote snapshot
 
 # Update the package dependencies when new deps are added to dune-project
 $(opam_file): dune-project $(opam_file).template
-	-dune build @install        # Update the $(project_name).opam file
+	-opam exec -- dune build @install        # Update the $(project_name).opam file
 	opam install . --deps-only  # Install the new dependencies

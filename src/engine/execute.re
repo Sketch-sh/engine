@@ -64,10 +64,14 @@ let report = (~loc: option(Location.t)=?, ~value=?, ~stdout=?, ~stderr=?, ()) =>
     },
 };
 
-let parse_use_file = lexbuf =>
+let parse_use_file = lexbuf => {
+  ignore(Js.Unsafe.global##.console##log(Js.string("[DEBUG] execute.re parse_use_file called")));
   try(Ok(Toploop.parse_use_file^(lexbuf))) {
-  | exn => Error(exn)
+  | exn => 
+    ignore(Js.Unsafe.global##.console##log(Js.string("[DEBUG] execute.re parse_use_file failed: " ++ (Printexc.to_string(exn)))));
+    Error(exn)
   };
+};
 
 let mod_use_file = name =>
   try(Ok(Toploop.mod_use_input(formatter, Toploop.File(name)))) {
@@ -79,6 +83,9 @@ let mod_use_file = name => {
   switch (mod_use_file(name)) {
   | Ok(true) => Ok()
   | Ok(false) => Error(Buffer.contents(buffer))
+  | Error(Reason_errors.Reason_error(err, loc)) =>
+    Reason_errors.report_error(~loc, formatter, err);
+    Error(Buffer.contents(buffer));
   | Error(exn) =>
     Errors.report_error(formatter, exn);
     Error(Buffer.contents(buffer));
@@ -86,6 +93,7 @@ let mod_use_file = name => {
 };
 
 let eval = code => {
+  ignore(Js.Unsafe.global##.console##log(Js.string("[DEBUG] execute.re eval called with code: " ++ code)));
   /* Clean up all buffers before executing new block */
   Buffer.clear(buffer);
   Buffer.clear(stderr_buffer);
