@@ -49,6 +49,18 @@ exports[`directives: #help 1`] = `
 #show_val <ident>
   Print the signature of the corresponding value.
 
+                              js_of_ocaml
+#debug_off <str>
+  Disable debug for the given section
+#debug_on <str>
+  Enable debug for the given section
+#disable <str>
+  Disable the given flag
+#enable <str>
+  Enable the given flag
+#tailcall <str>
+  Set the depth of tail calls before going through a trampoline
+
                               Pretty-printing
 #install_printer <ident>
   Registers a printer for values of a certain type.
@@ -68,6 +80,8 @@ exports[`directives: #help 1`] = `
   Stop tracing all functions traced so far.
 
                               Compiler options
+#debug <bool>
+  Choose whether to generate debugging events.
 #labels <bool>
   Choose whether to ignore labels in function types.
 #ppx <str>
@@ -80,12 +94,5 @@ exports[`directives: #help 1`] = `
 #warn_error <str>
   Treat as errors the warnings enabled by the argument.
 #warnings <str>
-  Enable or disable warnings according to the argument.
-
-                              Undocumented
-#debug_off <str>
-#debug_on <str>
-#disable <str>
-#enable <str>
-#tailcall <str>"
+  Enable or disable warnings according to the argument."
 `;

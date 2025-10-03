@@ -53,9 +53,9 @@ test("mod_use with syntax error", () => {
 
   expect(objPath.get(insertModule, "kind")).toBe("Error");
   expect(objPath.get(insertModule, "value").trim()).toMatchInlineSnapshot(`
-"File \\"/static/Syntax_error.re\\", line 1, characters 13-14:
-Error: Syntax error"
-`);
+    "File \\"/static/Syntax_error.re\\", line 1, characters 13-14:
+    Error: Syntax error"
+  `);
 });
 
 test("mod_use with type error", () => {
@@ -64,10 +64,10 @@ test("mod_use with type error", () => {
 
   expect(objPath.get(insertModule, "kind")).toBe("Error");
   expect(objPath.get(insertModule, "value").trim()).toMatchInlineSnapshot(`
-"File \\"/static/Type_error.re\\", line 1, characters 16-17:
-1 | let x: string = 1
-                    ^
-Error: This expression has type int but an expression was expected of type
-         string"
-`);
+    "File "/static/Type_error.re", line 1, characters 16-17:
+    1 | let x: string = 1
+                        ^
+    Error: The constant 1 has type int but an expression was expected of type
+             string"
+  `);
 });

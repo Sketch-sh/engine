@@ -1,6 +1,9 @@
 open Js_of_ocaml
 open Js_of_ocaml_toplevel
 
+(* External for wrapping OCaml functions for JavaScript calls in OCaml 5 *)
+external fun_to_js: int -> ('a -> 'b) -> < .. > Js.t = "caml_js_wrap_callback_strict"
+
 module Reason_toolchain = Reason.Reason_toolchain
 module Reason_oprint = Reason.Reason_oprint
 
@@ -125,11 +128,11 @@ let () = begin
 
   Js.export "evaluator" (
     object%js
-      val execute = execute
-      val reset = setup
-      val reasonSyntax = reasonSyntax
-      val mlSyntax = mlSyntax
-      val insertModule = insertModule
+      val execute = fun_to_js 1 execute
+      val reset = fun_to_js 0 setup
+      val reasonSyntax = fun_to_js 0 reasonSyntax
+      val mlSyntax = fun_to_js 0 mlSyntax
+      val insertModule = fun_to_js 3 insertModule
     end);
 
   Js.export "refmt" RefmtJsApi.api

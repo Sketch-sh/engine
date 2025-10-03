@@ -4,6 +4,9 @@ open Js_of_ocaml
   https://github.com/facebook/reason/blob/9bb16162a68486851069f295bc19d9fb81fca763/bspacks/refmtJsApi.ml
 *)
 
+(* External for wrapping OCaml functions for JavaScript calls in OCaml 5 *)
+external fun_to_js: int -> ('a -> 'b) -> < .. > Js.t = "caml_js_wrap_callback_strict"
+
 module RE = Reason.Reason_toolchain.RE
 module ML = Reason.Reason_toolchain.ML
 module Reason_errors = Reason.Reason_errors
@@ -96,13 +99,13 @@ let printML = printWith ML.print_implementation_with_comments
 let printMLI = printWith ML.print_interface_with_comments
 
 let api = object%js
-  val parseRE = parseRE
-  val parseREI = parseREI
-  val parseML = parseML
-  val parseMLI = parseMLI
+  val parseRE = fun_to_js 1 parseRE
+  val parseREI = fun_to_js 1 parseREI
+  val parseML = fun_to_js 1 parseML
+  val parseMLI = fun_to_js 1 parseMLI
 
-  val printRE = printRE
-  val printREI = printREI
-  val printML = printML
-  val printMLI = printMLI
+  val printRE = fun_to_js 1 printRE
+  val printREI = fun_to_js 1 printREI
+  val printML = fun_to_js 1 printML
+  val printMLI = fun_to_js 1 printMLI
 end;
