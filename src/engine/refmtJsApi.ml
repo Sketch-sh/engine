@@ -4,8 +4,9 @@ open Js_of_ocaml
   https://github.com/facebook/reason/blob/9bb16162a68486851069f295bc19d9fb81fca763/bspacks/refmtJsApi.ml
 *)
 
-module RE = Reason_toolchain.RE
-module ML = Reason_toolchain.ML
+module RE = Reason.Reason_toolchain.RE
+module ML = Reason.Reason_toolchain.ML
+module Reason_errors = Reason.Reason_errors
 
 let locationToJsObj (loc: Location.t) =
   let (_file, start_line, start_char) = Location.get_pos_info loc.loc_start in

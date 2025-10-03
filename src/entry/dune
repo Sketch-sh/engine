@@ -20,6 +20,8 @@
    %{bin:js_of_ocaml}
    --export
    %{dep:export.txt}
+   --effects
+   cps
    --toplevel
    --pretty
    +toplevel.js
@@ -35,6 +37,8 @@
    %{bin:js_of_ocaml}
    --export
    %{dep:export.txt}
+   --effects
+   cps
    --toplevel
    +toplevel.js
    +dynlink.js

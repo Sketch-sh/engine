@@ -1,6 +1,8 @@
 open Js_of_ocaml;
 open Types;
 
+module Reason_errors = Reason.Reason_errors;
+
 let get_error_loc =
   fun
   | Syntaxerr.Error(x) => Some(Syntaxerr.location_of_error(x))
@@ -63,12 +65,12 @@ let report = (~loc: option(Location.t)=?, ~value=?, ~stdout=?, ~stderr=?, ()) =>
 };
 
 let parse_use_file = lexbuf =>
-  try (Ok(Toploop.parse_use_file^(lexbuf))) {
+  try(Ok(Toploop.parse_use_file^(lexbuf))) {
   | exn => Error(exn)
   };
 
 let mod_use_file = name =>
-  try (Ok(Toploop.mod_use_file(formatter, name))) {
+  try(Ok(Toploop.mod_use_input(formatter, Toploop.File(name)))) {
   | exn => Error(exn)
   };
 
@@ -94,9 +96,9 @@ let eval = code => {
   Location.input_lexbuf := Some(lexbuf);
 
   switch (parse_use_file(lexbuf)) {
-    | Error(Reason_errors.Reason_error (err, loc)) => [
+  | Error(Reason_errors.Reason_error(err, loc)) => [
       {
-        Reason_errors.report_error(~loc, Format.err_formatter, err );
+        Reason_errors.report_error(~loc, Format.err_formatter, err);
         Error(report(~loc, ()));
       },
     ]
@@ -133,7 +135,7 @@ let eval = code => {
         Buffer.clear(stdout_buffer);
 
         switch (
-          try (Ok(Toploop.execute_phrase(true, formatter, phrase))) {
+          try(Ok(Toploop.execute_phrase(true, formatter, phrase))) {
           | exn => Error(exn)
           }
         ) {

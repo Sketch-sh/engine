@@ -18,16 +18,17 @@
  (description "In-browser compiler for https://github.com/Sketch-sh/sketch-sh")
  (depends
   ;; General system dependencies
-  (dune (and (>= 2) (< 3)))
-  (ocaml (and (>= 4.13.1) (< 4.14)))
+  dune
+  (ocaml (and (>= 5.3.0) (< 5.4)))
   
   ;; Engine dependencies
-  (js_of_ocaml (and (>= 3.11.0) (< 3.12.0)))
-  (js_of_ocaml-compiler (and (>= 3.11.0) (< 3.12.0)))
-  (js_of_ocaml-ppx (and (>= 3.11.0) (< 3.12.0)))
-  (js_of_ocaml-toplevel (and (>= 3.11.0) (< 3.12.0)))
+  js_of_ocaml
+  js_of_ocaml-compiler
+  js_of_ocaml-ppx
+  js_of_ocaml-toplevel
+  reason
 
   ;; Dev dependencies
   (ocamlformat :dev)
-  (ocaml-lsp :dev)
+  (ocaml-lsp-server :dev)
 ))

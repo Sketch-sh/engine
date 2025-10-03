@@ -1,4 +1,3 @@
-
 const { evaluator: e } = require("./engine.js");
 const objPath = require("object-path");
 

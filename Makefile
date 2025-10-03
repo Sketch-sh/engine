@@ -13,7 +13,7 @@ help: ## Print this help message
 
 .PHONY: create-switch
 create-switch:
-	opam switch create . 4.13.1 --deps-only
+	opam switch create . 5.3.0 --deps-only
 
 .PHONY: install
 install: $(opam_file) ## Alias to update the opam file and install the needed deps

@@ -1,6 +1,9 @@
 open Js_of_ocaml
 open Js_of_ocaml_toplevel
 
+module Reason_toolchain = Reason.Reason_toolchain
+module Reason_oprint = Reason.Reason_oprint
+
 module ToploopBackup = struct
   let parse_toplevel_phrase = !Toploop.parse_toplevel_phrase
   let parse_use_file = !Toploop.parse_use_file
@@ -37,21 +40,21 @@ let reasonSyntax () = begin
     (fun x -> List.map Reason_toolchain.To_current.copy_toplevel_phrase
         (Reason_toolchain.RE.use_file x));
   Toploop.print_out_value :=
-    wrap copy_out_value Reason_oprint.print_out_value;
+    wrap copy_out_value (Reason_oprint.print_out_value);
   Toploop.print_out_type :=
-    wrap copy_out_type Reason_oprint.print_out_type;
+    wrap copy_out_type (Format_doc.deprecated Reason_oprint.print_out_type);
   Toploop.print_out_class_type :=
-    wrap copy_out_class_type Reason_oprint.print_out_class_type;
+    wrap copy_out_class_type (Format_doc.deprecated Reason_oprint.print_out_class_type);
   Toploop.print_out_module_type :=
-    wrap copy_out_module_type Reason_oprint.print_out_module_type;
+    wrap copy_out_module_type (Format_doc.deprecated Reason_oprint.print_out_module_type);
   Toploop.print_out_type_extension :=
-    wrap copy_out_type_extension Reason_oprint.print_out_type_extension;
+    wrap copy_out_type_extension (Format_doc.deprecated Reason_oprint.print_out_type_extension);
   Toploop.print_out_sig_item :=
-    wrap copy_out_sig_item Reason_oprint.print_out_sig_item;
+    wrap copy_out_sig_item (Format_doc.deprecated Reason_oprint.print_out_sig_item);
   Toploop.print_out_signature :=
-    wrap (List.map copy_out_sig_item) Reason_oprint.print_out_signature;
+    wrap (List.map copy_out_sig_item) (Format_doc.deprecated Reason_oprint.print_out_signature);
   Toploop.print_out_phrase :=
-    wrap copy_out_phrase Reason_oprint.print_out_phrase;
+    wrap copy_out_phrase (Reason_oprint.print_out_phrase);
 end
 
 type lang = RE | ML
