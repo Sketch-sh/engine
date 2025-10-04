@@ -10,19 +10,11 @@ module Reason_oprint = Reason.Reason_oprint
 module ToploopBackup = struct
   (* Use the original OCaml functions directly, as defined in topcommon.ml *)
   let parse_toplevel_phrase = fun lexbuf -> 
-    try
-      Reason_toolchain.To_current.copy_toplevel_phrase 
-        (Reason_toolchain.ML.toplevel_phrase lexbuf)
-    with
-    | exn -> 
-      raise exn
+    Reason_toolchain.To_current.copy_toplevel_phrase 
+      (Reason_toolchain.ML.toplevel_phrase lexbuf)
   let parse_use_file = fun lexbuf ->
-    try
-      List.map Reason_toolchain.To_current.copy_toplevel_phrase 
-        (Reason_toolchain.ML.use_file lexbuf)
-    with
-    | exn ->
-      raise exn
+    List.map Reason_toolchain.To_current.copy_toplevel_phrase 
+      (Reason_toolchain.ML.use_file lexbuf)
   let print_out_value = !Oprint.out_value
   let print_out_type = !Oprint.out_type
   let print_out_class_type = !Oprint.out_class_type

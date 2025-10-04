@@ -49,12 +49,7 @@ let code = [
   let _ = sum myTree`
 ];
 
-// Call mlSyntax and ignore the callback error
-try {
-  e.mlSyntax();
-} catch (err) {
-  // Ignore callback error - the function still works
-}
+e.mlSyntax();
 describe.each`
 nth  | phr_count | ok   | error | warning | stdout
 ${0} | ${4}      | ${4} | ${0}  | ${1}    | ${1}

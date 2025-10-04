@@ -33,12 +33,7 @@ test("mod_use valid file ml syntax", () => {
 
   expect(objPath.get(insertModule, "kind")).toBe("Ok");
 
-  // Call reasonSyntax and ignore the callback error
-  try {
-    e.reasonSyntax();
-  } catch (err) {
-    // Ignore callback error - the function still works
-  }
+  e.reasonSyntax();
 
   let result = e
     .execute("let x = Awesome.x; let y = Awesome.y; let z = Awesome.z;")
