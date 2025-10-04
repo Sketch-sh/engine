@@ -21,7 +21,14 @@ let get_error_loc =
 let drainBuffer = bf => {
   let content = Buffer.contents(bf);
   Buffer.clear(bf);
-  content;
+  
+  /* Remove leading newline added by OCaml 5.x toplevel formatting
+   * See: https://github.com/ocaml/ocaml/pull/12024 */
+  if (String.length(content) > 0 && content.[0] == '\n') {
+    String.sub(content, 1, String.length(content) - 1)
+  } else {
+    content
+  }
 };
 
 let rec last = (head, tail) =>

@@ -58,8 +58,7 @@ exports[`ocaml 0 snapshot 1`] = `
 Warning 11 [redundant-case]: this match case is unused.
 ",
       "stdout": "",
-      "value": "
-- : say -> unit = <fun>
+      "value": "- : say -> unit = <fun>
 ",
     },
   },
@@ -78,8 +77,7 @@ Warning 11 [redundant-case]: this match case is unused.
       ],
       "stderr": "",
       "stdout": "",
-      "value": "
-val a : int = 1
+      "value": "val a : int = 1
 ",
     },
   },
@@ -104,8 +102,7 @@ exports[`ocaml 1 snapshot 1`] = `
       "stderr": "",
       "stdout": "Another stdout
 ",
-      "value": "
-- : unit = ()
+      "value": "- : unit = ()
 ",
     },
   },
@@ -129,8 +126,7 @@ exports[`ocaml 2 snapshot 1`] = `
       ],
       "stderr": "",
       "stdout": "",
-      "value": "
-val a : int ref = {contents = 1}
+      "value": "val a : int ref = {contents = 1}
 ",
     },
   },
@@ -149,8 +145,7 @@ val a : int ref = {contents = 1}
       ],
       "stderr": "",
       "stdout": "1",
-      "value": "
-- : unit = ()
+      "value": "- : unit = ()
 ",
     },
   },
@@ -174,8 +169,7 @@ exports[`ocaml 3 snapshot 1`] = `
       ],
       "stderr": "",
       "stdout": "",
-      "value": "
-val factorial : int -> int = <fun>
+      "value": "val factorial : int -> int = <fun>
 ",
     },
   },
@@ -194,8 +188,7 @@ val factorial : int -> int = <fun>
       ],
       "stderr": "",
       "stdout": "",
-      "value": "
-- : int = 720
+      "value": "- : int = 720
 ",
     },
   },
@@ -219,8 +212,7 @@ exports[`ocaml 4 snapshot 1`] = `
       ],
       "stderr": "",
       "stdout": "",
-      "value": "
-type tree = Leaf | Node of int * tree * tree
+      "value": "type tree = Leaf | Node of int * tree * tree
 ",
     },
   },
@@ -239,8 +231,7 @@ type tree = Leaf | Node of int * tree * tree
       ],
       "stderr": "",
       "stdout": "",
-      "value": "
-val sum : tree -> int = <fun>
+      "value": "val sum : tree -> int = <fun>
 ",
     },
   },
@@ -259,8 +250,7 @@ val sum : tree -> int = <fun>
       ],
       "stderr": "",
       "stdout": "",
-      "value": "
-val myTree : tree =
+      "value": "val myTree : tree =
   Node (1, Node (2, Node (4, Leaf, Leaf), Node (6, Leaf, Leaf)),
    Node (3, Node (5, Leaf, Leaf), Node (7, Leaf, Leaf)))
 ",
@@ -281,8 +271,7 @@ val myTree : tree =
       ],
       "stderr": "",
       "stdout": "",
-      "value": "
-- : int = 28
+      "value": "- : int = 28
 ",
     },
   },
