@@ -1,19 +1,20 @@
 open Js_of_ocaml
 open Js_of_ocaml_toplevel
 
+
 (* External for wrapping OCaml functions for JavaScript calls in OCaml 5 *)
 external fun_to_js: int -> ('a -> 'b) -> < .. > Js.t = "caml_js_wrap_callback_strict"
 
 module Reason_toolchain = Reason.Reason_toolchain
 module Reason_oprint = Reason.Reason_oprint
 
-module ToploopBackup = struct
-  (* Use the original OCaml functions directly, as defined in topcommon.ml *)
-  let parse_toplevel_phrase = fun lexbuf -> 
+module ToploopOCaml = struct
+  (* Use your original working approach - Reason toolchain ML parser with effects compatibility *)
+  let parse_toplevel_phrase lexbuf = 
     Reason_toolchain.To_current.copy_toplevel_phrase 
       (Reason_toolchain.ML.toplevel_phrase lexbuf)
-  let parse_use_file = fun lexbuf ->
-    List.map Reason_toolchain.To_current.copy_toplevel_phrase 
+  let parse_use_file lexbuf = 
+    List.map Reason_toolchain.To_current.copy_toplevel_phrase
       (Reason_toolchain.ML.use_file lexbuf)
   let print_out_value = !Oprint.out_value
   let print_out_type = !Oprint.out_type
@@ -25,24 +26,24 @@ module ToploopBackup = struct
   let print_out_phrase = !Oprint.out_phrase
 end
 
-let mlSyntax () = begin 
-  Toploop.parse_toplevel_phrase := ToploopBackup.parse_toplevel_phrase;
-  Toploop.parse_use_file := ToploopBackup.parse_use_file;
-  Toploop.print_out_value := ToploopBackup.print_out_value;
-  Toploop.print_out_type := ToploopBackup.print_out_type;
-  Toploop.print_out_class_type := ToploopBackup.print_out_class_type;
-  Toploop.print_out_module_type := ToploopBackup.print_out_module_type;
-  Toploop.print_out_type_extension := ToploopBackup.print_out_type_extension;
-  Toploop.print_out_sig_item := ToploopBackup.print_out_sig_item;
-  Toploop.print_out_signature := ToploopBackup.print_out_signature;
-  Toploop.print_out_phrase := ToploopBackup.print_out_phrase
-end
+let mlSyntax () =
+  Toploop.parse_toplevel_phrase := ToploopOCaml.parse_toplevel_phrase;
+  Toploop.parse_use_file := ToploopOCaml.parse_use_file;
+  Toploop.print_out_value := ToploopOCaml.print_out_value;
+  Toploop.print_out_type := ToploopOCaml.print_out_type;
+  Toploop.print_out_class_type := ToploopOCaml.print_out_class_type;
+  Toploop.print_out_module_type := ToploopOCaml.print_out_module_type;
+  Toploop.print_out_type_extension := ToploopOCaml.print_out_type_extension;
+  Toploop.print_out_sig_item := ToploopOCaml.print_out_sig_item;
+  Toploop.print_out_signature := ToploopOCaml.print_out_signature;
+  Toploop.print_out_phrase := ToploopOCaml.print_out_phrase
 
-let reasonSyntax () = 
+let reasonSyntax () =
   let open Reason_toolchain.From_current in
   let wrap f g fmt x = g fmt (f x) in
   Toploop.parse_toplevel_phrase := Reason_util.correctly_catch_parse_errors
-        (fun x -> Reason_toolchain.To_current.copy_toplevel_phrase
+        (fun x -> 
+          Reason_toolchain.To_current.copy_toplevel_phrase
             (Reason_toolchain.RE.toplevel_phrase x));
   Toploop.parse_use_file := Reason_util.correctly_catch_parse_errors
     (fun x -> 
@@ -93,8 +94,10 @@ let insertModule moduleName content lang =
       let lang = stringToLang lang_string in 
       begin 
         match lang with 
-        | ML -> mlSyntax()
-        | RE -> reasonSyntax()
+        | ML -> 
+          mlSyntax()
+        | RE -> 
+          reasonSyntax()
       end;
 
       let fileName = moduleToFileName moduleName lang in
@@ -135,9 +138,9 @@ let () = begin
   Js.export "evaluator" (
     object%js
       val execute = fun_to_js 1 execute
-      val reset = fun_to_js 0 setup
-      val reasonSyntax = reasonSyntax
-      val mlSyntax = mlSyntax
+      val reset = fun_to_js 1 setup
+      val reasonSyntax = fun_to_js 1 reasonSyntax
+      val mlSyntax = fun_to_js 1 mlSyntax
       val insertModule = fun_to_js 3 insertModule
     end);
 
