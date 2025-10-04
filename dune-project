@@ -22,11 +22,11 @@
   (ocaml (and (>= 5.3.0) (< 5.4)))
   
   ;; Engine dependencies
-  js_of_ocaml
-  js_of_ocaml-compiler
-  js_of_ocaml-ppx
-  js_of_ocaml-toplevel
-  reason
+  (js_of_ocaml (<= 6.2.0))
+  (js_of_ocaml-compiler (<= 6.2.0))
+  (js_of_ocaml-ppx (<= 6.2.0))
+  (js_of_ocaml-toplevel (<= 6.2.0))
+  (reason (<= 3.17.0))
 
   ;; Dev dependencies
   (ocamlformat :dev)
