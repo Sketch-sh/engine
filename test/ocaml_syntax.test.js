@@ -49,7 +49,7 @@ let code = [
   let _ = sum myTree`
 ];
 
-e.mlSyntax()
+e.mlSyntax();
 describe.each`
 nth  | phr_count | ok   | error | warning | stdout
 ${0} | ${4}      | ${4} | ${0}  | ${1}    | ${1}

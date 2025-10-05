@@ -1,6 +1,12 @@
 open Js_of_ocaml
 open Js_of_ocaml_toplevel
 
+(* External for wrapping OCaml functions for JavaScript calls in OCaml 5 *)
+external fun_to_js: int -> ('a -> 'b) -> < .. > Js.t = "caml_js_wrap_callback_strict"
+
+module Reason_toolchain = Reason.Reason_toolchain
+module Reason_oprint = Reason.Reason_oprint
+
 module ToploopBackup = struct
   let parse_toplevel_phrase = !Toploop.parse_toplevel_phrase
   let parse_use_file = !Toploop.parse_use_file
@@ -39,17 +45,17 @@ let reasonSyntax () = begin
   Toploop.print_out_value :=
     wrap copy_out_value Reason_oprint.print_out_value;
   Toploop.print_out_type :=
-    wrap copy_out_type Reason_oprint.print_out_type;
+    wrap copy_out_type (Format_doc.deprecated Reason_oprint.print_out_type);
   Toploop.print_out_class_type :=
-    wrap copy_out_class_type Reason_oprint.print_out_class_type;
+    wrap copy_out_class_type (Format_doc.deprecated Reason_oprint.print_out_class_type);
   Toploop.print_out_module_type :=
-    wrap copy_out_module_type Reason_oprint.print_out_module_type;
+    wrap copy_out_module_type (Format_doc.deprecated Reason_oprint.print_out_module_type);
   Toploop.print_out_type_extension :=
-    wrap copy_out_type_extension Reason_oprint.print_out_type_extension;
+    wrap copy_out_type_extension (Format_doc.deprecated Reason_oprint.print_out_type_extension);
   Toploop.print_out_sig_item :=
-    wrap copy_out_sig_item Reason_oprint.print_out_sig_item;
+    wrap copy_out_sig_item (Format_doc.deprecated Reason_oprint.print_out_sig_item);
   Toploop.print_out_signature :=
-    wrap (List.map copy_out_sig_item) Reason_oprint.print_out_signature;
+    wrap (List.map copy_out_sig_item) (Format_doc.deprecated Reason_oprint.print_out_signature);
   Toploop.print_out_phrase :=
     wrap copy_out_phrase Reason_oprint.print_out_phrase;
 end
@@ -122,11 +128,11 @@ let () = begin
 
   Js.export "evaluator" (
     object%js
-      val execute = execute
-      val reset = setup
-      val reasonSyntax = reasonSyntax
-      val mlSyntax = mlSyntax
-      val insertModule = insertModule
+      val execute = fun_to_js 1 execute
+      val reset = fun_to_js 1 setup
+      val reasonSyntax = fun_to_js 1 reasonSyntax
+      val mlSyntax = fun_to_js 1 mlSyntax
+      val insertModule = fun_to_js 3 insertModule
     end);
 
   Js.export "refmt" RefmtJsApi.api
